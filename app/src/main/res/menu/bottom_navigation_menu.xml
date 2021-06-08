@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="News"
+          android:id="@+id/page_1"
+          android:enabled="true"
+          android:icon="@drawable/ic_android_black_24dp"
+    />
+    <item android:title="Vendors"
+          android:id="@+id/page_2"
+          android:enabled="true"
+          android:icon="@drawable/ic_android_black_24dp"
+    />
+    <item android:title="Coupons"
+          android:id="@+id/page_3"
+          android:enabled="true"
+          android:icon="@drawable/ic_android_black_24dp"
+    />
+    <item android:title="Progress"
+          android:id="@+id/page_4"
+          android:enabled="true"
+          android:icon="@drawable/ic_android_black_24dp"
+    />
+</menu>

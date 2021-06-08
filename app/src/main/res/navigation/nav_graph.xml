@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/vendorList">
+    <fragment android:id="@+id/vendorList"
+              android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.VendorList"
+              android:label="fragment_vendor_list_list" tools:layout="@layout/fragment_vendor_list_list">
+        <action android:id="@+id/action_vendorList_to_newsfeed" app:destination="@id/newsfeed"/>
+    </fragment>
+    <fragment android:id="@+id/newsfeed"
+              android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.Newsfeed"
+              android:label="fragment_newsfeed_list" tools:layout="@layout/fragment_newsfeed_list"/>
+</navigation>
