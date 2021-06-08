@@ -1,10 +1,11 @@
-package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend
+package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy.DummyContent.DummyItem
 
@@ -12,9 +13,9 @@ import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy.DummyCon
  * [RecyclerView.Adapter] that can display a [DummyItem].
  * TODO: Replace the implementation with code for your data type.
  */
-class MyItemRecyclerViewAdapter2(
+class NewsfeedRecyclerViewAdapter(
     private val values: List<DummyItem>
-) : RecyclerView.Adapter<MyItemRecyclerViewAdapter2.ViewHolder>() {
+) : RecyclerView.Adapter<NewsfeedRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)

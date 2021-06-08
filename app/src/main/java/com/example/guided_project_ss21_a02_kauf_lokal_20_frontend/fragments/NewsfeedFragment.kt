@@ -1,4 +1,4 @@
-package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend
+package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.NewsfeedRecyclerViewAdapter
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy.DummyContent
 
 /**
  * A fragment representing a list of Items.
  */
-class Newsfeed : Fragment() {
+class NewsfeedFragment : Fragment() {
 
     private var columnCount = 1
 
@@ -38,7 +40,7 @@ class Newsfeed : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyItemRecyclerViewAdapter2(DummyContent.ITEMS)
+                adapter = NewsfeedRecyclerViewAdapter(DummyContent.ITEMS)
             }
         }
         return view
@@ -52,7 +54,7 @@ class Newsfeed : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            Newsfeed().apply {
+            NewsfeedFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }

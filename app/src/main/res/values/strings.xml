@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

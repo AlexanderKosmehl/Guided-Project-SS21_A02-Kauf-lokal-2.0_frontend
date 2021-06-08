@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="News"
-          android:id="@+id/page_1"
+          android:id="@+id/newsfeed"
           android:enabled="true"
           android:icon="@drawable/ic_android_black_24dp"
     />
     <item android:title="Vendors"
-          android:id="@+id/page_2"
+          android:id="@+id/vendorList"
           android:enabled="true"
           android:icon="@drawable/ic_android_black_24dp"
     />
     <item android:title="Coupons"
-          android:id="@+id/page_3"
+          android:id="@+id/testSeite"
           android:enabled="true"
           android:icon="@drawable/ic_android_black_24dp"
     />

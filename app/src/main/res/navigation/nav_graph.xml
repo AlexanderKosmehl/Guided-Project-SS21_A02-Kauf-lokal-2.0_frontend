@@ -4,11 +4,14 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
             app:startDestination="@id/vendorList">
     <fragment android:id="@+id/vendorList"
-              android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.VendorList"
+              android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.VendorListFragment"
               android:label="fragment_vendor_list_list" tools:layout="@layout/fragment_vendor_list_list">
-        <action android:id="@+id/action_vendorList_to_newsfeed" app:destination="@id/newsfeed"/>
+        <action android:id="@+id/action_vendorList_to_testSeite" app:destination="@id/testSeite"/>
     </fragment>
     <fragment android:id="@+id/newsfeed"
-              android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.Newsfeed"
+              android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.NewsfeedFragment"
               android:label="fragment_newsfeed_list" tools:layout="@layout/fragment_newsfeed_list"/>
+    <fragment android:id="@+id/testSeite"
+              android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.testSeite"
+              android:label="fragment_test_seite" tools:layout="@layout/fragment_test_seite"/>
 </navigation>
