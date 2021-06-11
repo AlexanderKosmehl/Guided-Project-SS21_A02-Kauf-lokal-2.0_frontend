@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
-            app:startDestination="@id/vendorList">
+            app:startDestination="@id/newsfeed">
     <fragment android:id="@+id/vendorList"
               android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.VendorListFragment"
               android:label="fragment_vendor_list_list" tools:layout="@layout/fragment_vendor_list_list">
@@ -10,8 +10,15 @@
     </fragment>
     <fragment android:id="@+id/newsfeed"
               android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.NewsfeedFragment"
-              android:label="fragment_newsfeed_list" tools:layout="@layout/fragment_newsfeed_list"/>
+              android:label="fragment_newsfeed_list" tools:layout="@layout/fragment_newsfeed_list">
+        <action android:id="@+id/action_newsfeed_to_vendorList" app:destination="@id/vendorList"/>
+    </fragment>
     <fragment android:id="@+id/testSeite"
               android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.testSeite"
-              android:label="fragment_test_seite" tools:layout="@layout/fragment_test_seite"/>
+              android:label="fragment_test_seite" tools:layout="@layout/fragment_test_seite">
+        <action android:id="@+id/action_testSeite_to_test_seite2" app:destination="@id/testSeite2"/>
+    </fragment>
+    <fragment android:id="@+id/testSeite2"
+              android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.test_seite2"
+              android:label="fragment_test_seite2" tools:layout="@layout/fragment_test_seite2"/>
 </navigation>
