@@ -4,21 +4,21 @@
     <item android:title="News"
           android:id="@+id/newsfeed"
           android:enabled="true"
-          android:icon="@drawable/ic_android_black_24dp"
+          android:icon="@drawable/ic_baseline_home_24"
     />
     <item android:title="Vendors"
           android:id="@+id/vendorList"
           android:enabled="true"
-          android:icon="@drawable/ic_android_black_24dp"
+          android:icon="@drawable/ic_baseline_location_on_24"
     />
     <item android:title="Coupons"
           android:id="@+id/testSeite"
           android:enabled="true"
-          android:icon="@drawable/ic_android_black_24dp"
+          android:icon="@drawable/ic_tag"
     />
     <item android:title="Progress"
-          android:id="@+id/page_4"
+          android:id="@+id/testSeite2"
           android:enabled="true"
-          android:icon="@drawable/ic_android_black_24dp"
+          android:icon="@drawable/ic_progress"
     />
 </menu>
