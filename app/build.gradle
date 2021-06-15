@@ -47,4 +47,5 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     // Testing Navigation
     androidTestImplementation("androidx.navigation:navigation-testing:2.3.5")
+    implementation("androidx.cardview:cardview:1.0.0")
 }
