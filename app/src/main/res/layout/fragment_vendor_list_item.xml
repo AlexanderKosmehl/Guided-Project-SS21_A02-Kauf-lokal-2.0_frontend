@@ -23,7 +23,7 @@
         <RatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ratingBar"
+                android:id="@+id/vendor_rating_bar"
                 android:layout_weight="1"
                 android:numStars="4"/>
 
@@ -51,7 +51,7 @@
                 android:text="TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView7"
+                android:id="@+id/vendor_distance"
                 android:layout_weight="1"/>
 
     </LinearLayout>

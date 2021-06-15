@@ -2,6 +2,7 @@ package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy
 
 import java.util.ArrayList
 import java.util.HashMap
+import kotlin.random.Random
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -36,7 +37,7 @@ object DummyContent {
     }
 
     private fun createDummyItem(position: Int): DummyItem {
-        return DummyItem(position.toString(), "Item " + position, makeDetails(position))
+        return DummyItem(position.toString(), "Händler $position", Random.nextInt(5), "Shop", false, Random.nextInt(6)*50)
     }
 
     private fun makeDetails(position: Int): String {
@@ -51,7 +52,5 @@ object DummyContent {
     /**
      * A dummy item representing a piece of content.
      */
-    data class DummyItem(val id: String, val content: String, val details: String) {
-        override fun toString(): String = content
-    }
+    data class DummyItem(val id: String, val title: String, val rating: Int, val vendorCategory: String, val isOpen: Boolean, val distance: Int)
 }
