@@ -8,45 +8,47 @@
         tools:context=".MainActivity" android:gravity="bottom|end"
         android:visibility="visible" android:id="@+id/linearLayout">
 
-    <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/nav_host_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/bottom_navigation"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph"
-            android:visibility="visible"
-            android:background="#E5E5E5">
-    </androidx.fragment.app.FragmentContainerView>
-
     <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent">
+        android:id="@+id/appBarLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:title="Title"
-                app:menu="@menu/top_app_bar"
-                app:navigationIcon="@drawable/ic_menu_24dp"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
-        />
+            android:id="@+id/topAppBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar"
+            app:navigationIcon="@drawable/ic_menu_24dp"
+            app:title="Title" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- Note: A RecyclerView can also be used -->
     <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:id="@+id/nestedScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2">
 
         <!-- Scrollable content -->
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:visibility="visible"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph"></androidx.fragment.app.FragmentContainerView>
     </androidx.core.widget.NestedScrollView>
 
 
