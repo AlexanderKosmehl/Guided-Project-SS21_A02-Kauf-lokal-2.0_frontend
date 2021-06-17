@@ -37,13 +37,21 @@ object DummyContent {
     }
 
     private fun createDummyItem(position: Int): DummyItem {
-        return DummyItem(position.toString(), "Händler $position", Random.nextInt(5), "Shop", false, Random.nextInt(6)*50)
+        return DummyItem(
+            position.toString(),
+            "Händler $position",
+            Random.nextInt(5),
+            "Shop",
+            listOf(true, false).random(),
+            Random.nextInt(6) * 50,
+            listOf(true, false).random(),
+        )
     }
 
     private fun makeDetails(position: Int): String {
         val builder = StringBuilder()
         builder.append("Details about Item: ").append(position)
-        for (i in 0..position - 1) {
+        for (i in 0 until position) {
             builder.append("\nMore details information here.")
         }
         return builder.toString()
@@ -52,5 +60,13 @@ object DummyContent {
     /**
      * A dummy item representing a piece of content.
      */
-    data class DummyItem(val id: String, val title: String, val rating: Int, val vendorCategory: String, val isOpen: Boolean, val distance: Int)
+    data class DummyItem(
+        val id: String,
+        val title: String,
+        val rating: Int,
+        val vendorCategory: String,
+        val isOpen: Boolean,
+        val distance: Int,
+        val isFavo: Boolean
+    )
 }

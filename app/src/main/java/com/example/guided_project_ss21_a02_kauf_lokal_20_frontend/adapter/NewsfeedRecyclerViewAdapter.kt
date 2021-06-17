@@ -31,7 +31,7 @@ class NewsfeedRecyclerViewAdapter(
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.findViewById(R.id.vendor_list_title)
+        val idView: TextView = view.findViewById(R.id.vendor_title)
         val contentView: TextView = view.findViewById(R.id.content)
 
         override fun toString(): String {
