@@ -6,11 +6,11 @@
           android:enabled="true"
           android:icon="@drawable/ic_baseline_home_24"
     />
-    <item android:title="Vendors"
-          android:id="@+id/vendorList"
-          android:enabled="true"
-          android:icon="@drawable/ic_baseline_location_on_24"
-    />
+    <item
+        android:id="@+id/vendorList"
+        android:enabled="true"
+        android:icon="@drawable/ic_locationbutton"
+        android:title="Vendors" />
     <item android:title="Coupons"
           android:id="@+id/testSeite"
           android:enabled="true"
