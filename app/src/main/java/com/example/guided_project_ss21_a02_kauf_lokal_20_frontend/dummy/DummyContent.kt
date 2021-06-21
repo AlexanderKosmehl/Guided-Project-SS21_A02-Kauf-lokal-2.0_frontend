@@ -37,16 +37,7 @@ object DummyContent {
     }
 
     private fun createDummyItem(position: Int): DummyItem {
-        return DummyItem(position.toString(), "Händler $position", Random.nextInt(5), "Shop", false, Random.nextInt(6)*50)
-    }
-
-    private fun makeDetails(position: Int): String {
-        val builder = StringBuilder()
-        builder.append("Details about Item: ").append(position)
-        for (i in 0..position - 1) {
-            builder.append("\nMore details information here.")
-        }
-        return builder.toString()
+        return DummyItem(position.toString(), "Händler $position", Random.nextInt(5), "Shop", listOf(true, false).random(), Random.nextInt(6)*50)
     }
 
     /**
