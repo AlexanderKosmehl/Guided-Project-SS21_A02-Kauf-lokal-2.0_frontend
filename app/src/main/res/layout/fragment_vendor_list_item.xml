@@ -20,20 +20,21 @@
             android:layout_height="wrap_content"
             android:background="#FFFFFF">
 
+
             <TextView
-                android:id="@+id/vendor_list_title"
+                android:id="@+id/vendor_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#82C8FF"
                 android:fontFamily="@font/montserrat"
-                android:text="shop"
+                android:paddingStart="17dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="30sp"
                 app:layout_constraintBottom_toTopOf="@id/vendor_category"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <RatingBar
                 android:id="@+id/vendor_rating_bar"
@@ -46,7 +47,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/vendor_category"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/vendor_list_title" />
+                app:layout_constraintTop_toBottomOf="@+id/vendor_title" />
 
 
             <TextView
@@ -57,11 +58,12 @@
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/montserrat"
                 android:text="category"
+                android:textColor="#000000"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toTopOf="@+id/vendor_is_open"
                 app:layout_constraintEnd_toStartOf="@+id/vendor_distance"
                 app:layout_constraintStart_toEndOf="@+id/vendor_rating_bar"
-                app:layout_constraintTop_toBottomOf="@+id/vendor_list_title" />
+                app:layout_constraintTop_toBottomOf="@+id/vendor_title" />
 
             <TextView
                 android:id="@+id/vendor_is_open"
@@ -71,6 +73,7 @@
                 android:layout_marginBottom="4dp"
                 android:fontFamily="@font/montserrat"
                 android:text="is open"
+                android:textColor="#000000"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/vendor_distance"
@@ -86,11 +89,36 @@
                 android:fontFamily="@font/montserrat"
                 android:text="distance"
                 android:textAlignment="textEnd"
+                android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/vendor_category"
-                app:layout_constraintTop_toBottomOf="@+id/vendor_list_title" />
+                app:layout_constraintTop_toBottomOf="@+id/vendor_title" />
+
+            <ImageView
+                android:id="@+id/vendor_is_favo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/vendor_title"
+                app:layout_constraintEnd_toEndOf="@id/vendor_title"
+                app:layout_constraintTop_toTopOf="@id/vendor_title"
+                app:layout_constraintVertical_bias="0.666"
+                app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
+
+            <ImageView
+                android:id="@+id/vendor_logo"
+                android:layout_width="93dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/vendor_title"
+                app:layout_constraintStart_toStartOf="@+id/vendor_title"
+                app:layout_constraintTop_toTopOf="@+id/vendor_title"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/ic_saturn_logo" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
