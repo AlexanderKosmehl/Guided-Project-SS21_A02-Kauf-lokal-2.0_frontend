@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy.DummyContent.DummyItem
@@ -38,7 +39,7 @@ class VendorListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         //holder.titleView.text = item.title
-        holder.titleView.setBackgroundResource(colors.random())
+        holder.headerLayout.setBackgroundResource(colors.random())
         holder.ratingBar.rating = item.rating.toFloat()
         holder.categoryView.text = item.vendorCategory
         holder.isOpenView.text = if (item.isOpen) "Geöffnet" else "Geschlossen"
@@ -59,6 +60,7 @@ class VendorListRecyclerViewAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleView: TextView = view.findViewById(R.id.vendor_title)
+        val headerLayout: ConstraintLayout = view.findViewById(R.id.headerLayout)
         val ratingBar: RatingBar = view.findViewById(R.id.vendor_rating_bar)
         val categoryView: TextView = view.findViewById(R.id.vendor_category)
         val isOpenView: TextView = view.findViewById(R.id.vendor_is_open)
