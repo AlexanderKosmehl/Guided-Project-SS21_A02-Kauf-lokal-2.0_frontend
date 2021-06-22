@@ -1,6 +1,7 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.VendorListRecyclerViewAdapter
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy.DummyContent
@@ -32,6 +38,21 @@ class VendorListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_vendor_list, container, false)
+
+        // Instantiate the RequestQueue
+        val queue = Volley.newRequestQueue(context)
+        val baseUrl = "http://10.0.2.2:8080/"
+
+        val request = JsonArrayRequest(Request.Method.GET, baseUrl + "merchant", null,
+            { response ->
+                Log.i("Response", response.toString())
+            },
+            { error ->
+                Log.e("No Response", error.message ?: "Keine Fehlermeldung gefunden")
+            }
+        )
+
+        queue.add(request)
 
         // Set the adapter
         if (view is RecyclerView) {
