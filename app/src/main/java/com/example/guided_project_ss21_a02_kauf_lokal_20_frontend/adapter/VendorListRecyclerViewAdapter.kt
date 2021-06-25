@@ -1,6 +1,7 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
-import android.annotation.SuppressLint
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy.DummyContent.DummyItem
@@ -53,6 +55,16 @@ class VendorListRecyclerViewAdapter(
             if (item.isFavo) R.drawable.ic_baseline_favorite_24
             else R.drawable.ic_baseline_favorite_border_24
         )
+
+        holder.cardView.setOnClickListener {
+            if (holder.hiddenView.visibility == View.VISIBLE) {
+                TransitionManager.beginDelayedTransition(holder.cardView, AutoTransition())
+                holder.hiddenView.visibility = View.GONE
+            } else {
+                TransitionManager.beginDelayedTransition(holder.cardView, AutoTransition())
+                holder.hiddenView.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun getItemCount(): Int = values.size
@@ -65,6 +77,9 @@ class VendorListRecyclerViewAdapter(
         val isOpenView: TextView = view.findViewById(R.id.vendor_is_open)
         val distanceView: TextView = view.findViewById(R.id.vendor_distance)
         val isFavoView: ImageView = view.findViewById(R.id.vendor_is_favo)
+
+        val cardView: CardView = view.findViewById(R.id.vendorCardView)
+        val hiddenView: ConstraintLayout = view.findViewById(R.id.hiddenView)
 
     }
 }
