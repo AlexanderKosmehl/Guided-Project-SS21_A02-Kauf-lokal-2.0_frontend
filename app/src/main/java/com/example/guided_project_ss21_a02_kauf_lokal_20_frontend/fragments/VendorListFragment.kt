@@ -41,49 +41,14 @@ class VendorListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_vendor_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_vendor_list, container, false) as RecyclerView
 
-        // Instantiate the RequestQueue
-        val queue = Volley.newRequestQueue(context)
-        val baseUrl = "http://10.0.2.2:8080/"
-
-        val request = JsonArrayRequest(Request.Method.GET, baseUrl + "merchant", null,
-            { response ->
-                Log.i("Response", response.toString())
-            },
-            { error ->
-                Log.e("No Response", error.message ?: "Keine Fehlermeldung gefunden")
-            }
-        )
-
-        queue.add(request)
-
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = VendorListRecyclerViewAdapter(DummyContent.ITEMS)
-            }
+        // Set LayoutManager and Adapter
+        with(view) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = VendorListRecyclerViewAdapter(DummyContent.ITEMS)
         }
 
         return view
-    }
-
-    companion object {
-
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            VendorListFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
     }
 }
