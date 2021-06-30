@@ -160,14 +160,14 @@
                     app:layout_constraintVertical_bias="0.296" />
 
                 <TextView
-                        android:text="Adresse:"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView6"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView5"
-                        android:layout_marginTop="28dp"
-                        android:layout_marginStart="16dp"/>
+                    android:id="@+id/vendor_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="28dp"
+                    android:text="Adresse:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/vendor_website" />
 
                 <Button
                         android:text="Coupons"
