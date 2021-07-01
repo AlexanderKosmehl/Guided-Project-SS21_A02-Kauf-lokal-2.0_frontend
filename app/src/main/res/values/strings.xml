@@ -6,6 +6,6 @@
     <string name="isOpened">Geöffnet</string>
     <string name="internetSite">Internetseite:</string>
     <string name="address">Adresse:</string>
-    <string name="coupons">Coupons</string>
+    <string name="coupon">Coupon</string>
     <string name="Route">Route</string>
 </resources>

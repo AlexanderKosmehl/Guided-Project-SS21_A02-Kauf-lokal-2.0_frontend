@@ -138,7 +138,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/hiddenView"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                 <ImageView
                         android:layout_width="wrap_content"
@@ -147,7 +147,8 @@
                         android:id="@+id/imageView"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:srcCompat="@drawable/ic_saturn_logo"/>
+                        app:srcCompat="@drawable/img"
+                        android:layout_marginTop="8dp"/>
 
                 <TextView
                         android:id="@+id/vendor_category2"
@@ -202,30 +203,38 @@
                         android:layout_width="135dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:textSize="12sp"
+                        android:layout_marginBottom="8dp"
+                        android:textSize="16sp"
                         android:backgroundTint="@color/orange"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:icon="@drawable/ic_tag"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:iconSize="35dp"
-                        app:rippleColor="@color/button_ripple_red"/>
+                        app:iconSize="25dp"
+                        app:rippleColor="@color/button_ripple_red"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat"
+                        app:cornerRadius="25dp"/>
 
                 <Button
                         android:text="@string/Route"
-                        android:layout_width="135dp"
+                        android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:id="@+id/route_button"
                         android:backgroundTint="@color/orange"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="16dp"
-                        android:textSize="12sp"
+                        android:layout_marginBottom="8dp"
+                        android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView6"
                         app:icon="@android:drawable/ic_dialog_map"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:rippleColor="@color/button_ripple_red"/>
+                        app:rippleColor="@color/button_ripple_red"
+                        android:fontFamily="@font/montserrat"
+                        android:textStyle="bold"
+                        app:iconPadding="0dp"
+                        app:iconSize="25dp"
+                        app:cornerRadius="25dp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
