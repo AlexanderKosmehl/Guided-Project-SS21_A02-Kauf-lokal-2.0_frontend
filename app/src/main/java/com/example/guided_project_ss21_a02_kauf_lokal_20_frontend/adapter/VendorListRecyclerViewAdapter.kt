@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
@@ -47,6 +48,8 @@ class VendorListRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val color = colors.random()
+
         val vendor = vendors[position]
 
         // TODO handle profilePicture URL(?) once backend implements it
@@ -57,7 +60,9 @@ class VendorListRecyclerViewAdapter(
         }
 
         // TODO Change when backend adds value
-        holder.headerLayout.setBackgroundResource(colors.random())
+        holder.headerLayout.setBackgroundResource(color)
+        holder.couponsButton.setBackgroundColor(color)
+        holder.routeButton.setBackgroundColor(color)
 
         // TODO MerchantScore is currently an integer
         holder.ratingBar.rating = vendor.merchantScore.toFloat()
@@ -87,11 +92,15 @@ class VendorListRecyclerViewAdapter(
         // Display vendor details on tap
         holder.cardView.setOnClickListener {
             if (holder.hiddenView.visibility == View.VISIBLE) {
-                TransitionManager.beginDelayedTransition(holder.cardView, AutoTransition())
+                holder.bodyLayout.visibility = View.VISIBLE
+                // TransitionManager.beginDelayedTransition(holder.cardView, AutoTransition())
                 holder.hiddenView.visibility = View.GONE
             } else {
+                holder.bodyLayout.visibility = View.GONE
                 TransitionManager.beginDelayedTransition(holder.cardView, AutoTransition())
                 holder.hiddenView.visibility = View.VISIBLE
+                holder.categoryViewHidden.text = "Keine Kategorie"
+                holder.ratingBarViewHidden.rating = vendor.merchantScore.toFloat()
             }
         }
     }
@@ -107,9 +116,13 @@ class VendorListRecyclerViewAdapter(
         val distanceView: TextView = view.findViewById(R.id.vendor_distance)
         val isFavoView: ImageView = view.findViewById(R.id.vendor_is_favo)
         val logoView: ImageView = view.findViewById(R.id.vendor_logo)
+        val couponsButton : Button = view.findViewById(R.id.coupons_button)
+        val routeButton : Button = view.findViewById(R.id.route_button)
+
+        val bodyLayout :ConstraintLayout = view.findViewById(R.id.simpleBodyLayout)
 
         val ratingBarViewHidden : RatingBar = view.findViewById(R.id.vendor_rating_bar2)
-
+        val categoryViewHidden : TextView = view.findViewById(R.id.vendor_category2)
 
         val cardView: CardView = view.findViewById(R.id.vendorCardView)
         val hiddenView: ConstraintLayout = view.findViewById(R.id.hiddenView)

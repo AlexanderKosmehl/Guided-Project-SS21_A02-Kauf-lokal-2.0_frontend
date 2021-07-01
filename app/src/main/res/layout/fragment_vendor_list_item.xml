@@ -198,9 +198,9 @@
                         android:layout_marginStart="16dp"/>
 
                 <Button
-                        android:text="@string/coupons"
-                        android:id="@+id/button_coupons"
-                        android:layout_width="135dp"
+                        android:text="@string/coupon"
+                        android:id="@+id/coupons_button"
+                        android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="8dp"
