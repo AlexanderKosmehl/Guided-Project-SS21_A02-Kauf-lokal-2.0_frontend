@@ -143,14 +143,40 @@
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="187dp"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic"
+                        tools:srcCompat="@tools:sample/avatars"
                         android:id="@+id/imageView"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        />
+                        app:srcCompat="@drawable/ic_saturn_logo"/>
 
                 <TextView
-                        android:text="Internetseite: "
+                        android:id="@+id/vendor_category2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/category"
+                        android:textColor="#000000"
+                        android:textSize="13sp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="16dp"/>
+
+                <RatingBar
+                        android:id="@+id/vendor_rating_bar2"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:progressTint="@color/star_fill"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView"
+                        android:layout_marginTop="16dp"/>
+
+                <TextView
+                        android:text="@string/internetSite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView5"
@@ -179,20 +205,21 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:icon="@drawable/ic_tag"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginBottom="16dp"/>
+                        app:iconSize="35dp"
+                        app:rippleColor="@color/button_ripple_red"/>
 
                 <Button
-                        android:text="Route"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/button2"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:text="@string/Route"
+                        android:layout_width="135dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/route_button"
+                        android:backgroundTint="@color/orange"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="10dp"
                         app:layout_constraintTop_toBottomOf="@+id/textView6"
                         app:icon="@android:drawable/ic_dialog_map"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginBottom="16dp"/>
+                        app:rippleColor="@color/button_ripple_red"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
