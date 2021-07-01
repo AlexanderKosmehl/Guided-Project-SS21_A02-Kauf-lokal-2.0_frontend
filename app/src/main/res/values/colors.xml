@@ -13,4 +13,6 @@
     <color name="open_color">#056118</color>
     <color name="almost_closed_color">#e2a363</color>
     <color name="close_color">#610505</color>
+    <color name="orange">#EB680B</color>
+    <color name="button_ripple_red">#FD0000</color>
 </resources>

@@ -22,7 +22,7 @@ class VendorListRecyclerViewAdapter(
     private val values: List<DummyItem>
 ) : RecyclerView.Adapter<VendorListRecyclerViewAdapter.ViewHolder>() {
 
-    val colors = listOf(
+    private val colors = listOf(
         R.color.teal_200,
         R.color.teal_700,
         R.color.purple_200,
@@ -50,7 +50,7 @@ class VendorListRecyclerViewAdapter(
                 null
             )
         )
-        holder.distanceView.text = item.distance.toString() + "m"
+        holder.distanceView.text = "${item.distance} m"
         holder.isFavoView.setImageResource(
             if (item.isFavo) R.drawable.ic_baseline_favorite_24
             else R.drawable.ic_baseline_favorite_border_24
@@ -77,6 +77,9 @@ class VendorListRecyclerViewAdapter(
         val isOpenView: TextView = view.findViewById(R.id.vendor_is_open)
         val distanceView: TextView = view.findViewById(R.id.vendor_distance)
         val isFavoView: ImageView = view.findViewById(R.id.vendor_is_favo)
+
+        val ratingBarViewHidden : RatingBar = view.findViewById(R.id.vendor_rating_bar2)
+
 
         val cardView: CardView = view.findViewById(R.id.vendorCardView)
         val hiddenView: ConstraintLayout = view.findViewById(R.id.hiddenView)
