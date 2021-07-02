@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="News"
-          android:id="@+id/newsfeed"
-          android:enabled="true"
-          android:icon="@drawable/ic_baseline_home_24"
-    />
+    <item
+        android:id="@+id/newsfeed"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/nav_news" />
     <item
         android:id="@+id/vendorList"
         android:enabled="true"
-        android:icon="@drawable/ic_locationbutton"
-        android:title="Vendors" />
-    <item android:title="Coupons"
-          android:id="@+id/testSeite"
-          android:enabled="true"
-          android:icon="@drawable/ic_tag"
-    />
-    <item android:title="Progress"
-          android:id="@+id/testSeite2"
-          android:enabled="true"
-          android:icon="@drawable/ic_progress"
-    />
+        android:icon="@drawable/ic_location_button"
+        android:title="@string/nav_vendor" />
+    <item
+        android:id="@+id/graph_coupon"
+        android:enabled="true"
+        android:icon="@drawable/ic_tag"
+        android:title="@string/nav_coupons" />
+    <item
+        android:id="@+id/graph_progress"
+        android:enabled="true"
+        android:icon="@drawable/ic_progress"
+        android:title="@string/nav_progress" />
 </menu>
