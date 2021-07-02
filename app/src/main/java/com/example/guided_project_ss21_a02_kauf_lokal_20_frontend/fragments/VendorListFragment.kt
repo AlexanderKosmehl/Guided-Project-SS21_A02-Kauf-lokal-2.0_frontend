@@ -1,28 +1,22 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments
 
 import android.os.Bundle
-import android.transition.AutoTransition
-import android.transition.TransitionManager
 import android.util.Log
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.Model.Vendor
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.VendorListRecyclerViewAdapter
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.MainActivity
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy.DummyContent
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.VendorListRecyclerViewAdapter
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import com.google.gson.Gson
+
 
 /**
  * A fragment representing a list of Items.
