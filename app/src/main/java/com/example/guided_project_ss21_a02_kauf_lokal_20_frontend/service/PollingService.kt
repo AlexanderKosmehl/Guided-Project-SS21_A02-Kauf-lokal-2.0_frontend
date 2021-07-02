@@ -11,6 +11,7 @@ import com.google.gson.Gson
 
 class PollingService(private val view: RecyclerView) {
 
+    val url = "http://10.0.2.2:8080/"
     val gson = Gson()
 
     //val queue = Volley.newRequestQueue(context)
@@ -23,9 +24,9 @@ class PollingService(private val view: RecyclerView) {
         val context = view.context
         val adapter = view.adapter as NewsfeedRecyclerViewAdapter
         val coupons = mutableListOf<Coupon>()
-        val url = "http://10.0.2.2:8080/coupon"
 
-        val request = JsonArrayRequest(Request.Method.GET, url, null,
+
+        val request = JsonArrayRequest(Request.Method.GET, url+"coupon", null,
             { response ->
                 // JSONArray does not support iterable which means this has to be a regular for loop
                 for (i in 0 until response.length()) {
