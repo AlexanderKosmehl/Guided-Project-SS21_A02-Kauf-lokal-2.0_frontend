@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.NewsfeedRecyclerViewAdapter
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.PollingService
@@ -15,17 +17,23 @@ import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.Pollin
  */
 class NewsfeedFragment : Fragment() {
 
-    private var adapter: RecyclerView.Adapter<NewsfeedRecyclerViewAdapter.ViewHolder>? = null
-
-    private var pollingService = PollingService(requireContext())
-    private val coupons = pollingService.pollCoupons()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-        ): View? {
-        adapter = NewsfeedRecyclerViewAdapter(coupons)
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_vendor_list, container, false) as RecyclerView
 
-        return inflater.inflate(R.layout.fragment_newsfeed_list, container, false)
+        // Set LayoutManager and Adapter
+        with(view) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = NewsfeedRecyclerViewAdapter(listOf<Coupon>())
+        }
+
+        // Handles backend communication
+        val pollingService = PollingService(view)
+        pollingService.pollEvents()
+
+        return view
     }
 }
