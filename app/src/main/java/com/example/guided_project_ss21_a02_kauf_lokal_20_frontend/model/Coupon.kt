@@ -1,12 +1,13 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-
-@JsonIgnoreProperties
+// TODO: Backend
 data class Coupon(
+    override var id:String,
+    override var timestamp: String,
     val couponDescription: String,
     val couponName: String,
     val expiryDate: String,
     val generatedCouponCode: Int,
-    val id: String,
-    val value: Number)
+    val value: Int,
+    val eventType:String="coupon"
+) : Event
