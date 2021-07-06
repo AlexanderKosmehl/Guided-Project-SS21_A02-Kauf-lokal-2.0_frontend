@@ -66,14 +66,14 @@ class VendorListRecyclerViewAdapter(
         val vendor = vendors[position]
 
         // TODO handle profilePicture URL(?) once backend implements it
-        if (vendor.profilePicture != null) {
+        // if (vendor.profilePicture != null) {
             // Handle picture
-        } else {
+        // } else {
             holder.logoView.visibility = View.GONE
             if (vendor.name != "Forum Gummersbach") // TODO remove fix when names in BE is fixed
                 holder.titleView.text = vendor.name.replace("Gummersbach", "", false)
             else holder.titleView.text = vendor.name
-        }
+        // }
 
         // TODO Change when backend adds value
         holder.headerLayout.setBackgroundResource(color)
