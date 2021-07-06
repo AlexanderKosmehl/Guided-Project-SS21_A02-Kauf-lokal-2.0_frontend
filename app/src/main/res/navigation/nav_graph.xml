@@ -9,10 +9,14 @@
     <fragment android:id="@+id/newsfeed"
               android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.NewsfeedFragment"
               android:label="fragment_newsfeed_list" tools:layout="@layout/fragment_newsfeed_list"/>
-    <fragment android:id="@+id/testSeite"
-              android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.testSeite"
-              android:label="fragment_test_seite" tools:layout="@layout/fragment_test_seite"/>
-    <fragment android:id="@+id/testSeite2"
-              android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.test_seite2"
-              android:label="fragment_test_seite2" tools:layout="@layout/coupon_alle"/>
+    <fragment
+        android:id="@+id/graph_coupon"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.CouponFragment"
+        android:label="fragment_coupon"
+        tools:layout="@layout/fragment_coupon" />
+    <fragment
+        android:id="@+id/graph_progress"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.ProgressFragment"
+        android:label="fragment_progress"
+        tools:layout="@layout/fragment_progress" />
 </navigation>
