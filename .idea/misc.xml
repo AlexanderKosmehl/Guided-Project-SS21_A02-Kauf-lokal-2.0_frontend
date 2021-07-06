@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/G/StudioProjects/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend_new/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/G/StudioProjects/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend_new/app/src/main/res/layout/coupon_alle.xml" value="1.0" />
+        <entry key="..\:/Users/G/StudioProjects/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend_new/app/src/main/res/layout/coupon_favorite.xml" value="0.2259963768115942" />
+        <entry key="..\:/Users/G/StudioProjects/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend_new/app/src/main/res/layout/fragment_coupon_alle.xml" value="0.2259963768115942" />
+        <entry key="..\:/Users/G/StudioProjects/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend_new/app/src/main/res/layout/fragment_coupon_favorit.xml" value="0.25" />
+        <entry key="..\:/Users/G/StudioProjects/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend_new/app/src/main/res/layout/fragment_coupon_favoriten.xml" value="0.2259963768115942" />
+        <entry key="..\:/Users/G/StudioProjects/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend_new/app/src/main/res/layout/fragment_newsfeed.xml" value="0.13272543059777103" />
+        <entry key="..\:/Users/G/StudioProjects/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend_new/app/src/main/res/layout/fragment_newsfeed_list.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/G/StudioProjects/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend_new/app/src/main/res/layout/fragment_newsfeed_list_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/G/StudioProjects/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend_new/app/src/main/res/layout/fragment_test_seite.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/G/StudioProjects/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend_new/app/src/main/res/layout/fragment_test_seite2.xml" value="0.22" />
+        <entry key="..\:/Users/G/StudioProjects/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend_new/app/src/main/res/layout/fragment_vendor_list.xml" value="0.25" />
+        <entry key="..\:/Users/G/StudioProjects/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend_new/app/src/main/res/layout/fragment_vendor_list_item.xml" value="0.36666666666666664" />
+      </map>
+    </option>
+  </component>
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
   </component>

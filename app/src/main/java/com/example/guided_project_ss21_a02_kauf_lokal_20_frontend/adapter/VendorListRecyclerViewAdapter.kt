@@ -74,7 +74,7 @@ class VendorListRecyclerViewAdapter(
         val headerLayout: ConstraintLayout = view.findViewById(R.id.headerLayout)
         val ratingBar: RatingBar = view.findViewById(R.id.vendor_rating_bar)
         val categoryView: TextView = view.findViewById(R.id.vendor_category)
-        val isOpenView: TextView = view.findViewById(R.id.vendor_is_open)
+        val isOpenView: TextView = view.findViewById(R.id.coupon_laden)
         val distanceView: TextView = view.findViewById(R.id.vendor_distance)
         val isFavoView: ImageView = view.findViewById(R.id.vendor_is_favo)
 
