@@ -1,42 +1,54 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service
 
-import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
-import com.fasterxml.jackson.module.kotlin.readValues
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.NewsfeedRecyclerViewAdapter
+import com.google.gson.Gson
 
-class PollingService(val context: Context) {
-    private val mapper = jacksonObjectMapper()
+class PollingService(private val view: RecyclerView) {
 
-    fun pollCoupons(): List<Coupon> {
-        val url = "http://10.0.2.2:8080/coupon"
-        var coupons: List<Coupon> = listOf()
+    val url = "http://10.0.2.2:8080/"
+    val gson = Gson()
 
-        val jsonObjectRequest = JsonArrayRequest(
-            Request.Method.GET, url, null,
-            Response.Listener { response ->
-                val body = response.toString()
-                coupons = mapper.readValue(body)
-                Log.i("Coupons:", response.toString())
+    //val queue = Volley.newRequestQueue(context)
+
+    fun pollEvents() {
+        pollCoupons()
+    }
+
+    fun pollCoupons() {
+        val context = view.context
+        val adapter = view.adapter as NewsfeedRecyclerViewAdapter
+        val coupons = mutableListOf<Coupon>()
+
+
+        val request = JsonArrayRequest(Request.Method.GET, url+"coupon", null,
+            { response ->
+                // JSONArray does not support iterable which means this has to be a regular for loop
+                for (i in 0 until response.length()) {
+                    val coupon = gson.fromJson(response.getJSONObject(i).toString(), Coupon::class.java)
+                    coupons.add(coupon)
+                }
+                // TODO Maybe add vendors one by one for smoother vendor view?
+
+                adapter.setValues(coupons)
             },
-            Response.ErrorListener { error ->
+            { error ->
+                // TODO Add meaningful error handling
                 Toast.makeText(context, "No content found",Toast.LENGTH_SHORT).show()
-                Log.e("No Response", error.message ?: "NICHTS")
+                Log.e("Response", error.message ?: "Keine Fehlermeldung vorhanden")
             }
         )
-
-        // Access the RequestQueue through your singleton class.
-        RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest)
-
-
-        return coupons
+        RequestSingleton.getInstance(context).addToRequestQueue(request)
 
     }
+
+
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -11,14 +12,17 @@ import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy.DummyContent.DummyItem
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.DetailEvent
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Event
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].
  * TODO: Replace the implementation with code for your data type.
  */
+
+// TODO fix the warning later
+@SuppressLint("SetTextI18n")
 class NewsfeedRecyclerViewAdapter(
-    private val coupons: List<Coupon>
+    private var events: List<Event>
 ) : RecyclerView.Adapter<NewsfeedRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,17 +32,36 @@ class NewsfeedRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val coupon = coupons[position]
-        holder.titleView.text = coupon.id
+        val event = events[position]
+
+        //TODO: set all eventType
+        when (event.javaClass.simpleName) {
+            "Coupon" -> {
+                holder.eventType.text = "Coupon"
+                holder.eventMessage.text = "A new Coupon was posted!"
+                holder.eventIv.setImageResource(R.drawable.ic_tag)
+            }
+            else -> {holder.eventType.text = "unknown"}
+        }
+
+
     }
 
-    override fun getItemCount(): Int = coupons.size
+    override fun getItemCount(): Int = events.size
+
+    // Automatically displays data changes
+    fun setValues(events: List<Event>) {
+        this.events = events
+        this.notifyDataSetChanged()
+    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var titleView: TextView
+        var eventMessage: TextView = view.findViewById(R.id.event_message)
+        var eventType: TextView = view.findViewById(R.id.event_type)
+        var eventIv :ImageView = view.findViewById(R.id.event_iv)
+
 
         init {
-            titleView = view.findViewById(R.id.event_title)
 
             itemView.setOnClickListener {
                 var position: Int = getAdapterPosition()
@@ -54,4 +77,5 @@ class NewsfeedRecyclerViewAdapter(
         }
 
     }
+
 }
