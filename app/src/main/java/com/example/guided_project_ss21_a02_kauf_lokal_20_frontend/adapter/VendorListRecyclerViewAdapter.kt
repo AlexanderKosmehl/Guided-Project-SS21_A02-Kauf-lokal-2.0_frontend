@@ -61,18 +61,19 @@ class VendorListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val color = colors.random()
         val isOpen = listOf(true, false).random()
+        val distance = (Random.nextInt(20) * 50).toString() + "m"
 
         val vendor = vendors[position]
 
         // TODO handle profilePicture URL(?) once backend implements it
-        if (vendor.profilePicture != null) {
+        // if (vendor.profilePicture != null) {
             // Handle picture
-        } else {
+        // } else {
             holder.logoView.visibility = View.GONE
             if (vendor.name != "Forum Gummersbach") // TODO remove fix when names in BE is fixed
                 holder.titleView.text = vendor.name.replace("Gummersbach", "", false)
             else holder.titleView.text = vendor.name
-        }
+        // }
 
         // TODO Change when backend adds value
         holder.headerLayout.setBackgroundResource(color)
@@ -94,7 +95,7 @@ class VendorListRecyclerViewAdapter(
         )
 
         // TODO Calculate value once backend adds support
-        holder.distanceView.text = (Random.nextInt(20) * 50).toString() + "m"
+        holder.distanceView.text = distance
 
         // TODO Change when backend adds value
         holder.isFavoView.setImageResource(
@@ -110,7 +111,7 @@ class VendorListRecyclerViewAdapter(
             } else {
                 holder.bodyLayout.visibility = View.GONE
                 holder.unfoldedView.visibility = View.VISIBLE
-                displayHiddenItems(holder, vendor, color, isOpen)
+                displayHiddenItems(holder, vendor, color, distance, isOpen)
                 TransitionManager.beginDelayedTransition(holder.cardView, AutoTransition())
             }
         }
@@ -128,6 +129,7 @@ class VendorListRecyclerViewAdapter(
         holder: ViewHolder,
         vendor: Vendor,
         color: Int,
+        distance: String,
         isOpen: Boolean
     ) {
         val colorRes = holder.couponsButton.context.resources.getColor(color, null)
@@ -150,6 +152,7 @@ class VendorListRecyclerViewAdapter(
         holder.routeButton.setBackgroundColor(colorRes)
         holder.websiteUnfoldImage.setColorFilter(colorRes)
         holder.addressUnfoldImage.setColorFilter(colorRes)
+        holder.distanceUnfoldView.text = distance
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -177,6 +180,7 @@ class VendorListRecyclerViewAdapter(
         val addressUnfoldView: TextView = view.findViewById(R.id.vendor_address_content)
         val isOpenUnfoldView: TextView = view.findViewById(R.id.vendor_is_open_unfold)
         val ratingCountUnfoldView: TextView = view.findViewById(R.id.vendor_rating_count)
+        val distanceUnfoldView: TextView = view.findViewById(R.id.vendor_distance_unfold)
         val websiteUnfoldImage: ImageView = view.findViewById(R.id.vendor_web_icon)
         val addressUnfoldImage: ImageView = view.findViewById(R.id.vendor_address_icon)
 
