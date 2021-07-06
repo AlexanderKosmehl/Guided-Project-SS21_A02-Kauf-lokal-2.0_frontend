@@ -18,72 +18,60 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.Model.Vendor
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.VendorListRecyclerViewAdapter
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy.DummyContent
+import com.google.gson.Gson
 
 /**
  * A fragment representing a list of Items.
  */
 class VendorListFragment : Fragment() {
 
-    private var columnCount = 1
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_vendor_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_vendor_list, container, false) as RecyclerView
 
-        // Instantiate the RequestQueue
-        val queue = Volley.newRequestQueue(context)
-        val baseUrl = "http://10.0.2.2:8080/"
-
-        val request = JsonArrayRequest(Request.Method.GET, baseUrl + "merchant", null,
-            { response ->
-                Log.i("Response", response.toString())
-            },
-            { error ->
-                Log.e("No Response", error.message ?: "Keine Fehlermeldung gefunden")
-            }
-        )
-
-        queue.add(request)
-
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = VendorListRecyclerViewAdapter(DummyContent.ITEMS)
-            }
+        // Set LayoutManager and Adapter
+        with(view) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = VendorListRecyclerViewAdapter(listOf<Vendor>())
         }
+
+        // Handles backend communication
+        addVendorsToAdapter(view)
 
         return view
     }
 
-    companion object {
+    fun addVendorsToAdapter(view: RecyclerView) {
+        val context = view.context
+        val adapter = view.adapter as VendorListRecyclerViewAdapter
 
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
+        val gson = Gson()
 
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            VendorListFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
+        val url = "http://10.0.2.2:8080/merchant"
+        val queue = Volley.newRequestQueue(context)
+        val vendors = mutableListOf<Vendor>()
+
+        val request = JsonArrayRequest(Request.Method.GET, url, null,
+            { response ->
+                // JSONArray does not support iterable which means this has to be a regular for loop
+                for (i in 0 until response.length()) {
+                    val vendor = gson.fromJson(response.getJSONObject(i).toString(), Vendor::class.java)
+                    vendors.add(vendor)
                 }
+                // TODO Maybe add vendors one by one for smoother vendor view?
+                adapter.setValues(vendors)
+            },
+            { error ->
+                // TODO Add meaningful error handling
+                Log.e("Response", error.message ?: "Keine Fehlermeldung vorhanden")
             }
+            )
+        queue.add(request)
     }
 }
