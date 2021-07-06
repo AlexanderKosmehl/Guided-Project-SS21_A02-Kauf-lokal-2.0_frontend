@@ -3,6 +3,7 @@ package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 import android.annotation.SuppressLint
 import android.transition.AutoTransition
 import android.transition.TransitionManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +14,10 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.OpeningTime
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy.DummyContent.DummyItem
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.OpeningTime
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import kotlin.random.Random
 
 /**
@@ -42,7 +43,6 @@ class VendorListRecyclerViewAdapter(
         R.color.purple_700,
         R.color.star_fill,
         R.color.close_color,
-        R.color.button_ripple_red,
         R.color.saturn_orange
     )
 
@@ -61,19 +61,24 @@ class VendorListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val color = colors.random()
         val isOpen = listOf(true, false).random()
-        val distance = (Random.nextInt(20) * 50).toString() + "m"
+        val distance = (Random.nextInt(20) * 50).toString() + " m"
 
         val vendor = vendors[position]
 
         // TODO handle profilePicture URL(?) once backend implements it
-        // if (vendor.profilePicture != null) {
+        if (vendor.profilePicture != null) {
             // Handle picture
-        // } else {
+        } else {
             holder.logoView.visibility = View.GONE
             if (vendor.name != "Forum Gummersbach") // TODO remove fix when names in BE is fixed
                 holder.titleView.text = vendor.name.replace("Gummersbach", "", false)
-            else holder.titleView.text = vendor.name
-        // }
+            else {
+                holder.titleView.text = vendor.name
+            }
+        }
+
+        val colorString: String = holder.titleView.context.resources.getString(color)
+        adjustTextColor(colorString, holder)
 
         // TODO Change when backend adds value
         holder.headerLayout.setBackgroundResource(color)
@@ -120,6 +125,24 @@ class VendorListRecyclerViewAdapter(
     // TODO something useful?
     private fun isVendorOpen(openingTime: OpeningTime): Boolean {
         return listOf(true, false).random()
+    }
+
+    private fun adjustTextColor(hexColor: String, holder: ViewHolder) {
+        val brightnessColor = listOf(hexColor[3], hexColor[4], hexColor[5], hexColor[6])
+        val brightnessArray = listOf('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
+        val brightnessHex = listOf('a', 'b', 'c', 'd', 'e', 'f')
+
+        Log.i("adjust Text Color", hexColor)
+
+        if (brightnessArray.contains(brightnessColor[0])
+            && brightnessArray.contains(brightnessColor[1])
+        ) {
+            if (!brightnessHex.contains(brightnessColor[2])) {
+                holder.titleView.setTextColor(
+                    holder.titleView.context.resources.getColor(R.color.white, null)
+                )
+            }
+        }
     }
 
     override fun getItemCount(): Int = vendors.size
