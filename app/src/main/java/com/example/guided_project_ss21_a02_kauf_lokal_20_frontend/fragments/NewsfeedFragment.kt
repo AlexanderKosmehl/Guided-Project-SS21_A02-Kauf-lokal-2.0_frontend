@@ -22,16 +22,16 @@ class NewsfeedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_vendor_list, container, false) as RecyclerView
-
+        val view = inflater.inflate(R.layout.fragment_newsfeed_list, container, false)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.newsfeedList)
         // Set LayoutManager and Adapter
-        with(view) {
+        with(recyclerView) {
             layoutManager = LinearLayoutManager(context)
             adapter = NewsfeedRecyclerViewAdapter(listOf<Coupon>())
         }
 
         // Handles backend communication
-        val pollingService = PollingService(view)
+        val pollingService = PollingService(recyclerView)
         pollingService.pollEvents()
 
         return view

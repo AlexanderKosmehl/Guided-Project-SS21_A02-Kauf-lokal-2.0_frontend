@@ -22,12 +22,15 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:id="@+id/event_iv"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
                     />
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/event_type"
                 card_view:layout_constraintLeft_toRightOf="@id/event_iv"
+                card_view:layout_constraintTop_toTopOf="parent"
                 android:textSize="10sp"
                 android:layout_marginStart="10dp"
                 android:text="Eventtype"/>
@@ -36,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/event_time"
                 card_view:layout_constraintLeft_toRightOf="@id/event_type"
+                card_view:layout_constraintTop_toTopOf="parent"
                 android:textSize="10sp"
                 android:layout_marginStart="10dp"
                 android:text="x min"/>
