@@ -6,8 +6,8 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="textH1">#747474</color>
-    <color name="textH2">#979797</color>
+    <color name="caption_h1">#747474</color>
+    <color name="caption_h2">#979797</color>
     <color name="star_fill">#AF185B</color>
 
     <!-- custom -->
