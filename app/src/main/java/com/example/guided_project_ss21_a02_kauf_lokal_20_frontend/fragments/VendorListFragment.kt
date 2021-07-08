@@ -45,7 +45,8 @@ class VendorListFragment : Fragment() {
 
         val gson = Gson()
 
-        val url = "http://10.0.2.2:8080/merchant"
+        //TODO: changed Port for temporary testing
+        val url = "http://10.0.2.2:3000/vendor"
         val queue = Volley.newRequestQueue(context)
         val vendors = mutableListOf<Vendor>()
 
