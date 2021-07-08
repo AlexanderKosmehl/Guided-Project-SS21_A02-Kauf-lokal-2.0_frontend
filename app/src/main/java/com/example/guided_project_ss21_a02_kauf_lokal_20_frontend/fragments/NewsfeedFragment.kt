@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.NewsfeedRecyclerViewAdapter
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Event
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.PollingService
 
 /**
@@ -27,7 +27,7 @@ class NewsfeedFragment : Fragment() {
         // Set LayoutManager and Adapter
         with(recyclerView) {
             layoutManager = LinearLayoutManager(context)
-            adapter = NewsfeedRecyclerViewAdapter(listOf<Coupon>())
+            adapter = NewsfeedRecyclerViewAdapter(listOf<Event>())
         }
 
         // Handles backend communication
