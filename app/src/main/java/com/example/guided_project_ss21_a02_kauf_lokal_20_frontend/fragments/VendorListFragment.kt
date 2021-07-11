@@ -45,6 +45,7 @@ class VendorListFragment : Fragment() {
 
         val gson = Gson()
 
+        // TODO Add resource file for urls
         val url = "http://10.0.2.2:8080/vendor"
         val queue = Volley.newRequestQueue(context)
         val vendors = mutableListOf<Vendor>()
@@ -56,7 +57,6 @@ class VendorListFragment : Fragment() {
                     val vendor = gson.fromJson(response.getJSONObject(i).toString(), Vendor::class.java)
                     vendors.add(vendor)
                 }
-                // TODO Maybe add vendors one by one for smoother vendor view?
                 adapter.setValues(vendors)
             },
             { error ->
