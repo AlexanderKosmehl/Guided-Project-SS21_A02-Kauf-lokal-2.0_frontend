@@ -63,7 +63,8 @@ class VendorListRecyclerViewAdapter(
         val distanceText = (Random.nextInt(20) * 50).toString() + " m"
 
         val vendor = vendors[position]
-        val vendorColor = Color.parseColor(vendor.color)
+        val vendorColorString = vendor.color?: "#16161d" // Remove fix once backend fixes null values
+        val vendorColor = Color.parseColor(vendorColorString)
 
         // TODO handle profilePicture URL(?) once backend implements it
         if (vendor.logo != null) {
@@ -83,15 +84,15 @@ class VendorListRecyclerViewAdapter(
         holder.headerLayout.setBackgroundColor(vendorColor)
 
         // TODO vendorScore is currently an integer
-        holder.ratingBar.rating = vendor.vendorScore.toFloat()
+        // TODO Remove fix once backend fixes vendorScores
+        holder.ratingBar.rating = vendor.vendorScore?.toFloat() ?: listOf(0,1,2,3,4,5).random().toFloat()
 
-        holder.categoryView.text = vendor.category.name
-
-        holder.isOpenView.text = if (vendor.openingTime.isOpen) "Geöffnet" else "Geschlossen"
-
+        // TODO Remove fix once backend fixes null fields
+        holder.categoryView.text = vendor.category?.name ?: "Keine Kategorie"
+        holder.isOpenView.text = if (vendor.openingTime?.isOpen == true) "Geöffnet" else "Geschlossen"
         holder.isOpenView.setTextColor(
             holder.isOpenView.context.resources.getColor(
-                if (vendor.openingTime.isOpen) R.color.open_color else R.color.close_color,
+                if (vendor.openingTime?.isOpen == true) R.color.open_color else R.color.close_color,
                 null
             )
         )
@@ -145,16 +146,18 @@ class VendorListRecyclerViewAdapter(
         vendorColor: Int,
         distance: String,
     ) {
-        holder.categoryUnfoldView.text = vendor.category.name
+        // TODO Remove fix once backend fixes null fields
+        holder.categoryUnfoldView.text = vendor.category?.name ?: "Keine Kategorie"
         holder.websiteUnfoldView.text = vendor.websiteURL
         holder.addressUnfoldView.text = "${vendor.address.street} ${vendor.address.houseNr}"
         holder.ratingCountUnfoldView.text = "(${vendor.ratings.size})"
-        holder.ratingBarUnfold.rating = vendor.vendorScore.toFloat()
+        // TODO Remove fix once backend fixes vendorScores
+        holder.ratingBarUnfold.rating = vendor.vendorScore?.toFloat() ?: listOf(0,1,2,3,4,5).random().toFloat()
 
-        holder.isOpenUnfoldView.text = if (vendor.openingTime.isOpen) "Geöffnet" else "Geschlossen"
+        holder.isOpenUnfoldView.text = if (vendor.openingTime?.isOpen == true) "Geöffnet" else "Geschlossen"
         holder.isOpenUnfoldView.setTextColor(
             holder.isOpenUnfoldView.context.resources.getColor(
-                if (vendor.openingTime.isOpen)
+                if (vendor.openingTime?.isOpen == true)
                     R.color.open_color else R.color.close_color, null
             )
         )
