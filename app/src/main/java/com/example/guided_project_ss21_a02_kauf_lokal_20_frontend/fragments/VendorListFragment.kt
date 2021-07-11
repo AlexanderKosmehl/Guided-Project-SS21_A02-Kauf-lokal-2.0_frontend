@@ -39,6 +39,7 @@ class VendorListFragment : Fragment() {
         return view
     }
 
+    // TODO Maybe extract into connection class
     fun addVendorsToAdapter(view: RecyclerView) {
         val context = view.context
         val adapter = view.adapter as VendorListRecyclerViewAdapter
