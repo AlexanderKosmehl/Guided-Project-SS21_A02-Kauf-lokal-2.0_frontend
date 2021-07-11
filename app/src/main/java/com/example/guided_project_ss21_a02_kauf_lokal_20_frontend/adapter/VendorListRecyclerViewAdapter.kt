@@ -1,6 +1,7 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.util.Log
@@ -63,6 +64,7 @@ class VendorListRecyclerViewAdapter(
         val distance = (Random.nextInt(20) * 50).toString() + " m"
 
         val vendor = vendors[position]
+        val vendorColor = Color.parseColor(vendor.color)
 
         // TODO handle profilePicture URL(?) once backend implements it
         if (vendor.profilePicture != null) {
@@ -79,8 +81,7 @@ class VendorListRecyclerViewAdapter(
         val colorString: String = holder.titleView.context.resources.getString(color)
         adjustTextColor(colorString, holder)
 
-        // TODO Change when backend adds value
-        holder.headerLayout.setBackgroundResource(color)
+        holder.headerLayout.setBackgroundColor(vendorColor)
 
         // TODO MerchantScore is currently an integer
         holder.ratingBar.rating = vendor.merchantScore.toFloat()
@@ -150,7 +151,7 @@ class VendorListRecyclerViewAdapter(
     private fun displayHiddenItems(
         holder: ViewHolder,
         vendor: Vendor,
-        color: Int,
+        vendorColor: Int,
         distance: String,
         isOpen: Boolean
     ) {
@@ -170,10 +171,10 @@ class VendorListRecyclerViewAdapter(
             )
         )
 
-        holder.couponsButton.setBackgroundColor(colorRes)
-        holder.routeButton.setBackgroundColor(colorRes)
-        holder.websiteUnfoldImage.setColorFilter(colorRes)
-        holder.addressUnfoldImage.setColorFilter(colorRes)
+        holder.couponsButton.setBackgroundColor(vendorColor)
+        holder.routeButton.setBackgroundColor(vendorColor)
+        holder.websiteUnfoldImage.setColorFilter(vendorColor)
+        holder.addressUnfoldImage.setColorFilter(vendorColor)
         holder.distanceUnfoldView.text = distance
     }
 
