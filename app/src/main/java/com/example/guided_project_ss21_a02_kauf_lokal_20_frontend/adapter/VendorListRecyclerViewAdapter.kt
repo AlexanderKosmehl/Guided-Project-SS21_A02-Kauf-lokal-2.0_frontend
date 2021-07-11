@@ -59,7 +59,6 @@ class VendorListRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val color = colors.random()
         val distanceText = (Random.nextInt(20) * 50).toString() + " m"
 
         val vendor = vendors[position]
@@ -78,7 +77,7 @@ class VendorListRecyclerViewAdapter(
             }
         }
 
-        val colorString: String = holder.titleView.context.resources.getString(color)
+        val colorString: String = vendor.color?: "#16161d"
         adjustTextColor(colorString, holder)
 
         holder.headerLayout.setBackgroundColor(vendorColor)
@@ -114,7 +113,7 @@ class VendorListRecyclerViewAdapter(
             } else {
                 holder.bodyLayout.visibility = View.GONE
                 holder.unfoldedView.visibility = View.VISIBLE
-                displayHiddenItems(holder, vendor, color, distanceText)
+                displayHiddenItems(holder, vendor, vendorColor, distanceText)
                 TransitionManager.beginDelayedTransition(holder.cardView, AutoTransition())
             }
         }
