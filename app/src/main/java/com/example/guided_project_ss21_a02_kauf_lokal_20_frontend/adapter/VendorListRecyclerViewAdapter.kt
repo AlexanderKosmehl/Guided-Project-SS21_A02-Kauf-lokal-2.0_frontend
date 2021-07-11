@@ -17,7 +17,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy.DummyContent.DummyItem
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.OpeningTime
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import kotlin.random.Random
 
@@ -61,8 +60,7 @@ class VendorListRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val color = colors.random()
-        val isOpen = listOf(true, false).random()
-        val distance = (Random.nextInt(20) * 50).toString() + " m"
+        val distanceText = (Random.nextInt(20) * 50).toString() + " m"
 
         val vendor = vendors[position]
         val vendorColor = Color.parseColor(vendor.color)
@@ -99,9 +97,9 @@ class VendorListRecyclerViewAdapter(
         )
 
         // TODO Calculate value once backend adds support
-        holder.distanceView.text = distance
+        holder.distanceView.text = distanceText
 
-        // TODO Change when backend adds value
+        // TODO Implement user management
         holder.isFavoView.setImageResource(
             if (listOf(true, false).random()) R.drawable.ic_baseline_favorite_24
             else R.drawable.ic_baseline_favorite_border_24
@@ -141,7 +139,6 @@ class VendorListRecyclerViewAdapter(
 
     override fun getItemCount(): Int = vendors.size
 
-    // TODO Change when backend adds usable values
     private fun displayHiddenItems(
         holder: ViewHolder,
         vendor: Vendor,
