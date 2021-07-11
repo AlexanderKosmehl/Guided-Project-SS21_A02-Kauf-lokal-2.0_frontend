@@ -68,7 +68,7 @@ class VendorListRecyclerViewAdapter(
         val vendorColor = Color.parseColor(vendor.color)
 
         // TODO handle profilePicture URL(?) once backend implements it
-        if (vendor.profilePicture != null) {
+        if (vendor.logo != null) {
             // Handle picture
         } else {
             holder.logoView.visibility = View.GONE
@@ -84,18 +84,16 @@ class VendorListRecyclerViewAdapter(
 
         holder.headerLayout.setBackgroundColor(vendorColor)
 
-        // TODO MerchantScore is currently an integer
-        holder.ratingBar.rating = vendor.merchantScore.toFloat()
+        // TODO vendorScore is currently an integer
+        holder.ratingBar.rating = vendor.vendorScore.toFloat()
 
-        // TODO Change when backend adds value
-        holder.categoryView.text = "Keine Kategorie"
+        holder.categoryView.text = vendor.category.name
 
-        // TODO Calculate value once backend adds support
-        holder.isOpenView.text = if (isOpen) "Geöffnet" else "Geschlossen"
+        holder.isOpenView.text = if (vendor.openingTime.isOpen) "Geöffnet" else "Geschlossen"
 
         holder.isOpenView.setTextColor(
             holder.isOpenView.context.resources.getColor(
-                if (holder.isOpenView.text == "Geöffnet") R.color.open_color else R.color.close_color,
+                if (vendor.openingTime.isOpen) R.color.open_color else R.color.close_color,
                 null
             )
         )
@@ -117,15 +115,10 @@ class VendorListRecyclerViewAdapter(
             } else {
                 holder.bodyLayout.visibility = View.GONE
                 holder.unfoldedView.visibility = View.VISIBLE
-                displayHiddenItems(holder, vendor, color, distance, isOpen)
+                displayHiddenItems(holder, vendor, color, distanceText)
                 TransitionManager.beginDelayedTransition(holder.cardView, AutoTransition())
             }
         }
-    }
-
-    // TODO something useful?
-    private fun isVendorOpen(openingTime: OpeningTime): Boolean {
-        return listOf(true, false).random()
     }
 
     private fun adjustTextColor(hexColor: String, holder: ViewHolder) {
@@ -154,20 +147,17 @@ class VendorListRecyclerViewAdapter(
         vendor: Vendor,
         vendorColor: Int,
         distance: String,
-        isOpen: Boolean
     ) {
-        val colorRes = holder.couponsButton.context.resources.getColor(color, null)
-
-        holder.categoryUnfoldView.text = "Keine Kategorie"
-        holder.websiteUnfoldView.text = "Keine Website"
+        holder.categoryUnfoldView.text = vendor.category.name
+        holder.websiteUnfoldView.text = vendor.websiteURL
         holder.addressUnfoldView.text = "${vendor.address.street} ${vendor.address.houseNr}"
-        holder.ratingCountUnfoldView.text = "(${Random.nextInt(1, 1001)})"
-        holder.ratingBarUnfold.rating = vendor.merchantScore.toFloat()
+        holder.ratingCountUnfoldView.text = "(${vendor.ratings.size})"
+        holder.ratingBarUnfold.rating = vendor.vendorScore.toFloat()
 
-        holder.isOpenUnfoldView.text = if (isOpen) "Geöffnet" else "Geschlossen"
+        holder.isOpenUnfoldView.text = if (vendor.openingTime.isOpen) "Geöffnet" else "Geschlossen"
         holder.isOpenUnfoldView.setTextColor(
             holder.isOpenUnfoldView.context.resources.getColor(
-                if (holder.isOpenUnfoldView.text == "Geöffnet")
+                if (vendor.openingTime.isOpen)
                     R.color.open_color else R.color.close_color, null
             )
         )
