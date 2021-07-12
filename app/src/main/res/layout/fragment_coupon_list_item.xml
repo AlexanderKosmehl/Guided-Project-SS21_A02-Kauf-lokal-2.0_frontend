@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="#FAF9F9">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="#FFFFFF"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="148dp"
+                    android:layout_height="108dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="#F6D0D0"
+                    android:scaleType="fitCenter"
+                    tools:layout_editor_absoluteX="35dp"
+
+                    tools:layout_editor_absoluteY="30dp"
+                    tools:srcCompat="@drawable/_000px_saturn_logo_svg" />
+
+                <TextView
+                    android:id="@+id/CoupBe"
+                    android:layout_width="148dp"
+                    android:layout_height="73dp"
+                    android:layout_weight="1"
+                    android:text="5% Rabatt"
+                    android:textSize="20"
+                    android:textStyle="bold|italic"
+                    tools:layout_editor_absoluteX="35dp"
+                    tools:layout_editor_absoluteY="137dp" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="58dp"
+                    android:layout_height="50dp"
+                    android:text="Gültig bis:"
+                    android:textSize="10dp"
+                    tools:layout_editor_absoluteX="35dp"
+                    tools:layout_editor_absoluteY="210dp" />
+
+                <EditText
+                    android:id="@+id/editTextDate5"
+                    android:layout_width="91dp"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:inputType="date"
+                    android:text="21.07"
+                    tools:layout_editor_absoluteX="93dp"
+                    tools:layout_editor_absoluteY="210dp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/unfoldedView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/vendor_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="187dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="216dp"
+                        android:contentDescription="@string/picture_description"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/img"
+                        tools:srcCompat="@drawable/figma_coupon" />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="114dp"
+                        android:layout_height="79dp"
+                        android:layout_weight="1"
+                        android:text="5% Rabatt"
+                        app:layout_constraintTop_toBottomOf="@+id/vendor_image"
+                        tools:layout_editor_absoluteX="16dp" />
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="94dp"
+                        android:layout_height="29dp"
+                        android:layout_marginTop="2dp"
+                        android:text="Gültig bis:"
+                        android:textSize="10dp"
+                        app:layout_constraintTop_toBottomOf="@+id/vendor_image"
+                        tools:layout_editor_absoluteX="130dp" />
+
+                    <EditText
+                        android:id="@+id/editTextDate4"
+                        android:layout_width="96dp"
+                        android:layout_height="48dp"
+                        android:ems="10"
+                        android:inputType="date"
+                        android:text="21.07"
+                        app:layout_constraintTop_toBottomOf="@+id/textView15"
+                        tools:layout_editor_absoluteX="130dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#F6D0D0"
+                android:backgroundTintMode="add">
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="148dp"
+                    android:layout_height="108dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="#F6D0D0"
+                    tools:layout_editor_absoluteX="216dp"
+                    tools:layout_editor_absoluteY="33dp"
+                    tools:srcCompat="@drawable/saturn_logo" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="148dp"
+                    android:layout_height="73dp"
+                    android:layout_weight="1"
+                    android:text="1 Gratisbecher"
+                    android:textSize="15dp"
+                    android:textStyle="bold|italic"
+                    tools:layout_editor_absoluteX="216dp"
+                    tools:layout_editor_absoluteY="140dp" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="58dp"
+                    android:layout_height="50dp"
+                    android:text="Gültig bis:"
+                    android:textSize="10dp"
+                    tools:layout_editor_absoluteX="218dp"
+                    tools:layout_editor_absoluteY="213dp" />
+
+                <EditText
+                    android:id="@+id/editTextDate3"
+                    android:layout_width="91dp"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:inputType="date"
+                    android:text="28.07"
+                    tools:layout_editor_absoluteX="271dp"
+                    tools:layout_editor_absoluteY="214dp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/unfoldedView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/vendor_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="187dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="216dp"
+                        android:contentDescription="@string/picture_description"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/img"
+                        tools:srcCompat="@drawable/figma_coupon" />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="114dp"
+                        android:layout_height="79dp"
+                        android:layout_weight="1"
+                        android:textSize="20dp"
+                        app:layout_constraintTop_toBottomOf="@+id/vendor_image"
+                        tools:layout_editor_absoluteX="16dp" />
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="94dp"
+                        android:layout_height="29dp"
+                        android:layout_marginTop="2dp"
+                        android:text="Gültig bis:"
+                        android:textSize="10dp"
+                        app:layout_constraintTop_toBottomOf="@+id/vendor_image"
+                        tools:layout_editor_absoluteX="130dp" />
+
+                    <EditText
+                        android:id="@+id/editTextDate4"
+                        android:layout_width="96dp"
+                        android:layout_height="48dp"
+                        android:ems="10"
+                        android:inputType="date"
+                        android:text="21.07"
+                        app:layout_constraintTop_toBottomOf="@+id/textView15"
+                        tools:layout_editor_absoluteX="130dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
