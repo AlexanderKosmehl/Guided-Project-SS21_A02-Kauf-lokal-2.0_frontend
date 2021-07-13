@@ -12,6 +12,7 @@ import com.google.gson.Gson
 
 /**
  * Service that handles Backend-Communication
+ * TODO: NO LONGER USED DUE TO PROBLEMS WITH ASYNCHRONICITY - EITHER REMOVE OR FIND SOLUTION TO PREVENT BOILERPLATE CODE
  */
 class PollingService(private val view: RecyclerView) {
 
@@ -52,7 +53,7 @@ class PollingService(private val view: RecyclerView) {
     //TODO:
     fun pollCoupons() {
         val context = view.context
-        val adapter = view.adapter // as NewsfeedRecyclerViewAdapter
+        //val adapter = view.adapter // as NewsfeedRecyclerViewAdapter
         val coupons = mutableListOf<Coupon>()
 
 
