@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
-            app:startDestination="@id/newsfeed">
-    <fragment android:id="@+id/vendorList"
-              android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.VendorListFragment"
-              android:label="fragment_vendor_list_list" tools:layout="@layout/fragment_vendor_list"/>
-    <fragment android:id="@+id/newsfeed"
-              android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.NewsfeedFragment"
-              android:label="fragment_newsfeed_list" tools:layout="@layout/fragment_newsfeed_list"/>
-    <fragment
-        android:id="@+id/graph_coupon"
-        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.CouponFragment"
-        android:label="fragment_coupon"
-        tools:layout="@layout/fragment_coupon" />
-    <fragment
-        android:id="@+id/graph_progress"
-        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.ProgressFragment"
-        android:label="fragment_progress"
-        tools:layout="@layout/fragment_progress" />
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@+id/home">
+
+    <include app:graph="@navigation/home"/>
+    <include app:graph="@navigation/vendor"/>
+    <include app:graph="@navigation/coupon"/>
+    <include app:graph="@navigation/progress"/>
+
 </navigation>

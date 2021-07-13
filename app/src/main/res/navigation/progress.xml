@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/progress"
+            app:startDestination="@id/progress_list">
+
+    <fragment
+            android:id="@+id/progress_list"
+            android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.ProgressFragment"
+            android:label="Progress List"
+            tools:layout="@layout/fragment_progress"/>
+</navigation>
