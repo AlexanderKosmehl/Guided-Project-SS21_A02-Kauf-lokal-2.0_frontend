@@ -15,7 +15,6 @@ import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy.DummyContent.DummyItem
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.OpeningTime
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import kotlin.random.Random
