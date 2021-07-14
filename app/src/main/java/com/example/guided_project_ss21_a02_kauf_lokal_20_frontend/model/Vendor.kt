@@ -7,7 +7,7 @@ data class Vendor(
     var id: UUID,
     var name: String,
     var offerAmount: Int?,
-    var vendorScore: Int?,
+    var vendorScore: Double?,
     var logo: String,
     var websiteURL: String,
     var color: String?,
