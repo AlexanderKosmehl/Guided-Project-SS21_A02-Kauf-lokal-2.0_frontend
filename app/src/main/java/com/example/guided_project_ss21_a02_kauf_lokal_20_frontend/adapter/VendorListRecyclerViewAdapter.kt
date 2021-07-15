@@ -1,6 +1,7 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.util.Log
@@ -16,7 +17,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.dummy.DummyContent.DummyItem
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.OpeningTime
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import kotlin.random.Random
 
@@ -59,14 +59,14 @@ class VendorListRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val color = colors.random()
-        val isOpen = listOf(true, false).random()
-        val distance = (Random.nextInt(20) * 50).toString() + " m"
+        val distanceText = (Random.nextInt(20) * 50).toString() + " m"
 
         val vendor = vendors[position]
+        val vendorColorString = vendor.color?: "#16161d" // Remove fix once backend fixes null values
+        val vendorColor = Color.parseColor(vendorColorString)
 
         // TODO handle profilePicture URL(?) once backend implements it
-        if (vendor.profilePicture != null) {
+        if (vendor.logo != null) {
             // Handle picture
         } else {
             holder.logoView.visibility = View.GONE
@@ -77,32 +77,29 @@ class VendorListRecyclerViewAdapter(
             }
         }
 
-        val colorString: String = holder.titleView.context.resources.getString(color)
+        val colorString: String = vendor.color?: "#16161d"
         adjustTextColor(colorString, holder)
 
-        // TODO Change when backend adds value
-        holder.headerLayout.setBackgroundResource(color)
+        holder.headerLayout.setBackgroundColor(vendorColor)
 
-        // TODO MerchantScore is currently an integer
-        holder.ratingBar.rating = vendor.merchantScore.toFloat()
+        // TODO vendorScore is currently an integer
+        // TODO Remove fix once backend fixes vendorScores
+        holder.ratingBar.rating = vendor.vendorScore?.toFloat() ?: listOf(0,1,2,3,4,5).random().toFloat()
 
-        // TODO Change when backend adds value
-        holder.categoryView.text = "Keine Kategorie"
-
-        // TODO Calculate value once backend adds support
-        holder.isOpenView.text = if (isOpen) "Geöffnet" else "Geschlossen"
-
+        // TODO Remove fix once backend fixes null fields
+        holder.categoryView.text = vendor.category?.name ?: "Keine Kategorie"
+        holder.isOpenView.text = if (vendor.openingTime?.isOpen == true) "Geöffnet" else "Geschlossen"
         holder.isOpenView.setTextColor(
             holder.isOpenView.context.resources.getColor(
-                if (holder.isOpenView.text == "Geöffnet") R.color.open_color else R.color.close_color,
+                if (vendor.openingTime?.isOpen == true) R.color.open_color else R.color.close_color,
                 null
             )
         )
 
         // TODO Calculate value once backend adds support
-        holder.distanceView.text = distance
+        holder.distanceView.text = distanceText
 
-        // TODO Change when backend adds value
+        // TODO Implement user management
         holder.isFavoView.setImageResource(
             if (listOf(true, false).random()) R.drawable.ic_baseline_favorite_24
             else R.drawable.ic_baseline_favorite_border_24
@@ -116,15 +113,10 @@ class VendorListRecyclerViewAdapter(
             } else {
                 holder.bodyLayout.visibility = View.GONE
                 holder.unfoldedView.visibility = View.VISIBLE
-                displayHiddenItems(holder, vendor, color, distance, isOpen)
+                displayHiddenItems(holder, vendor, vendorColor, distanceText)
                 TransitionManager.beginDelayedTransition(holder.cardView, AutoTransition())
             }
         }
-    }
-
-    // TODO something useful?
-    private fun isVendorOpen(openingTime: OpeningTime): Boolean {
-        return listOf(true, false).random()
     }
 
     private fun adjustTextColor(hexColor: String, holder: ViewHolder) {
@@ -147,34 +139,32 @@ class VendorListRecyclerViewAdapter(
 
     override fun getItemCount(): Int = vendors.size
 
-    // TODO Change when backend adds usable values
     private fun displayHiddenItems(
         holder: ViewHolder,
         vendor: Vendor,
-        color: Int,
+        vendorColor: Int,
         distance: String,
-        isOpen: Boolean
     ) {
-        val colorRes = holder.couponsButton.context.resources.getColor(color, null)
-
-        holder.categoryUnfoldView.text = "Keine Kategorie"
-        holder.websiteUnfoldView.text = "Keine Website"
+        // TODO Remove fix once backend fixes null fields
+        holder.categoryUnfoldView.text = vendor.category?.name ?: "Keine Kategorie"
+        holder.websiteUnfoldView.text = vendor.websiteURL
         holder.addressUnfoldView.text = "${vendor.address.street} ${vendor.address.houseNr}"
-        holder.ratingCountUnfoldView.text = "(${Random.nextInt(1, 1001)})"
-        holder.ratingBarUnfold.rating = vendor.merchantScore.toFloat()
+        holder.ratingCountUnfoldView.text = "(${vendor.ratings.size})"
+        // TODO Remove fix once backend fixes vendorScores
+        holder.ratingBarUnfold.rating = vendor.vendorScore?.toFloat() ?: listOf(0,1,2,3,4,5).random().toFloat()
 
-        holder.isOpenUnfoldView.text = if (isOpen) "Geöffnet" else "Geschlossen"
+        holder.isOpenUnfoldView.text = if (vendor.openingTime?.isOpen == true) "Geöffnet" else "Geschlossen"
         holder.isOpenUnfoldView.setTextColor(
             holder.isOpenUnfoldView.context.resources.getColor(
-                if (holder.isOpenUnfoldView.text == "Geöffnet")
+                if (vendor.openingTime?.isOpen == true)
                     R.color.open_color else R.color.close_color, null
             )
         )
 
-        holder.couponsButton.setBackgroundColor(colorRes)
-        holder.routeButton.setBackgroundColor(colorRes)
-        holder.websiteUnfoldImage.setColorFilter(colorRes)
-        holder.addressUnfoldImage.setColorFilter(colorRes)
+        holder.couponsButton.setBackgroundColor(vendorColor)
+        holder.routeButton.setBackgroundColor(vendorColor)
+        holder.websiteUnfoldImage.setColorFilter(vendorColor)
+        holder.addressUnfoldImage.setColorFilter(vendorColor)
         holder.distanceUnfoldView.text = distance
     }
 
