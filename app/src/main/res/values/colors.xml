@@ -24,4 +24,14 @@
     <!-- basic -->
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+
+    <!-- color scheme -->
+    <color name="primaryColor">#4dd0e1</color>
+    <color name="primaryLightColor">#88ffff</color>
+    <color name="primaryDarkColor">#009faf</color>
+    <color name="secondaryColor">#80cbc4</color>
+    <color name="secondaryLightColor">#b2fef7</color>
+    <color name="secondaryDarkColor">#4f9a94</color>
+    <color name="primary_complementary">#E45334</color>
+    <!-- <color name="primary_complementary">#E15E4D</color> -->
 </resources>
