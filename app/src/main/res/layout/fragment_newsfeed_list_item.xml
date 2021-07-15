@@ -7,9 +7,9 @@
         android:id="@+id/event_card"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_marginTop="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="15dp"
         card_view:contentPadding="10dp"
@@ -64,6 +64,17 @@
                 card_view:layout_constraintTop_toTopOf="@+id/event_type"
                 card_view:layout_constraintEnd_toStartOf="@+id/event_time"/>
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_share_24"
+            android:id="@+id/share_iv"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="10dp"
+            android:clickable="true"
+            />
         <!-- TODO: should be in detailed fragment
         <TextView
                 android:layout_width="wrap_content"

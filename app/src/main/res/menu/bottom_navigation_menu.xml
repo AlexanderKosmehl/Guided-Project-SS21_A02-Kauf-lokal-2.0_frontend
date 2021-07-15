@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/newsfeed"
+        android:id="@+id/home"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/nav_news" />
     <item
-        android:id="@+id/vendorList"
+        android:id="@+id/vendor"
         android:enabled="true"
         android:icon="@drawable/ic_location_button"
         android:title="@string/nav_vendor" />
     <item
-        android:id="@+id/graph_coupon"
+        android:id="@+id/coupon"
         android:enabled="true"
         android:icon="@drawable/ic_tag"
         android:title="@string/nav_coupons" />
     <item
-        android:id="@+id/graph_progress"
+        android:id="@+id/progress"
         android:enabled="true"
         android:icon="@drawable/ic_progress"
         android:title="@string/nav_progress" />
