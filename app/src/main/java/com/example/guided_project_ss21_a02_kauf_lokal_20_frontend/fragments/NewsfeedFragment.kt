@@ -33,7 +33,7 @@ class NewsfeedFragment : Fragment() {
         // Set LayoutManager and Adapter
         with(recyclerView) {
             layoutManager = LinearLayoutManager(context)
-            adapter = NewsfeedRecyclerViewAdapter(listOf())
+            adapter = NewsfeedRecyclerViewAdapter(listOf<Event>())
         }
 
         // Handles backend communication
@@ -51,6 +51,7 @@ class NewsfeedFragment : Fragment() {
         val events = mutableListOf<Event>()
         val gson = Gson()
 
+        //TODO: changed Port for temporary testing
         val url = "http://10.0.2.2:8080/event"
 
         val request = JsonArrayRequest(
@@ -66,7 +67,8 @@ class NewsfeedFragment : Fragment() {
             },
             { error ->
                 // TODO Add meaningful error handling
-                Toast.makeText(context, "No content found: $error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "No content found", Toast.LENGTH_SHORT).show()
+                Log.e("Response", error.message ?: "Keine Fehlermeldung vorhanden")
             }
         )
         RequestSingleton.getInstance(context).addToRequestQueue(request)
