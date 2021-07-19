@@ -16,7 +16,6 @@ import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.OpeningTime
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import kotlin.random.Random
 
@@ -62,7 +61,8 @@ class VendorListRecyclerViewAdapter(
         val distanceText = (Random.nextInt(20) * 50).toString() + " m"
 
         val vendor = vendors[position]
-        val vendorColorString = vendor.color?: "#16161d" // Remove fix once backend fixes null values
+        val vendorColorString = vendor.color.ifEmpty { "#16161d" }
+
         val vendorColor = Color.parseColor(vendorColorString)
 
         // TODO handle profilePicture URL(?) once backend implements it
@@ -77,21 +77,20 @@ class VendorListRecyclerViewAdapter(
             }
         }
 
-        val colorString: String = vendor.color?: "#16161d"
-        adjustTextColor(colorString, holder)
+        adjustTextColor(vendorColorString, holder)
 
         holder.headerLayout.setBackgroundColor(vendorColor)
 
         // TODO vendorScore is currently an integer
         // TODO Remove fix once backend fixes vendorScores
-        holder.ratingBar.rating = vendor.vendorScore?.toFloat() ?: listOf(0,1,2,3,4,5).random().toFloat()
+        holder.ratingBar.rating = vendor.vendorScore.toFloat()
 
         // TODO Remove fix once backend fixes null fields
-        holder.categoryView.text = vendor.category?.name ?: "Keine Kategorie"
-        holder.isOpenView.text = if (vendor.openingTime?.isOpen == true) "Geöffnet" else "Geschlossen"
+        holder.categoryView.text = vendor.category.name
+        holder.isOpenView.text = if (vendor.openingTime.isOpen == true) "Geöffnet" else "Geschlossen"
         holder.isOpenView.setTextColor(
             holder.isOpenView.context.resources.getColor(
-                if (vendor.openingTime?.isOpen == true) R.color.open_color else R.color.close_color,
+                if (vendor.openingTime.isOpen) R.color.open_color else R.color.close_color,
                 null
             )
         )
@@ -170,7 +169,7 @@ class VendorListRecyclerViewAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         //--- both
-        val headerLayout: ConstraintLayout = view.findViewById(R.id.headerLayout)
+        val headerLayout: ConstraintLayout = view.findViewById(R.id.couponHeaderLayout)
         val cardView: CardView = view.findViewById(R.id.vendorCardView)
         val titleView: TextView = view.findViewById(R.id.vendor_title)
         val isFavoView: ImageView = view.findViewById(R.id.vendor_is_favo)
