@@ -4,12 +4,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/coupon"
-        app:startDestination="@id/coupon_list">
+        app:startDestination="@id/couponList">
 
     <fragment
-            android:id="@+id/coupon_list"
-            android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.CouponFragment"
+            android:id="@+id/couponList"
+            android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.CouponListFragment"
             android:label="Coupon List"
-            tools:layout="@layout/fragment_coupon" />
+            tools:layout="@layout/fragment_coupon_list" />
 
 </navigation>
