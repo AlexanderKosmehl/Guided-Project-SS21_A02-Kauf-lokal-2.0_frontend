@@ -9,6 +9,6 @@ data class Coupon(
     var description: String,
     var couponCode: Int,
     var expiryDate: Date,
-    var value: Double,
+    var value: Float,
     var created: Date
 )
