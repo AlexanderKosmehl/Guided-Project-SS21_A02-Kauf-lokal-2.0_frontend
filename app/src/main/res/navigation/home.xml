@@ -14,11 +14,11 @@
                 android:id="@+id/action_newsfeed_to_detail"
                 app:destination="@+id/newsfeedMessage"/>
         <action
-                android:id="@+id/action_newsfeed_to_poll"
-                app:destination="@id/newsfeedPoll"/>
-        <action
                 android:id="@+id/action_newsfeed_to_coupon"
                 app:destination="@id/home"/>
+        <action
+                android:id="@+id/action_newsfeed_to_pollVoting"
+                app:destination="@id/poll"/>
     </fragment>
     <fragment
             android:id="@+id/newsfeedMessage"
@@ -30,8 +30,12 @@
                 app:argType="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Event"/>
     </fragment>
     <fragment
-            android:id="@+id/newsfeedPoll"
+            android:id="@+id/poll"
             android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.PollFragment"
-            android:label="Newsfeed Poll"
-            tools:layout="@layout/fragment_newsfeed_poll"/>
+            android:label="Poll"
+            tools:layout="@layout/fragment_poll">
+        <argument
+                android:name="event"
+                app:argType="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Event"/>
+    </fragment>
 </navigation>
