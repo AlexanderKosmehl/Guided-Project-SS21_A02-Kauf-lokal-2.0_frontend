@@ -18,7 +18,7 @@
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/headerLayout"
+            android:id="@+id/couponHeaderLayout"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:background="@color/saturn_orange">
@@ -56,7 +56,7 @@
             android:background="#FFFFFF">
 
             <TextView
-                android:id="@+id/percentageText"
+                android:id="@+id/couponText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -83,7 +83,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/percentageText" />
+                app:layout_constraintTop_toBottomOf="@id/couponText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
