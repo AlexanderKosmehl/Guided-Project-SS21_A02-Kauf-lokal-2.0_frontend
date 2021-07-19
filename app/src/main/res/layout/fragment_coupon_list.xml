@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_column="2"
-    android:padding="16dp"
     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
     tools:context=".fragments.CouponListFragment"
     tools:listitem="@layout/fragment_coupon_list_item" />
