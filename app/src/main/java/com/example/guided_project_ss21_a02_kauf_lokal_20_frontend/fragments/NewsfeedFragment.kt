@@ -33,7 +33,7 @@ class NewsfeedFragment : Fragment() {
         // Set LayoutManager and Adapter
         with(recyclerView) {
             layoutManager = LinearLayoutManager(context)
-            adapter = NewsfeedRecyclerViewAdapter(listOf<Event>())
+            adapter = NewsfeedRecyclerViewAdapter(listOf())
         }
 
         // Handles backend communication
@@ -67,8 +67,7 @@ class NewsfeedFragment : Fragment() {
             },
             { error ->
                 // TODO Add meaningful error handling
-                Toast.makeText(context, "No content found", Toast.LENGTH_SHORT).show()
-                Log.e("Response", error.message ?: "Keine Fehlermeldung vorhanden")
+                Toast.makeText(context, "No content found: $error", Toast.LENGTH_SHORT).show()
             }
         )
         RequestSingleton.getInstance(context).addToRequestQueue(request)

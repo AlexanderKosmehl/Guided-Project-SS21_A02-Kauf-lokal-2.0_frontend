@@ -7,6 +7,7 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
@@ -121,7 +122,7 @@ class NewsfeedRecyclerViewAdapter(
                 if (it.isClickable) {
                     var position: Int = bindingAdapterPosition
                     val event = events[position]
-                    //val context = itemView.context
+                    val context = itemView.context
                     //var nextFrag: Fragment? = null
 
                     //Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT).show()
@@ -134,16 +135,14 @@ class NewsfeedRecyclerViewAdapter(
                             val action = NewsfeedFragmentDirections.actionNewsfeedToDetail(event)
                             view.findNavController().navigate(action)
                         }
-                        //EventTypes.MESSAGE -> nextFrag = MessageFragment(event)
                         EventTypes.COUPON -> TODO()
-                        EventTypes.POLL -> TODO()
+                        EventTypes.POLL -> {
+                            val action = NewsfeedFragmentDirections.actionNewsfeedToPollVoting(event)
+                            view.findNavController().navigate(action)
+                        }
                         EventTypes.UPDATE -> TODO()
                     }
 
-                    /*val activity = view.context as AppCompatActivity
-
-                    activity.supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, nextFrag!!)
-                        .addToBackStack(null).commit()*/
                 }
             }
         }
