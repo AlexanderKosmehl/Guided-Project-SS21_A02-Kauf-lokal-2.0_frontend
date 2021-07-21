@@ -37,7 +37,7 @@ class PollFragment(// TODO: Rename and change types of parameters
 // Set LayoutManager and Adapter
         with(recyclerView) {
             layoutManager = LinearLayoutManager(context)
-            adapter = PollRecyclerViewAdapter(listOf())
+            adapter = PollRecyclerViewAdapter(listOf(), 0)
         }
 
         // Handles backend communication
@@ -80,7 +80,7 @@ class PollFragment(// TODO: Rename and change types of parameters
                 votingAuthorName.text = poll.authorName
                 votingDate.text = event.created.toString()
 
-                adapter.setValues(poll.options)
+                adapter.setValues(poll.options, poll.totalAmountVoters)
 
             },
             { error ->

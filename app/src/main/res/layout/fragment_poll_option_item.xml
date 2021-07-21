@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -12,27 +12,84 @@
         android:layout_marginBottom="10dp"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="15dp"
-        card_view:contentPadding="10dp"
-        android:clickable="true">
+        android:padding="16dp"
+        android:clipToPadding="false"
+
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:elevation="8dp"
+        card_view:checkedIconTint="@color/bottom_nav_color"
+
+        >
+
+    <!--<SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/percentage_box"
+            android:max="100"
+            android:progress="1"
+            android:thumbTint="@android:color/transparent"
+            android:progressDrawable="@drawable/percentage_box"
+            android:splitTrack="false"
+            android:layout_marginLeft="-16dp"
+            android:layout_marginRight="-16dp"
+            android:layout_marginTop="-35dp"
+            android:layout_marginBottom="-35dp"
+
+
+            android:visibility="gone"
+
+            />-->
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+
+            >
+
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/percentage_box"
+                android:max="100"
+                android:progress="1"
+                android:thumbTint="@android:color/transparent"
+                android:progressDrawable="@drawable/percentage_box"
+                android:splitTrack="false"
+                android:layout_marginLeft="-16dp"
+                android:layout_marginRight="-16dp"
+                android:layout_marginTop="-35dp"
+                android:layout_marginBottom="-35dp"
+                android:padding="0dp"
 
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/poll_option_percentage"
-                card_view:layout_constraintTop_toTopOf="parent"
-                android:textSize="10sp"
-                android:text="x%"
-                card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintBottom_toBottomOf="parent"/>
+                android:visibility="gone"
+
+                />
+
+        <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:id="@+id/poll_checkmark"
+                card_view:layout_constraintLeft_toRightOf="@id/poll_option_name"
+                card_view:layout_constraintTop_toTopOf="@id/poll_option_name"
+                card_view:layout_constraintBottom_toBottomOf="@id/poll_option_name"
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/ic_baseline_check_24"
+                android:visibility="gone"
+
+                />
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/poll_option_name"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
 
                 android:text="Option"
                 android:textSize="14sp"
@@ -40,9 +97,15 @@
                 card_view:layout_constraintTop_toTopOf="parent"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintStart_toStartOf="parent"/>
+                card_view:layout_constraintStart_toStartOf="parent"
+                android:textAlignment="gravity"
+                android:gravity="center"
+                android:layout_margin="10dp"/>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+
+
+</com.google.android.material.card.MaterialCardView>
