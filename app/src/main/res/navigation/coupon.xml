@@ -7,9 +7,24 @@
         app:startDestination="@id/couponList">
 
     <fragment
-            android:id="@+id/couponList"
-            android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.CouponListFragment"
-            android:label="Coupon List"
-            tools:layout="@layout/fragment_coupon_list" />
+        android:id="@+id/couponList"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.CouponListFragment"
+        android:label="Coupon List"
+        tools:layout="@layout/fragment_coupon_list">
+        <action
+            android:id="@+id/action_couponList_to_couponDetailFragment"
+            app:destination="@id/couponDetailFragment"
+            app:popUpTo="@id/couponList"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/couponDetailFragment"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.CouponDetailFragment"
+        android:label="fragment_coupon_detail"
+        tools:layout="@layout/fragment_coupon_detail" >
+        <argument
+            android:name="Coupon"
+            app:argType="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon" />
+    </fragment>
 
 </navigation>
