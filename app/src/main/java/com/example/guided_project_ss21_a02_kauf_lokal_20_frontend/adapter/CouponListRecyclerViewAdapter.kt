@@ -6,9 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.CouponListFragment
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.CouponListFragmentDirections
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon
 import java.time.LocalDate
 import java.util.*
@@ -52,17 +56,25 @@ class CouponListRecyclerViewAdapter(
         val expiryString = "${calendar.get(Calendar.DAY_OF_MONTH)} ${monthStrings[calendar.get(Calendar.MONTH)]}"
 
         holder.couponDate.text = "$createdString - $expiryString" ?: "Ohne Ablaufdatum"
+
+        // Click Listener
+        holder.couponCardView.setOnClickListener {
+            val action = CouponListFragmentDirections.actionCouponListToCouponDetailFragment(coupons[position])
+            it.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount(): Int = coupons.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val couponCardView: CardView = view.findViewById(R.id.couponCardView)
         val couponHeader: ConstraintLayout = view.findViewById(R.id.couponHeaderLayout)
         val couponLogo: ImageView = view.findViewById(R.id.couponLogoView)
         val couponFavorite: ImageView = view.findViewById(R.id.couponIsFavo)
         val couponText: TextView = view.findViewById(R.id.couponText)
         val couponDate: TextView = view.findViewById(R.id.couponDate)
     }
+
 
 
 }
