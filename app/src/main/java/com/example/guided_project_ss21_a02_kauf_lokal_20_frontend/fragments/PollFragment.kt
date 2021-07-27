@@ -1,5 +1,6 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,10 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
+import com.bumptech.glide.Glide
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.NewsfeedRecyclerViewAdapter
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.PollRecyclerViewAdapter
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Poll
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.RequestSingleton
 import com.google.gson.Gson
 
@@ -72,14 +74,15 @@ class PollFragment(// TODO: Rename and change types of parameters
 
                 val poll = gson.fromJson(response.toString(), Poll::class.java)
 
+                //TODO: voting header image
 
-                //TODO: votingImage
+                // get Author Data
+                addAuthor(poll.vendorId, view)
+
                 votingTitle.text = poll.title
-                //TODO: votingAuthorImage
-                votingAuthorName.text = poll.authorName
-                votingDate.text = event.created.toString()
+                votingDate.text = event.formatDate()
 
-                adapter.setValues(poll.options, poll.totalAmountVoters)
+                adapter.setValues(poll.votingOptions, poll.totalAmountVoters)
 
             },
             { error ->
@@ -89,6 +92,36 @@ class PollFragment(// TODO: Rename and change types of parameters
             }
         )
         RequestSingleton.getInstance(context).addToRequestQueue(request)
+    }
+
+    fun addAuthor(vendorId:String, view: View) {
+        val url = "http://10.0.2.2:8080/vendor/"
+        val gson = Gson()
+        val context = view.context
+        val votingAuthorName: TextView = view.findViewById(R.id.poll_author_name)
+        val votingAuthorImage: ImageView = view.findViewById(R.id.poll_author_image)
+
+        val request = JsonObjectRequest(
+            Request.Method.GET, url + vendorId, null,
+            { response ->
+
+                val vendor = gson.fromJson(response.toString(), Vendor::class.java)
+                votingAuthorName.text = vendor.name
+
+                // TODO: Author image
+                Glide.with(this).load(vendor.logo).into(votingAuthorImage)
+
+
+            },
+            { error ->
+                Toast.makeText(context, "No Vendor found", Toast.LENGTH_SHORT).show()
+                Log.e("Response", error.message ?: "Kein Vendor vorhanden")
+            }
+        )
+        RequestSingleton.getInstance(context).addToRequestQueue(request)
+
+
+
     }
 
 }

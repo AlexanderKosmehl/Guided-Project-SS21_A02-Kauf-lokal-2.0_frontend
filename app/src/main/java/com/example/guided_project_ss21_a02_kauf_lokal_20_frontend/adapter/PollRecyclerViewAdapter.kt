@@ -2,28 +2,20 @@ package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
-import android.transition.ChangeBounds
-import android.transition.TransitionManager
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import android.view.animation.*
-import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.view.animation.PathInterpolatorCompat
-import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.VotingOption
 import com.google.android.material.card.MaterialCardView
-import kotlinx.coroutines.delay
 
 
 /**
@@ -49,7 +41,7 @@ class PollRecyclerViewAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val option = options[position]
-        holder.optionName.text = option.name
+        holder.optionName.text = option.title
 
         //Seekbar-Hack: Overwrite OnToucListener to prevent UserInput
         holder.optionPercentage.setOnTouchListener(OnTouchListener { v, event -> true })
@@ -60,7 +52,7 @@ class PollRecyclerViewAdapter(
             isClicked = true
 
             // calculate percentage
-            var percentage = getPercentage(option.amountVoters, totalAmountVoter)
+            var percentage = getPercentage(option.totalAmountVoters, totalAmountVoter)
 
             ObjectAnimator.ofFloat(holder.optionName, "x", 46f).apply{
                 duration = 500
@@ -119,9 +111,8 @@ class PollRecyclerViewAdapter(
                 isClicked = true
                 card.isFocused
                 card.cardElevation = 0F
-
-
-
+                card.strokeWidth = 1
+                //card.strokeColor = strokeColor(getResources().getColor(R.color.GRAY))
 
                 // necessary to influence other items
                 notifyDataSetChanged()
