@@ -42,6 +42,7 @@
                 card_view:layout_constraintLeft_toRightOf="@id/event_type"
                 card_view:layout_constraintTop_toTopOf="parent"
                 android:textSize="10sp"
+                android:fontFamily="@font/montserrat"
                 android:layout_marginStart="10dp"
                 android:text="x min"/>
             <TextView
@@ -53,6 +54,7 @@
                     android:layout_marginStart="10dp"
                     android:text="Nachricht"
                     android:textSize="14sp"
+                    android:fontFamily="@font/montserrat"
                     android:textStyle="bold"/>
 
         <ImageView

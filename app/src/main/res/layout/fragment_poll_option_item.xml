@@ -7,8 +7,7 @@
         android:id="@+id/poll_option_card"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+
         android:layout_marginBottom="10dp"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="15dp"
@@ -20,7 +19,7 @@
         android:focusable="true"
         android:checkable="true"
         android:foreground="?android:selectableItemBackground"
-        android:elevation="8dp"
+        android:elevation="4dp"
         card_view:checkedIconTint="@color/bottom_nav_color"
 
         >
@@ -82,6 +81,7 @@
                 android:id="@+id/poll_option_name"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
+                android:fontFamily="@font/montserrat"
 
                 android:text="Option"
                 android:textSize="14sp"
