@@ -6,7 +6,8 @@ import java.util.*
 @kotlinx.parcelize.Parcelize
 data class VotingOption(
     var id: UUID,
-    var name: String,
-    var amountVoters: Int,
+    var title: String,
+    var totalAmountVoters: Int,
+    var users: List<String>,
 ): Parcelable
 

@@ -8,8 +8,7 @@ import java.util.*
 data class Poll(
     var id: UUID,
     var title: String,
-    var authorName: String,
+    var vendorId: String,
     var totalAmountVoters: Int,
-    var authorProfilePicture: String,
-    var options: List<VotingOption>,
+    var votingOptions: List<VotingOption>,
 ): Parcelable
