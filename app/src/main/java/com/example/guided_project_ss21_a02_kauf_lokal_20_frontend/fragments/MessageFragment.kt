@@ -39,8 +39,7 @@ class MessageFragment(// TODO: Rename and change types of parameters
         val context = view.context
         val gson = Gson()
 
-        //TODO: changed Port for temporary testing
-        val url = "http://10.0.2.2:3000/message/"
+        val url = "http://10.0.2.2:8080/message/"
 
         val messageText: TextView = view.findViewById(R.id.message_tv)
 

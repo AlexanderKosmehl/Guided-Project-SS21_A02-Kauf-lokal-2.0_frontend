@@ -51,8 +51,7 @@ class NewsfeedFragment : Fragment() {
         val events = mutableListOf<Event>()
         val gson = Gson()
 
-        //TODO: changed Port for temporary testing
-        val url = "http://10.0.2.2:3000/event"
+        val url = "http://10.0.2.2:8080/event"
 
         val request = JsonArrayRequest(
             Request.Method.GET, url, null,

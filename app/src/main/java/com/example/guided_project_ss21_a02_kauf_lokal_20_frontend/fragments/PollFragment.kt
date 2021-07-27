@@ -64,8 +64,7 @@ class PollFragment(// TODO: Rename and change types of parameters
         val votingAuthorName: TextView = view.findViewById(R.id.poll_author_name)
         val votingDate: TextView = view.findViewById(R.id.poll_date)
 
-        //TODO: changed Port for temporary testing
-        val url = "http://10.0.2.2:3000/poll/"
+        val url = "http://10.0.2.2:8080/poll/"
 
         val request = JsonObjectRequest(
             Request.Method.GET, url + event.refId, null,

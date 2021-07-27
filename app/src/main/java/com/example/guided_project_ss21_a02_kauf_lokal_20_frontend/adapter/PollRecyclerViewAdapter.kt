@@ -1,18 +1,29 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
-import android.view.*
-import android.view.View.OnTouchListener
-import android.view.View.VISIBLE
+import android.transition.ChangeBounds
+import android.transition.TransitionManager
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.View.*
+import android.view.ViewGroup
+import android.view.animation.*
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.view.marginLeft
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.animation.doOnEnd
+import androidx.core.animation.doOnStart
+import androidx.core.view.animation.PathInterpolatorCompat
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.VotingOption
 import com.google.android.material.card.MaterialCardView
+import kotlinx.coroutines.delay
 
 
 /**
@@ -44,30 +55,34 @@ class PollRecyclerViewAdapter(
         holder.optionPercentage.setOnTouchListener(OnTouchListener { v, event -> true })
 
 
-
         // check whether one item was already clicked
         if (isClicked) {
             isClicked = true
-            //holder.card.isFocused
-            // move text to left TODO: FIX
-            holder.optionName.gravity = Gravity.START
 
-            // show percentage bar
+            // calculate percentage
             var percentage = getPercentage(option.amountVoters, totalAmountVoter)
-            holder.optionPercentage.progress = percentage
-            holder.optionPercentage.visibility = VISIBLE
-            holder.optionName.visibility = VISIBLE
+
+            ObjectAnimator.ofFloat(holder.optionName, "x", 46f).apply{
+                duration = 500
+                doOnStart {
+                    //pass percentage to seekbar
+                    ObjectAnimator.ofInt(holder.optionPercentage, "progress", percentage).apply {
+
+                        duration = 1000
+                        holder.optionPercentage.visibility = VISIBLE
+                        // custom cubic-belzier curve, created with: https://cubic-bezier.com/
+                        val custInterpolator: Interpolator = PathInterpolatorCompat.create(.42f,0f,.58f,1f)
+                        interpolator = custInterpolator
+                    }.start()
+                }
+            }.start()
 
         }
-
-
 
 
     }
 
     override fun getItemCount(): Int = options.size
-
-
 
     // Automatically displays data changes
     fun setValues(options: List<VotingOption>, totalAmountVoter: Int) {
@@ -85,13 +100,11 @@ class PollRecyclerViewAdapter(
 
     @SuppressLint("ClickableViewAccessibility")
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val context = view.context
         var optionName: TextView = view.findViewById(R.id.poll_option_name)
         var optionPercentage: SeekBar = view.findViewById(R.id.percentage_box)
         var card: MaterialCardView = view.findViewById(R.id.poll_option_card)
-        var checkMark: ImageView = view.findViewById(R.id.poll_checkmark)
-
-
-
+        var cardConstraint: ConstraintLayout = view.findViewById(R.id.card_constraint_layout)
 
 
         init {
@@ -99,10 +112,6 @@ class PollRecyclerViewAdapter(
             itemView.setOnClickListener {
                 var position: Int = bindingAdapterPosition
                 val option = options[position]
-                val context = itemView.context
-
-
-
 
 
                 // actions clicked = true
@@ -110,13 +119,9 @@ class PollRecyclerViewAdapter(
                 isClicked = true
                 card.isFocused
                 card.cardElevation = 0F
-                // move text to left TODO: FIX
-                optionName.gravity = Gravity.START
-                // show percentage bar
-                var percentage = getPercentage(option.amountVoters, totalAmountVoter)
-                optionPercentage.progress = percentage
-                optionPercentage.visibility = VISIBLE
-                checkMark.visibility = VISIBLE
+
+
+
 
                 // necessary to influence other items
                 notifyDataSetChanged()

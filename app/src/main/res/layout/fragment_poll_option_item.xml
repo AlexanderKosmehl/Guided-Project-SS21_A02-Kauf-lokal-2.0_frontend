@@ -15,6 +15,7 @@
         android:padding="16dp"
         android:clipToPadding="false"
 
+
         android:clickable="true"
         android:focusable="true"
         android:checkable="true"
@@ -48,6 +49,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:animateLayoutChanges="true"
+
+
+            android:id="@+id/card_constraint_layout"
 
             >
 
@@ -67,22 +72,9 @@
                 android:padding="0dp"
 
 
-                android:visibility="gone"
+                android:visibility="invisible"
 
-                />
-
-        <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:id="@+id/poll_checkmark"
-                card_view:layout_constraintLeft_toRightOf="@id/poll_option_name"
-                card_view:layout_constraintTop_toTopOf="@id/poll_option_name"
-                card_view:layout_constraintBottom_toBottomOf="@id/poll_option_name"
-                android:layout_marginLeft="4dp"
-                android:src="@drawable/ic_baseline_check_24"
-                android:visibility="gone"
-
-                />
+                card_view:layout_constraintEnd_toStartOf="parent"/>
 
         <TextView
                 android:layout_width="wrap_content"
