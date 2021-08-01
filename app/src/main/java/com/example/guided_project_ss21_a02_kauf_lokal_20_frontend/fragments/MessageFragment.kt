@@ -62,8 +62,7 @@ class MessageFragment(// TODO: Rename and change types of parameters
                 messageTitle.text = message.title
                 messageDate.text = message.formatDate()
 
-                //TODO: as soon as added by backend
-                //addAuthor(message.vendorId, view)
+                addAuthor(message.vendorId, view)
 
             },
             { error ->

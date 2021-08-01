@@ -13,6 +13,7 @@ data class Message(
     var created: Date,
     var imageURL: String,
     var title: String,
+    var vendorId: String,
 ): Parcelable {
 
     fun formatDate(): String {
