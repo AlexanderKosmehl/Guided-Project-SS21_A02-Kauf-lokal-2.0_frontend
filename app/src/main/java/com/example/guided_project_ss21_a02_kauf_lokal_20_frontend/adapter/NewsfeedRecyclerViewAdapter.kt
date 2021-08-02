@@ -1,12 +1,18 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.view.marginBottom
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
@@ -67,8 +73,16 @@ class NewsfeedRecyclerViewAdapter(
                 holder.eventMessage.text = "A new Update was posted!"
                 holder.eventIv.setImageResource(R.drawable.ic_baseline_update_24)
                 holder.eventTime.text = timePassed
-                holder.eventShareIv.visibility=GONE
                 holder.itemView.isClickable=false
+
+                // Visual Changes due to type Update
+                holder.eventShareIv.visibility=GONE
+                holder.eventIv.layoutParams.height=100
+                holder.eventIv.layoutParams.width=100
+                holder.eventMessage.textSize=10F
+                //holder.eventCard.setCardBackgroundColor(Color.GRAY)
+                holder.eventCard.setCardBackgroundColor(ContextCompat.getColor(holder.eventCard.context,R.color.card_color_unclickable))
+                holder.eventCard.elevation=0F
             }
         }
 
@@ -113,6 +127,10 @@ class NewsfeedRecyclerViewAdapter(
         var eventType: TextView = view.findViewById(R.id.event_type)
         var eventIv :ImageView = view.findViewById(R.id.event_iv)
         var eventTime : TextView = view.findViewById(R.id.event_time)
+        var eventCard: CardView = view.findViewById(R.id.event_card)
+
+        val paramsMessage = eventMessage.layoutParams as ConstraintLayout.LayoutParams
+        val paramsType = eventType.layoutParams as ConstraintLayout.LayoutParams
 
 
         init {
@@ -121,7 +139,7 @@ class NewsfeedRecyclerViewAdapter(
                 if (it.isClickable) {
                     var position: Int = bindingAdapterPosition
                     val event = events[position]
-                    //val context = itemView.context
+                    val context = itemView.context
                     //var nextFrag: Fragment? = null
 
                     //Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT).show()
@@ -134,16 +152,14 @@ class NewsfeedRecyclerViewAdapter(
                             val action = NewsfeedFragmentDirections.actionNewsfeedToDetail(event)
                             view.findNavController().navigate(action)
                         }
-                        //EventTypes.MESSAGE -> nextFrag = MessageFragment(event)
                         EventTypes.COUPON -> TODO()
-                        EventTypes.POLL -> TODO()
-                        EventTypes.UPDATE -> TODO()
+                        EventTypes.POLL -> {
+                            val action = NewsfeedFragmentDirections.actionNewsfeedToPollVoting(event)
+                            view.findNavController().navigate(action)
+                        }
+                        //EventTypes.UPDATE -> TODO()
                     }
 
-                    /*val activity = view.context as AppCompatActivity
-
-                    activity.supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, nextFrag!!)
-                        .addToBackStack(null).commit()*/
                 }
             }
         }

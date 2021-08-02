@@ -1,7 +1,9 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.util.Log
@@ -14,6 +16,7 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
@@ -165,6 +168,13 @@ class VendorListRecyclerViewAdapter(
         holder.websiteUnfoldImage.setColorFilter(vendorColor)
         holder.addressUnfoldImage.setColorFilter(vendorColor)
         holder.distanceUnfoldView.text = distance
+
+        holder.routeButton.setOnClickListener {
+            val gmmIntentUri = Uri.parse("geo:0,0?q=${vendor.name} ${vendor.address.zipCode} ${vendor.address.place} ${vendor.address.street} ${vendor.address.houseNr}")
+            val mapIntent: Intent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            holder.routeButton.context.startActivity(mapIntent)
+        }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
