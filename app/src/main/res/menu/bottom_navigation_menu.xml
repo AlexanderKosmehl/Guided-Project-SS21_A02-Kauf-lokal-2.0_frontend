@@ -6,6 +6,11 @@
         android:id="@+id/home"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/news"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_article_24"
         android:title="@string/nav_news" />
     <item
         android:id="@+id/vendor"
@@ -17,9 +22,4 @@
         android:enabled="true"
         android:icon="@drawable/ic_tag"
         android:title="@string/nav_coupons" />
-    <item
-        android:id="@+id/progress"
-        android:enabled="true"
-        android:icon="@drawable/ic_progress"
-        android:title="@string/nav_progress" />
 </menu>
