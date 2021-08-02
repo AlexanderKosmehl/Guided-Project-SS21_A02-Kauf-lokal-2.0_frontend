@@ -1,6 +1,7 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.marginBottom
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -43,30 +45,32 @@ class NewsfeedRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val event = events[position]
-
-
-
+        var textToSend = ""
         val timePassed = getTimePassed(event.created)
 
         //TODO: set all eventType
+        //TODO: write better textToSend
         when (event.eventTypes) {
             EventTypes.COUPON -> {
                 holder.eventType.text = "Coupon"
                 holder.eventMessage.text = "A new Coupon was posted!"
                 holder.eventIv.setImageResource(R.drawable.ic_tag)
                 holder.eventTime.text = timePassed
+                textToSend = "Hey, ein neuer Coupon wurde gesichtet: ${holder.eventMessage.text}"
             }
             EventTypes.MESSAGE -> {
                 holder.eventType.text = "Message"
                 holder.eventMessage.text = "A new Message was posted!"
                 holder.eventIv.setImageResource(R.drawable.ic_baseline_article_24)
                 holder.eventTime.text = timePassed
+                textToSend = "Hey, schau mal was es bei KaufLokal neues gibt: ${holder.eventMessage.text}"
             }
             EventTypes.POLL -> {
                 holder.eventType.text = "Poll"
                 holder.eventMessage.text = "A new Poll was posted!"
                 holder.eventIv.setImageResource(R.drawable.ic_baseline_poll_24)
                 holder.eventTime.text = timePassed
+                textToSend = "Hey, guck mal, bei KaufLokal gibt es wieder eine neue Umfrage: ${holder.eventMessage.text}"
             }
             EventTypes.UPDATE -> {
                 holder.eventType.text = "Update"
@@ -85,8 +89,16 @@ class NewsfeedRecyclerViewAdapter(
                 holder.eventCard.elevation=0F
             }
         }
-
-
+        // Share Click Listener
+        holder.eventShareIv.setOnClickListener {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, textToSend)
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            holder.eventIv.context.startActivity(shareIntent)
+        }
     }
 
     override fun getItemCount(): Int = events.size

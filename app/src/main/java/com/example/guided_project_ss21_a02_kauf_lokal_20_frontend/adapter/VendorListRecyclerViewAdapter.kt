@@ -205,7 +205,6 @@ class VendorListRecyclerViewAdapter(
         val distanceUnfoldView: TextView = view.findViewById(R.id.vendor_distance_unfold)
         val websiteUnfoldImage: ImageView = view.findViewById(R.id.vendor_web_icon)
         val addressUnfoldImage: ImageView = view.findViewById(R.id.vendor_address_icon)
-
     }
 }
 
