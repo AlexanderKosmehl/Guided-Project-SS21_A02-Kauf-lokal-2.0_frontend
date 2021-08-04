@@ -3,11 +3,72 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/nav_graph"
-            app:startDestination="@+id/home">
+    app:startDestination="@id/home">
 
-    <include app:graph="@navigation/home" />
-    <include app:graph="@navigation/news" />
-    <include app:graph="@navigation/vendor"/>
-    <include app:graph="@navigation/coupon"/>
+    <fragment
+        android:id="@+id/coupon"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.CouponListFragment"
+        android:label="Coupon List"
+        tools:layout="@layout/fragment_coupon_list">
+        <action
+            android:id="@+id/action_couponList_to_couponDetailFragment"
+            app:destination="@id/couponDetailFragment"
+            app:popUpTo="@id/coupon"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/couponDetailFragment"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.CouponDetailFragment"
+        android:label="fragment_coupon_detail"
+        tools:layout="@layout/fragment_coupon_detail" >
+        <argument
+            android:name="Coupon"
+            app:argType="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon" />
+    </fragment>
+    <fragment
+        android:id="@+id/news"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.NewsfeedFragment"
+        android:label="Newsfeed"
+        tools:layout="@layout/fragment_newsfeed_list">
+        <action
+            android:id="@+id/action_news_to_couponDetailFragment"
+            app:destination="@id/couponDetailFragment" />
+        <action
+            android:id="@+id/action_news_to_poll"
+            app:destination="@id/poll" />
+        <action
+            android:id="@+id/action_news_to_newsfeedMessage"
+            app:destination="@id/newsfeedMessage" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsfeedMessage"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.MessageFragment"
+        android:label="Newsfeed Message"
+        tools:layout="@layout/fragment_newsfeed_message">
+        <argument
+            android:name="event"
+            app:argType="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Event"/>
+    </fragment>
+    <fragment
+        android:id="@+id/poll"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.PollFragment"
+        android:label="Poll"
+        tools:layout="@layout/fragment_poll">
+        <argument
+            android:name="event"
+            app:argType="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Event"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/vendor"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.VendorListFragment"
+        android:label="Vendor List"
+        tools:layout="@layout/fragment_vendor_list"/>
 
 </navigation>
