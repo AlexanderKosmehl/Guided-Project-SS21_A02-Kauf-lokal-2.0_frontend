@@ -1,6 +1,5 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,6 +21,7 @@ import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Poll
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.RequestSingleton
 import com.google.gson.Gson
+import java.util.*
 
 class PollFragment(// TODO: Rename and change types of parameters
 
@@ -39,7 +39,7 @@ class PollFragment(// TODO: Rename and change types of parameters
 // Set LayoutManager and Adapter
         with(recyclerView) {
             layoutManager = LinearLayoutManager(context)
-            adapter = PollRecyclerViewAdapter(listOf(), 0)
+            adapter = PollRecyclerViewAdapter(listOf(), 0, UUID(0L, 0L))
         }
 
         // Handles backend communication
@@ -82,7 +82,7 @@ class PollFragment(// TODO: Rename and change types of parameters
                 votingTitle.text = poll.title
                 votingDate.text = event.formatDate()
 
-                adapter.setValues(poll.votingOptions, poll.totalAmountVoters)
+                adapter.setValues(poll.votingOptions, poll.totalAmountVoters, poll.id)
 
             },
             { error ->
