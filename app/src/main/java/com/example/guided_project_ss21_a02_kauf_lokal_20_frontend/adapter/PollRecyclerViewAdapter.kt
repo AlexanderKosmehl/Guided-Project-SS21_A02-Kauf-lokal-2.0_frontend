@@ -1,21 +1,34 @@
+
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.*
+import android.view.View.OnTouchListener
+import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.view.animation.*
+import android.view.animation.Interpolator
 import android.widget.SeekBar
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.Toast
 import androidx.core.animation.doOnStart
 import androidx.core.view.animation.PathInterpolatorCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.VolleyLog
+import com.android.volley.toolbox.JsonObjectRequest
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Address
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.User
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.VotingOption
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.RequestSingleton
 import com.google.android.material.card.MaterialCardView
+import com.google.gson.Gson
+import org.json.JSONObject
+import java.util.*
 
 
 /**
@@ -25,7 +38,8 @@ import com.google.android.material.card.MaterialCardView
 // TODO: fix the warning later
 class PollRecyclerViewAdapter(
     private var options: List<VotingOption>,
-    private var totalAmountVoter: Int
+    private var totalAmountVoter: Int,
+    private var pollId: UUID
 ) : RecyclerView.Adapter<PollRecyclerViewAdapter.ViewHolder>() {
     var isClicked = false
 
@@ -77,11 +91,12 @@ class PollRecyclerViewAdapter(
     override fun getItemCount(): Int = options.size
 
     // Automatically displays data changes
-    fun setValues(options: List<VotingOption>, totalAmountVoter: Int) {
+    fun setValues(options: List<VotingOption>, totalAmountVoter: Int, pollId: UUID) {
         // sorts events by Date create
         //this.events = events.sortedByDescending { it.created }
         this.options = options
         this.totalAmountVoter = totalAmountVoter
+        this.pollId = pollId
         this.notifyDataSetChanged()
 
     }
@@ -96,8 +111,6 @@ class PollRecyclerViewAdapter(
         var optionName: TextView = view.findViewById(R.id.poll_option_name)
         var optionPercentage: SeekBar = view.findViewById(R.id.percentage_box)
         var card: MaterialCardView = view.findViewById(R.id.poll_option_card)
-        var cardConstraint: ConstraintLayout = view.findViewById(R.id.card_constraint_layout)
-
 
         init {
 
@@ -116,6 +129,8 @@ class PollRecyclerViewAdapter(
 
                 // necessary to influence other items
                 notifyDataSetChanged()
+                postOption(option.id, pollId, context)
+
 
 
             }
@@ -123,5 +138,62 @@ class PollRecyclerViewAdapter(
 
 
     }
+
+    fun postOption(optionId: UUID, pollId: UUID, context: Context) {
+
+        val gson = Gson()
+        ///poll/{voteId}/vote/{voteOptionId}
+        val url = "http://10.0.2.2:8080/poll/${pollId}/vote/${optionId}"
+
+        val mockUser = User(
+            UUID.randomUUID().toString(),
+            30,
+            0,
+            "Mock",
+            "User",
+            "i@am.test",
+            Address(
+                "",
+                "",
+                "",
+                "",
+                ""
+            ),
+            emptyList(),
+            emptyList(),
+            emptyList(),
+            emptyList()
+        )
+
+        val mockBody = JSONObject(Gson().toJson(mockUser))
+
+        /*val request: StringRequest = object : StringRequest(
+            Request.Method.POST, url, Response.Listener
+            { response ->
+                Toast.makeText(context, "POST Successful: $response", Toast.LENGTH_SHORT).show()
+                //This code is executed if the server responds, whether or not the response contains data.
+                //The String 'response' contains the server's response.
+            },
+            { error ->
+                VolleyLog.e("Response", error.message ?: "Kein POST möglich")
+            }
+        ) */
+
+        val request = JsonObjectRequest(
+            Request.Method.POST, url, mockBody,
+            { response ->
+                Toast.makeText(context, "POST Successful: $response", Toast.LENGTH_SHORT).show()
+            },
+            { error ->
+                Log.e("Response", error.message ?: "Kein POST möglich")
+            }
+        )
+
+        RequestSingleton.getInstance(context).addToRequestQueue(request)
+
+    }
+
+
+
 
 }
