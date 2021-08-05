@@ -3,6 +3,7 @@ package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -15,12 +16,21 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.marginBottom
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.CouponListFragmentDirections
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.NewsfeedFragmentDirections
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Event
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.EventTypes
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.RequestSingleton
+import com.google.gson.Gson
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -152,6 +162,8 @@ class NewsfeedRecyclerViewAdapter(
                     var position: Int = bindingAdapterPosition
                     val event = events[position]
                     val context = itemView.context
+                    val navController: NavController = view.findNavController()
+
                     //var nextFrag: Fragment? = null
 
                     //Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT).show()
@@ -161,13 +173,32 @@ class NewsfeedRecyclerViewAdapter(
                         EventTypes.MESSAGE -> {
 
                             // Uses Safe Args with type safety
-                            val action = NewsfeedFragmentDirections.actionNewsfeedToDetail(event)
-                            view.findNavController().navigate(action)
+                            val action = NewsfeedFragmentDirections.actionNewsToNewsfeedMessage(event)
+                            navController.navigate(action)
                         }
-                        EventTypes.COUPON -> TODO()
+                        EventTypes.COUPON -> {
+
+                            val gson = Gson()
+
+                            val url = "http://10.0.2.2:8080/coupon/"
+
+                            val request = JsonObjectRequest(
+                                Request.Method.GET, url+event.refId, null,
+                                { response ->
+                                    val coupon = gson.fromJson(response.toString(), Coupon::class.java)
+                                    val action = NewsfeedFragmentDirections.actionNewsToCouponDetailFragment(coupon)
+                                    it.findNavController().navigate(action)
+
+                                },
+                                { error ->
+                                    Log.e("Response", error.message ?: "Keine Fehlermeldung vorhanden")
+                                }
+                            )
+                            RequestSingleton.getInstance(context).addToRequestQueue(request)
+                        }
                         EventTypes.POLL -> {
-                            val action = NewsfeedFragmentDirections.actionNewsfeedToPollVoting(event)
-                            view.findNavController().navigate(action)
+                            val action = NewsfeedFragmentDirections.actionNewsToPoll(event)
+                            navController.navigate(action)
                         }
                         //EventTypes.UPDATE -> TODO()
                     }
