@@ -11,6 +11,7 @@ import android.view.View.OnTouchListener
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.animation.Interpolator
+import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
@@ -20,9 +21,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.VolleyLog
 import com.android.volley.toolbox.JsonObjectRequest
+import com.bumptech.glide.Glide
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Address
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.User
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.VotingOption
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.RequestSingleton
 import com.google.android.material.card.MaterialCardView
@@ -42,11 +45,33 @@ class PollRecyclerViewAdapter(
     private var pollId: UUID
 ) : RecyclerView.Adapter<PollRecyclerViewAdapter.ViewHolder>() {
     var isClicked = false
+    var dummyUser: User? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_poll_option_item, parent, false)
+
+        // create dummyUser
+        var url = "http://10.0.2.2:8080/user/dummy"
+        val gson = Gson()
+        val context = view.context
+
+        val request = JsonObjectRequest(
+            Request.Method.GET, url , null,
+            { response ->
+
+                dummyUser = gson.fromJson(response.toString(), User::class.java)
+                //Toast.makeText(context, "User is ${dummyUser?.firstName}",Toast.LENGTH_SHORT).show()
+
+            },
+            { error ->
+                Toast.makeText(context, "No DummyUser found", Toast.LENGTH_SHORT).show()
+                Log.e("Response", error.message ?: "Kein DummyUser vorhanden")
+            }
+        )
+        RequestSingleton.getInstance(context).addToRequestQueue(request)
+
 
         return ViewHolder(view)
 
@@ -56,9 +81,37 @@ class PollRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val option = options[position]
         holder.optionName.text = option.title
+        val context = holder.context
 
-        //Seekbar-Hack: Overwrite OnToucListener to prevent UserInput
+        // Seekbar-Hack: Overwrite OnToucListener to prevent UserInput
         holder.optionPercentage.setOnTouchListener(OnTouchListener { v, event -> true })
+
+
+
+        // TODO: if dummyUser already voted: clicked = true
+        var url = "http://10.0.2.2:8080/userVoted/${option.id}/${dummyUser?.id}"
+        var userVoted:Boolean = false
+        var request = JsonObjectRequest(
+            Request.Method.GET, url , null,
+            { response ->
+
+                userVoted = response.toString().toBoolean()
+                if (!userVoted) {
+                    // TODO: toast: you already voted
+                    Toast.makeText(context, "You already voted!", Toast.LENGTH_SHORT).show()
+                }
+
+            },
+            { error ->
+                Log.e("Response", error.message ?: "Kein Voting vorhanden")
+            }
+        )
+        RequestSingleton.getInstance(context).addToRequestQueue(request)
+
+        if (userVoted) {
+            isClicked = true
+        }
+
 
 
         // check whether one item was already clicked
@@ -145,44 +198,12 @@ class PollRecyclerViewAdapter(
         ///poll/{voteId}/vote/{voteOptionId}
         val url = "http://10.0.2.2:8080/poll/${pollId}/vote/${optionId}"
 
-        val mockUser = User(
-            UUID.randomUUID().toString(),
-            30,
-            0,
-            "Mock",
-            "User",
-            "i@am.test",
-            Address(
-                "",
-                "",
-                "",
-                "",
-                ""
-            ),
-            emptyList(),
-            emptyList(),
-            emptyList(),
-            emptyList()
-        )
-
-        val mockBody = JSONObject(Gson().toJson(mockUser))
-
-        /*val request: StringRequest = object : StringRequest(
-            Request.Method.POST, url, Response.Listener
-            { response ->
-                Toast.makeText(context, "POST Successful: $response", Toast.LENGTH_SHORT).show()
-                //This code is executed if the server responds, whether or not the response contains data.
-                //The String 'response' contains the server's response.
-            },
-            { error ->
-                VolleyLog.e("Response", error.message ?: "Kein POST möglich")
-            }
-        ) */
+        val mockBody = JSONObject(Gson().toJson(dummyUser))
 
         val request = JsonObjectRequest(
             Request.Method.POST, url, mockBody,
             { response ->
-                Toast.makeText(context, "POST Successful: $response", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "POST Successful: $response", Toast.LENGTH_SHORT).show()
             },
             { error ->
                 Log.e("Response", error.message ?: "Kein POST möglich")
@@ -192,8 +213,5 @@ class PollRecyclerViewAdapter(
         RequestSingleton.getInstance(context).addToRequestQueue(request)
 
     }
-
-
-
 
 }
