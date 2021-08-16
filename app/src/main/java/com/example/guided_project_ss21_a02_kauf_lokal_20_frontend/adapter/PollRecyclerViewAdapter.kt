@@ -11,7 +11,6 @@ import android.view.View.OnTouchListener
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.animation.Interpolator
-import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
@@ -19,19 +18,19 @@ import androidx.core.animation.doOnStart
 import androidx.core.view.animation.PathInterpolatorCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
-import com.android.volley.VolleyLog
 import com.android.volley.toolbox.JsonObjectRequest
-import com.bumptech.glide.Glide
+import com.android.volley.toolbox.RequestFuture
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Address
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.User
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.VotingOption
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.RequestSingleton
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import org.json.JSONObject
 import java.util.*
+import java.util.concurrent.ExecutionException
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 
 
 /**
@@ -89,7 +88,7 @@ class PollRecyclerViewAdapter(
 
 
         // TODO: if dummyUser already voted: clicked = true
-        var url = "http://10.0.2.2:8080/userVoted/${option.id}/${dummyUser?.id}"
+        /*var url = "http://10.0.2.2:8080/userVoted/${option.id}/${dummyUser?.id}"
         var userVoted:Boolean = false
         var request = JsonObjectRequest(
             Request.Method.GET, url , null,
@@ -111,7 +110,7 @@ class PollRecyclerViewAdapter(
         if (userVoted) {
             isClicked = true
         }
-
+        */
 
 
         // check whether one item was already clicked
@@ -184,8 +183,6 @@ class PollRecyclerViewAdapter(
                 notifyDataSetChanged()
                 postOption(option.id, pollId, context)
 
-
-
             }
         }
 
@@ -203,10 +200,11 @@ class PollRecyclerViewAdapter(
         val request = JsonObjectRequest(
             Request.Method.POST, url, mockBody,
             { response ->
-                //Toast.makeText(context, "POST Successful: $response", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Erfolgreich abgestimmt.", Toast.LENGTH_SHORT).show()
             },
             { error ->
                 Log.e("Response", error.message ?: "Kein POST möglich")
+                Toast.makeText(context, "Sie haben bereits abgestimmt!", Toast.LENGTH_SHORT).show()
             }
         )
 
