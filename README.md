@@ -1,4 +1,4 @@
-# Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend
+# Kauf Lokal 2.0 (Frontend)
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
