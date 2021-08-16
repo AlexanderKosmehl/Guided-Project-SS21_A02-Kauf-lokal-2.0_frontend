@@ -1,8 +1,10 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model
 
+import android.os.Parcelable
 import java.util.*
 
 // TODO Re-check nullables
+@kotlinx.parcelize.Parcelize
 data class Vendor(
     var id: UUID,
     var name: String,
@@ -22,4 +24,4 @@ data class Vendor(
     var products: Set<Product>,
     // var messages: Set<Message>, // TODO Fix messages once they are finished
     // var events: Set<Event>      // TODO Fix events once they are finished
-)
+): Parcelable

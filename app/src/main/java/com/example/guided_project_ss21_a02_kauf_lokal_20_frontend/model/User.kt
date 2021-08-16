@@ -2,10 +2,11 @@ package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+import java.util.*
 
 @kotlinx.parcelize.Parcelize
 data class User(
-    val id: String,
+    val id: UUID,
     val level: Int,
     val experience: Int,
     val firstName: String,
@@ -13,9 +14,9 @@ data class User(
     val email: String,
     val address: Address,
     val ratings: List<Rating>,
-    val favoriteVendorsIDs: List<String>, //TODO
-    val favoriteCouponIDs: List<String>, //TODO
-    val experiences: List<String>, //TODO
+    val favoriteVendorsIDs: List<Vendor>,
+    val favoriteCouponIDs: List<Coupon>,
+    val experiences: List<Experience>,
 ): Parcelable {
 
 /*    @kotlinx.parcelize.Parcelize
