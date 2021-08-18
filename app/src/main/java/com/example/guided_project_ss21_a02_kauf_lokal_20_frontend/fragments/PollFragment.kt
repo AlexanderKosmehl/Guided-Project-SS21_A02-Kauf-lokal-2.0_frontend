@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
@@ -17,20 +18,22 @@ import com.google.gson.Gson
 
 class PollFragment(// TODO: Rename and change types of parameters
     val event: Event
-): Fragment() {
+) : Fragment() {
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View? {
-            // Inflate the layout for this fragment
-            val view = inflater.inflate(R.layout.fragment_newsfeed_poll, container, false)
-            //val recyclerView = view.findViewById<ConstraintLayout>(R.id.detailView)
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_newsfeed_poll, container, false)
+        //val recyclerView = view.findViewById<ConstraintLayout>(R.id.detailView)
 
-            setPoll(view)
+        (activity as AppCompatActivity).supportActionBar?.title = "Umfragen"
 
-            return view
-        }
+        setPoll(view)
+
+        return view
+    }
 
     fun setPoll(view: View) {
         val context = view.context
@@ -43,12 +46,15 @@ class PollFragment(// TODO: Rename and change types of parameters
 
 
         val request = JsonObjectRequest(
-            Request.Method.GET, url+event.refId, null,
+            Request.Method.GET, url + event.refId, null,
             { response ->
                 // JSONArray does not support iterable which means this has to be a regular for loop
-                val poll = gson.fromJson(response.toString(), com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Poll::class.java)
+                val poll = gson.fromJson(
+                    response.toString(),
+                    com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Poll::class.java
+                )
 
-                pollText.text=poll.test
+                pollText.text = poll.test
 
 
             },

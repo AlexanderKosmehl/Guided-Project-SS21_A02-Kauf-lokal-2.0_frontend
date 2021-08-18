@@ -1,10 +1,11 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,7 +36,9 @@ class CouponDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_coupon_detail, container, false)
+        val view = inflater.inflate(R.layout.fragment_coupon_detail, container, false)
+        (activity as AppCompatActivity).supportActionBar?.title = "5% auf alles außer Tiernahrung"
+        return view
     }
 
     companion object {

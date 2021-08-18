@@ -2,18 +2,19 @@ package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.VendorListRecyclerViewAdapter
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.VendorListRecyclerViewAdapter
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import com.google.gson.Gson
 
 /**
@@ -27,6 +28,7 @@ class VendorListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_vendor_list, container, false) as RecyclerView
 
+        (activity as AppCompatActivity).supportActionBar?.title = "Händler in deiner Nähe"
         // Set LayoutManager and Adapter
         with(view) {
             layoutManager = LinearLayoutManager(context)

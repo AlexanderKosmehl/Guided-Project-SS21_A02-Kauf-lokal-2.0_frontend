@@ -2,10 +2,11 @@ package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -14,9 +15,7 @@ import com.android.volley.toolbox.Volley
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.CouponListRecyclerViewAdapter
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import com.google.gson.Gson
-import java.util.*
 
 /**
  * A fragment representing a list of Items.
@@ -28,6 +27,8 @@ class CouponListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_coupon_list, container, false) as RecyclerView
+
+        (activity as AppCompatActivity).supportActionBar?.title = "Coupons für dich"
 
         // Set LayoutManager and Adapter
         with(view) {
