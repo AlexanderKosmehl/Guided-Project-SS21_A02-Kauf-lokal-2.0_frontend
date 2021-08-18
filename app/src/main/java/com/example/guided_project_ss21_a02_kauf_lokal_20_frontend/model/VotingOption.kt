@@ -4,7 +4,10 @@ import android.os.Parcelable
 import java.util.*
 
 @kotlinx.parcelize.Parcelize
-data class Rating(
-    val id: UUID,
-    val ratingScore: Float,
+data class VotingOption(
+    var id: UUID,
+    var title: String,
+    var totalAmountVoters: Int,
+    //TODO: var users: List<User>,
 ): Parcelable
+

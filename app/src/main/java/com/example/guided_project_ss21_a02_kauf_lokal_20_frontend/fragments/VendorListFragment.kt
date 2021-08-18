@@ -60,7 +60,6 @@ class VendorListFragment : Fragment() {
                     val vendor = gson.fromJson(response.getJSONObject(i).toString(), Vendor::class.java)
                     vendors.add(vendor)
                 }
-                // TODO Maybe add vendors one by one for smoother vendor view?
                 adapter.setValues(vendors)
             },
             { error ->

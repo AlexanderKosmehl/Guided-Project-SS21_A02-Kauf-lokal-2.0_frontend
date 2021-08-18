@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/poll_option_card"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+
+        android:layout_marginBottom="10dp"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="15dp"
+        android:padding="16dp"
+        android:clipToPadding="false"
+
+
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:elevation="4dp"
+        card_view:checkedIconTint="@color/bottom_nav_color"
+
+        >
+
+    <!--<SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/percentage_box"
+            android:max="100"
+            android:progress="1"
+            android:thumbTint="@android:color/transparent"
+            android:progressDrawable="@drawable/percentage_box"
+            android:splitTrack="false"
+            android:layout_marginLeft="-16dp"
+            android:layout_marginRight="-16dp"
+            android:layout_marginTop="-35dp"
+            android:layout_marginBottom="-35dp"
+
+
+            android:visibility="gone"
+
+            />-->
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:animateLayoutChanges="true"
+
+
+            android:id="@+id/card_constraint_layout"
+
+            >
+
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/percentage_box"
+                android:max="100"
+                android:progress="1"
+                android:thumbTint="@android:color/transparent"
+                android:progressDrawable="@drawable/percentage_box"
+                android:splitTrack="false"
+                android:layout_marginLeft="-16dp"
+                android:layout_marginRight="-16dp"
+                android:layout_marginTop="-35dp"
+                android:layout_marginBottom="-35dp"
+                android:padding="0dp"
+
+
+                android:visibility="invisible"
+
+                card_view:layout_constraintEnd_toStartOf="parent"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/poll_option_name"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:fontFamily="@font/montserrat"
+
+                android:text="Option"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                android:textAlignment="gravity"
+                android:gravity="center"
+                android:layout_margin="10dp"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</com.google.android.material.card.MaterialCardView>
