@@ -10,7 +10,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.KaufLokal"> <!--Cleartext HTTP Workaround-->
+        android:theme="@style/lightly"> <!--Cleartext HTTP Workaround-->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
