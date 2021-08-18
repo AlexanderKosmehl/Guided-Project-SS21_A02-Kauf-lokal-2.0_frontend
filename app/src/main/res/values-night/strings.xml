@@ -10,6 +10,7 @@
     <string name="Route">Route</string>
     <string name="vendor_overview">Händlerübersicht</string>
 
+
     <!-- nav stuff -->
     <string name="nav_more">Mehr</string>
     <string name="nav_search">Suche</string>
@@ -23,7 +24,7 @@
     <string name="no_address">Keine Adresse</string>
     <string name="no_website">Keine Website</string>
     <string name="no_rating_count">(0)</string>
-    <string name="picture_description">Bild des Ladens</string>
+    <string name="picture_description">Bilde des Ladens</string>
     <string name="icon_description">Icon</string>
     <string name="logo_description">Logo des Ladens</string>
     <string name="nav_more_description">Mehr Optionen</string>
@@ -32,27 +33,5 @@
     <!-- everything else -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lightMode">Lightmode</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-
-    <!-- -->
-    <string name="event_type">Eventtype</string>
-    <string name="rem_min">x min</string>
-    <string name="notification">Nachricht</string>
-    <string name="placeholder_progress">Hier wird auch bald dein Fortschritt stehen! Nur Geduld!</string>
-    <string name="discount_coupon_list_item">5 % Rabatt</string>
-    <string name="date_coupon_list_item">01 März - 30 Juni</string>
 
 </resources>

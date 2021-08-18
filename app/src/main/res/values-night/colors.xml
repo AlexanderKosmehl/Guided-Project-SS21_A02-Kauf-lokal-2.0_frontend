@@ -5,7 +5,6 @@
     <color name="purple_500">#6200EE</color>
     <color name="purple_700">#3700B3</color>
     <color name="teal_200">#03DAC5</color>
-    <color name="teal_500">#009688</color>
     <color name="teal_700">#018786</color>
     <color name="caption_h1">#747474</color>
     <color name="caption_h2">#979797</color>
@@ -34,11 +33,7 @@
     <color name="secondaryLightColor">#b2fef7</color>
     <color name="secondaryDarkColor">#4f9a94</color>
     <color name="primaryComplementary">#E45334</color>
-    <color name="primaryComplementaryLight">#FF7457</color>
     <!-- <color name="primary_complementary">#E15E4D</color> -->
 
     <color name="surface">#121212</color>
-    <color name="item">#212121</color>
-    <color name="gray_300">#E0E0E0</color>
-    <color name="gray_600">#757575</color>
 </resources>
