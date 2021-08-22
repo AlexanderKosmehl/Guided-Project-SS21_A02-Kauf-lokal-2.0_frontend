@@ -12,6 +12,7 @@
 
         <item name="background_color">@color/white</item>
         <item name="text_color">@color/black</item>
+        <item name="invert_text_color">@color/white</item>
         <item name="top_bar_color">@color/primaryColor</item>
         <item name="bottom_icon">@color/primaryComplementary</item>
         <item name="bottom_icon_disabled">@color/black</item>
@@ -29,6 +30,11 @@
     <style name="RatingBarTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorControlNormal">@color/gray_600</item>
         <item name="colorControlActivated">@color/star_fill</item>
+    </style>
+
+    <style name="CardTheme" parent="Theme.MaterialComponents.Light">
+        <item name="android:clickable">@color/white</item>
+        <item name="un_clickable">@color/card_color_unclickable</item>
     </style>
 </resources>
 

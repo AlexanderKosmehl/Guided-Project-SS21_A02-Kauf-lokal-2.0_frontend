@@ -47,12 +47,30 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
-    <!-- -->
+    <!-- Some weirdly specific stuff -->
     <string name="event_type">Eventtype</string>
     <string name="rem_min">x min</string>
     <string name="notification">Nachricht</string>
     <string name="placeholder_progress">Hier wird auch bald dein Fortschritt stehen! Nur Geduld!</string>
     <string name="discount_coupon_list_item">5 % Rabatt</string>
     <string name="date_coupon_list_item">01 März - 30 Juni</string>
+
+    <string name="welcome">Willkommen Kevin !</string>
+    <string name="level">Level 70</string>
+    <string name="exp_till_level">450 EXP bis Level 71</string>
+    <string name="exp">100 EXP</string>
+    <string name="shop_30">Einkauf für 30€</string>
+    <string name="expiration_date">31.07.2021</string>
+    <string name="exp_2">50 EXP</string>
+    <string name="shop_10">Einkauf für 10€</string>
+    <string name="coupon_date_2">31.07.2021</string>
+
+    <!-- Some generic stuff -->
+    <string name="title">title</string>
+    <string name="of">von</string>
+    <string name="name">Vorname Nachname</string>
+    <string name="date">Datum</string>
+    <string name="option">Option</string>
+    <string name="filter_date">Nach Datum</string>
 
 </resources>

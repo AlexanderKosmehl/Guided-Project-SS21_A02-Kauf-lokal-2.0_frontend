@@ -22,6 +22,7 @@
     <color name="risse_green">#A5C715</color>
     <color name="open_color">#056118</color>
     <color name="tchibo_blue">#003F8A</color>
+    <color name="progress_tint">#B8E537</color>
 
     <!-- basic -->
     <color name="black">#000000</color>

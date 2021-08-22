@@ -30,7 +30,7 @@ class ProgressFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_coupon_detail, container, false)
+        val view = inflater.inflate(R.layout.fragment_progress, container, false)
         (activity as AppCompatActivity).supportActionBar?.title = "Dein Fortschritt"
         return view
     }

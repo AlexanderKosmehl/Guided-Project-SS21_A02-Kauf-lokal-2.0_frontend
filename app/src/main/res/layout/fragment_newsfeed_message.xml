@@ -58,7 +58,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:fontFamily="@font/montserrat"
-			android:id="@+id/textView6"
+			android:id="@+id/poll_of"
 			app:layout_constraintStart_toEndOf="@+id/message_author_image"
 			android:layout_marginStart="5dp"
 			app:layout_constraintTop_toTopOf="@+id/message_author_image"
@@ -70,10 +70,10 @@
 			android:layout_height="wrap_content"
 			android:fontFamily="@font/montserrat"
 			android:id="@+id/message_author_name"
-			app:layout_constraintStart_toEndOf="@+id/textView6"
+			app:layout_constraintStart_toEndOf="@+id/poll_of"
 			android:layout_marginStart="5dp"
-			app:layout_constraintTop_toTopOf="@+id/textView6"
-			app:layout_constraintBottom_toBottomOf="@+id/textView6"/>
+			app:layout_constraintTop_toTopOf="@+id/poll_of"
+			app:layout_constraintBottom_toBottomOf="@+id/poll_of"/>
 
 	<TextView
 			android:text="Datum"

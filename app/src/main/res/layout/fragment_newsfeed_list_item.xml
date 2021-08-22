@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/event_card"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="10dp"
-        card_view:cardBackgroundColor="@color/white"
-        card_view:cardCornerRadius="15dp"
-        card_view:contentPadding="10dp"
-        android:clickable="true"
-        card_view:layout_constraintBottom_toBottomOf="parent">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/event_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="10dp"
+    android:clickable="true"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="15dp"
+    card_view:contentPadding="10dp"
+    card_view:layout_constraintBottom_toBottomOf="parent">
 
-<androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -25,9 +23,9 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/icon_description"
+            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintLeft_toLeftOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintBottom_toBottomOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/event_type"
@@ -35,8 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/event_type"
-            android:textSize="@dimen/event_type_text_size"
             android:textColor="?attr/item_text_color"
+            android:textSize="@dimen/event_type_text_size"
             card_view:layout_constraintLeft_toRightOf="@id/event_iv"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -46,8 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/rem_min"
-            android:textSize="@dimen/event_time_text_size"
             android:textColor="?attr/item_text_color"
+            android:textSize="@dimen/event_time_text_size"
             card_view:layout_constraintLeft_toRightOf="@id/event_type"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -57,9 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/notification"
+            android:textColor="?attr/item_text_color"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:textColor="?attr/item_text_color"
             card_view:layout_constraintLeft_toRightOf="@id/event_iv"
             card_view:layout_constraintTop_toBottomOf="@id/event_type" />
 
@@ -80,8 +78,8 @@
             android:layout_height="30dp"
             android:layout_marginEnd="10dp"
             android:clickable="true"
-            android:src="@drawable/ic_baseline_share_24"
             android:contentDescription="@string/icon_description"
+            android:src="@drawable/ic_baseline_share_24"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintRight_toRightOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
