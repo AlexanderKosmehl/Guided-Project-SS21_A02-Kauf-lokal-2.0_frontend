@@ -58,7 +58,6 @@ class NewsfeedRecyclerViewAdapter(
         var textToSend = ""
         val timePassed = getTimePassed(event.created)
 
-        //TODO: set all eventType
         //TODO: write better textToSend
         when (event.eventTypes) {
             EventTypes.COUPON -> {
@@ -94,7 +93,6 @@ class NewsfeedRecyclerViewAdapter(
                 holder.eventIv.layoutParams.height=100
                 holder.eventIv.layoutParams.width=100
                 holder.eventMessage.textSize=10F
-                //holder.eventCard.setCardBackgroundColor(Color.GRAY)
                 holder.eventCard.setCardBackgroundColor(ContextCompat.getColor(holder.eventCard.context,R.color.card_color_unclickable))
                 holder.eventCard.elevation=0F
             }
@@ -119,17 +117,15 @@ class NewsfeedRecyclerViewAdapter(
     fun setValues(events: List<Event>) {
         // sorts events by Date create
         this.events = events.sortedByDescending { it.created }
+        //TODO: this is a bad hack 
         this.notifyDataSetChanged()
     }
 
     fun getTimePassed(dateTime: Date): String {
 
         val dateTimeNow = LocalDateTime.now()
-        //val dateTimeParsed = LocalDateTime.parse(dateTime)
         val dateTimeConv = LocalDateTime.ofInstant(dateTime.toInstant(), ZoneId.systemDefault())
         val diff = Duration.between(dateTimeConv, dateTimeNow).seconds
-
-
 
         return when {
              diff in 60..3599 -> (diff / 60).toString() + " min"
@@ -151,10 +147,6 @@ class NewsfeedRecyclerViewAdapter(
         var eventTime : TextView = view.findViewById(R.id.event_time)
         var eventCard: CardView = view.findViewById(R.id.event_card)
 
-        val paramsMessage = eventMessage.layoutParams as ConstraintLayout.LayoutParams
-        val paramsType = eventType.layoutParams as ConstraintLayout.LayoutParams
-
-
         init {
 
             itemView.setOnClickListener {
@@ -163,11 +155,6 @@ class NewsfeedRecyclerViewAdapter(
                     val event = events[position]
                     val context = itemView.context
                     val navController: NavController = view.findNavController()
-
-                    //var nextFrag: Fragment? = null
-
-                    //Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT).show()
-
 
                     when (event.eventTypes) {
                         EventTypes.MESSAGE -> {
@@ -202,12 +189,8 @@ class NewsfeedRecyclerViewAdapter(
                         }
                         //EventTypes.UPDATE -> TODO()
                     }
-
                 }
             }
         }
-
-
     }
-
 }

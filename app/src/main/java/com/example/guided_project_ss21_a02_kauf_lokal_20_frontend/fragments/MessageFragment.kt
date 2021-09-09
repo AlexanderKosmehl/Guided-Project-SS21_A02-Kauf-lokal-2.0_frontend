@@ -20,9 +20,7 @@ import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.RequestSingleton
 import com.google.gson.Gson
 
-class MessageFragment(// TODO: Rename and change types of parameters
-    //val event: Event
-) : Fragment() {
+class MessageFragment() : Fragment() {
 
     private val args by navArgs<MessageFragmentArgs>()
 
@@ -30,9 +28,7 @@ class MessageFragment(// TODO: Rename and change types of parameters
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_newsfeed_message, container, false)
-        //val recyclerView = view.findViewById<ConstraintLayout>(R.id.detailView)
         (activity as AppCompatActivity).supportActionBar?.title = "Nachrichtenseite"
 
         setMessage(view)
@@ -47,8 +43,6 @@ class MessageFragment(// TODO: Rename and change types of parameters
         val messageText: TextView = view.findViewById(R.id.message_tv)
         val messageImage: ImageView = view.findViewById(R.id.message_iv)
         val messageTitle: TextView = view.findViewById(R.id.message_title)
-        val messageAuthorImage: ImageView = view.findViewById(R.id.message_author_image)
-        val messageAuthorName: TextView = view.findViewById(R.id.message_author_name)
         val messageDate: TextView = view.findViewById(R.id.message_date)
 
         val url = "http://10.0.2.2:8080/message/"
@@ -56,7 +50,6 @@ class MessageFragment(// TODO: Rename and change types of parameters
         val request = JsonObjectRequest(
             Request.Method.GET, url + args.event.refId, null,
             { response ->
-                // JSONArray does not support iterable which means this has to be a regular for loop
                 val message = gson.fromJson(
                     response.toString(),
                     com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Message::class.java
@@ -66,9 +59,7 @@ class MessageFragment(// TODO: Rename and change types of parameters
                 Glide.with(this).load(message.imageURL).into(messageImage)
                 messageTitle.text = message.title
                 messageDate.text = message.formatDate()
-
                 addAuthor(message.vendorId, view)
-
             },
             { error ->
                 // TODO Add meaningful error handling
@@ -89,14 +80,11 @@ class MessageFragment(// TODO: Rename and change types of parameters
         val request = JsonObjectRequest(
             Request.Method.GET, url + vendorId, null,
             { response ->
-
                 val vendor = gson.fromJson(response.toString(), Vendor::class.java)
                 messageAuthorName.text = vendor.name
 
-                // TODO: Author image
+                // TODO: Author's image
                 Glide.with(this).load(vendor.logo).into(messageAuthorImage)
-
-
             },
             { error ->
                 Toast.makeText(context, "No Vendor found", Toast.LENGTH_SHORT).show()
@@ -104,9 +92,5 @@ class MessageFragment(// TODO: Rename and change types of parameters
             }
         )
         RequestSingleton.getInstance(context).addToRequestQueue(request)
-
-
-
     }
-
 }

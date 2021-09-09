@@ -44,8 +44,9 @@ class PollRecyclerViewAdapter(
     private var pollId: UUID
 ) : RecyclerView.Adapter<PollRecyclerViewAdapter.ViewHolder>() {
     var isClicked = false
+    // TODO: introduce proper user management
+    // The following is only used to test functionality
     var dummyUser: User? = null
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -59,10 +60,7 @@ class PollRecyclerViewAdapter(
         val request = JsonObjectRequest(
             Request.Method.GET, url , null,
             { response ->
-
                 dummyUser = gson.fromJson(response.toString(), User::class.java)
-                //Toast.makeText(context, "User is ${dummyUser?.firstName}",Toast.LENGTH_SHORT).show()
-
             },
             { error ->
                 Toast.makeText(context, "No DummyUser found", Toast.LENGTH_SHORT).show()
@@ -71,9 +69,7 @@ class PollRecyclerViewAdapter(
         )
         RequestSingleton.getInstance(context).addToRequestQueue(request)
 
-
         return ViewHolder(view)
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -84,34 +80,6 @@ class PollRecyclerViewAdapter(
 
         // Seekbar-Hack: Overwrite OnToucListener to prevent UserInput
         holder.optionPercentage.setOnTouchListener(OnTouchListener { v, event -> true })
-
-
-
-        // TODO: if dummyUser already voted: clicked = true
-        /*var url = "http://10.0.2.2:8080/userVoted/${option.id}/${dummyUser?.id}"
-        var userVoted:Boolean = false
-        var request = JsonObjectRequest(
-            Request.Method.GET, url , null,
-            { response ->
-
-                userVoted = response.toString().toBoolean()
-                if (!userVoted) {
-                    // TODO: toast: you already voted
-                    Toast.makeText(context, "You already voted!", Toast.LENGTH_SHORT).show()
-                }
-
-            },
-            { error ->
-                Log.e("Response", error.message ?: "Kein Voting vorhanden")
-            }
-        )
-        RequestSingleton.getInstance(context).addToRequestQueue(request)
-
-        if (userVoted) {
-            isClicked = true
-        }
-        */
-
 
         // check whether one item was already clicked
         if (isClicked) {
@@ -134,23 +102,18 @@ class PollRecyclerViewAdapter(
                     }.start()
                 }
             }.start()
-
         }
-
-
     }
 
     override fun getItemCount(): Int = options.size
 
     // Automatically displays data changes
     fun setValues(options: List<VotingOption>, totalAmountVoter: Int, pollId: UUID) {
-        // sorts events by Date create
-        //this.events = events.sortedByDescending { it.created }
         this.options = options
         this.totalAmountVoter = totalAmountVoter
         this.pollId = pollId
+        // TODO: find solution for this hack
         this.notifyDataSetChanged()
-
     }
 
     fun getPercentage(part: Int, total: Int): Int {
@@ -165,36 +128,27 @@ class PollRecyclerViewAdapter(
         var card: MaterialCardView = view.findViewById(R.id.poll_option_card)
 
         init {
-
             itemView.setOnClickListener {
                 var position: Int = bindingAdapterPosition
                 val option = options[position]
-
-
-                // actions clicked = true
 
                 isClicked = true
                 card.isFocused
                 card.cardElevation = 0F
                 card.strokeWidth = 1
-                //card.strokeColor = strokeColor(getResources().getColor(R.color.GRAY))
 
                 // necessary to influence other items
+                // TODO: find solution for this bad hack
                 notifyDataSetChanged()
                 postOption(option.id, pollId, context)
-
             }
         }
-
-
     }
 
     fun postOption(optionId: UUID, pollId: UUID, context: Context) {
 
         val gson = Gson()
-        ///poll/{voteId}/vote/{voteOptionId}
         val url = "http://10.0.2.2:8080/poll/${pollId}/vote/${optionId}"
-
         val mockBody = JSONObject(Gson().toJson(dummyUser))
 
         val request = JsonObjectRequest(
@@ -207,9 +161,6 @@ class PollRecyclerViewAdapter(
                 Toast.makeText(context, "Sie haben bereits abgestimmt!", Toast.LENGTH_SHORT).show()
             }
         )
-
         RequestSingleton.getInstance(context).addToRequestQueue(request)
-
     }
-
 }

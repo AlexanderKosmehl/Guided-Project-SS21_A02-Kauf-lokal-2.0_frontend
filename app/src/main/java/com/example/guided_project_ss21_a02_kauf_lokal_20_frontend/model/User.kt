@@ -17,13 +17,6 @@ data class User(
     val favoriteVendorsIDs: List<Vendor>,
     val favoriteCouponIDs: List<Coupon>,
     val experiences: List<Experience>,
-): Parcelable {
-
-/*    @kotlinx.parcelize.Parcelize
-    data class FavoriteCoupon(
-        val id: String
-    ) : Parcelable*/
-
-}
+): Parcelable
 
 

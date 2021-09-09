@@ -29,13 +29,10 @@ class VendorListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_vendor_list, container, false) as RecyclerView
 
         (activity as AppCompatActivity).supportActionBar?.title = "Händler in deiner Nähe"
-        // Set LayoutManager and Adapter
         with(view) {
             layoutManager = LinearLayoutManager(context)
             adapter = VendorListRecyclerViewAdapter(listOf<Vendor>())
         }
-
-        // Handles backend communication
         addVendorsToAdapter(view)
 
         return view
@@ -48,14 +45,12 @@ class VendorListFragment : Fragment() {
 
         val gson = Gson()
 
-        // TODO Add resource file for urls
         val url = "http://10.0.2.2:8080/vendor"
         val queue = Volley.newRequestQueue(context)
         val vendors = mutableListOf<Vendor>()
 
         val request = JsonArrayRequest(Request.Method.GET, url, null,
             { response ->
-                // JSONArray does not support iterable which means this has to be a regular for loop
                 for (i in 0 until response.length()) {
                     val vendor = gson.fromJson(response.getJSONObject(i).toString(), Vendor::class.java)
                     vendors.add(vendor)
