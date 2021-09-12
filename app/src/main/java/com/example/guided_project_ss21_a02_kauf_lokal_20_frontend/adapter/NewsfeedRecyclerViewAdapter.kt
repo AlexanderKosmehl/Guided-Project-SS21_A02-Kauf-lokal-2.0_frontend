@@ -2,7 +2,6 @@ package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,21 +9,15 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.view.marginBottom
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
-import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.CouponListFragmentDirections
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.NewsfeedFragmentDirections
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Event
@@ -94,7 +87,6 @@ class NewsfeedRecyclerViewAdapter(
                 holder.eventIv.layoutParams.height=100
                 holder.eventIv.layoutParams.width=100
                 holder.eventMessage.textSize=10F
-                //holder.eventCard.setCardBackgroundColor(Color.GRAY)
                 holder.eventCard.setCardBackgroundColor(ContextCompat.getColor(holder.eventCard.context,R.color.card_color_unclickable))
                 holder.eventCard.elevation=0F
             }
@@ -122,10 +114,9 @@ class NewsfeedRecyclerViewAdapter(
         this.notifyDataSetChanged()
     }
 
-    fun getTimePassed(dateTime: Date): String {
+    private fun getTimePassed(dateTime: Date): String {
 
         val dateTimeNow = LocalDateTime.now()
-        //val dateTimeParsed = LocalDateTime.parse(dateTime)
         val dateTimeConv = LocalDateTime.ofInstant(dateTime.toInstant(), ZoneId.systemDefault())
         val diff = Duration.between(dateTimeConv, dateTimeNow).seconds
 
@@ -164,11 +155,6 @@ class NewsfeedRecyclerViewAdapter(
                     val context = itemView.context
                     val navController: NavController = view.findNavController()
 
-                    //var nextFrag: Fragment? = null
-
-                    //Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT).show()
-
-
                     when (event.eventTypes) {
                         EventTypes.MESSAGE -> {
 
@@ -179,9 +165,7 @@ class NewsfeedRecyclerViewAdapter(
                         EventTypes.COUPON -> {
 
                             val gson = Gson()
-
                             val url = "http://10.0.2.2:8080/coupon/"
-
                             val request = JsonObjectRequest(
                                 Request.Method.GET, url+event.refId, null,
                                 { response ->
@@ -200,7 +184,7 @@ class NewsfeedRecyclerViewAdapter(
                             val action = NewsfeedFragmentDirections.actionNewsToPoll(event)
                             navController.navigate(action)
                         }
-                        //EventTypes.UPDATE -> TODO()
+                        EventTypes.UPDATE -> TODO()
                     }
 
                 }

@@ -36,13 +36,8 @@ class NewsfeedFragment : Fragment() {
 
         with(recyclerView) {
             layoutManager = LinearLayoutManager(context)
-            adapter = NewsfeedRecyclerViewAdapter(listOf<Event>())
+            adapter = NewsfeedRecyclerViewAdapter(listOf())
         }
-
-        // Handles backend communication
-
-        //val pollingService = PollingService(adapter)
-
         addEventsToAdapter(recyclerView)
 
         return view

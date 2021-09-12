@@ -29,6 +29,9 @@ class CouponDetailFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        // val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {}
+
     }
 
     override fun onCreateView(

@@ -16,7 +16,7 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = "Willkommen"
+        (activity as AppCompatActivity).supportActionBar?.title = "Kauf Lokal"
         return view
     }
 }
