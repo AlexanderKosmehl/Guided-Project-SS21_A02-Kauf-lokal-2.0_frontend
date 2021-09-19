@@ -7,15 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.Volley
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter.VendorListRecyclerViewAdapter
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
-import com.google.gson.Gson
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.Constants
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.viewModel.VendorListViewModel
 
 /**
  * A fragment representing a list of Items.
@@ -25,48 +24,25 @@ class VendorListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view = inflater.inflate(R.layout.fragment_vendor_list, container, false) as RecyclerView
 
-        (activity as AppCompatActivity).supportActionBar?.title = "Händler in deiner Nähe"
+        (activity as AppCompatActivity).supportActionBar?.title = Constants.TITLE_VENDOR_LIST
         // Set LayoutManager and Adapter
         with(view) {
             layoutManager = LinearLayoutManager(context)
             adapter = VendorListRecyclerViewAdapter(listOf<Vendor>())
         }
-
-        // Handles backend communication
-        addVendorsToAdapter(view)
-
+        Log.i("VendorListFragment", "HELLO TEST")
+        addVendorsToAdapterVM(view)
         return view
     }
 
-    // TODO Maybe extract into connection class
-    fun addVendorsToAdapter(view: RecyclerView) {
-        val context = view.context
-        val adapter = view.adapter as VendorListRecyclerViewAdapter
-
-        val gson = Gson()
-
-        // TODO Add resource file for urls
-        val url = "http://10.0.2.2:8080/vendor"
-        val queue = Volley.newRequestQueue(context)
-        val vendors = mutableListOf<Vendor>()
-
-        val request = JsonArrayRequest(Request.Method.GET, url, null,
-            { response ->
-                // JSONArray does not support iterable which means this has to be a regular for loop
-                for (i in 0 until response.length()) {
-                    val vendor = gson.fromJson(response.getJSONObject(i).toString(), Vendor::class.java)
-                    vendors.add(vendor)
-                }
-                adapter.setValues(vendors)
-            },
-            { error ->
-                // TODO Add meaningful error handling
-                Log.e("Response", error.message ?: "Keine Fehlermeldung vorhanden")
-            }
-            )
-        queue.add(request)
+    private fun addVendorsToAdapterVM(view: RecyclerView) {
+        val model: VendorListViewModel by viewModels()
+        model.getVendors()
+            .observe(this, {
+                (view.adapter as VendorListRecyclerViewAdapter).setValues(it)
+            })
     }
 }

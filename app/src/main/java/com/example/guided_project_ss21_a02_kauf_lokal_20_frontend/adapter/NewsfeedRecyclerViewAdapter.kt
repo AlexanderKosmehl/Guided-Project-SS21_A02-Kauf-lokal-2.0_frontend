@@ -12,6 +12,9 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +26,7 @@ import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Event
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.EventTypes
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.RequestSingleton
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.viewModel.NewsfeedListViewModel
 import com.google.gson.Gson
 import java.time.Duration
 import java.time.LocalDateTime
@@ -40,6 +44,8 @@ class NewsfeedRecyclerViewAdapter(
     private var events: List<Event>
 ) : RecyclerView.Adapter<NewsfeedRecyclerViewAdapter.ViewHolder>() {
 
+    lateinit var owner : LifecycleOwner
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_newsfeed_list_item, parent, false)
@@ -51,7 +57,6 @@ class NewsfeedRecyclerViewAdapter(
         var textToSend = ""
         val timePassed = getTimePassed(event.created)
 
-        //TODO: set all eventType
         //TODO: write better textToSend
         when (event.eventTypes) {
             EventTypes.COUPON -> {
@@ -66,29 +71,36 @@ class NewsfeedRecyclerViewAdapter(
                 holder.eventMessage.text = "A new Message was posted!"
                 holder.eventIv.setImageResource(R.drawable.ic_baseline_article_24)
                 holder.eventTime.text = timePassed
-                textToSend = "Hey, schau mal was es bei KaufLokal neues gibt: ${holder.eventMessage.text}"
+                textToSend =
+                    "Hey, schau mal was es bei KaufLokal neues gibt: ${holder.eventMessage.text}"
             }
             EventTypes.POLL -> {
                 holder.eventType.text = "Poll"
                 holder.eventMessage.text = "A new Poll was posted!"
                 holder.eventIv.setImageResource(R.drawable.ic_baseline_poll_24)
                 holder.eventTime.text = timePassed
-                textToSend = "Hey, guck mal, bei KaufLokal gibt es wieder eine neue Umfrage: ${holder.eventMessage.text}"
+                textToSend =
+                    "Hey, guck mal, bei KaufLokal gibt es wieder eine neue Umfrage: ${holder.eventMessage.text}"
             }
             EventTypes.UPDATE -> {
                 holder.eventType.text = "Update"
                 holder.eventMessage.text = "A new Update was posted!"
                 holder.eventIv.setImageResource(R.drawable.ic_baseline_update_24)
                 holder.eventTime.text = timePassed
-                holder.itemView.isClickable=false
+                holder.itemView.isClickable = false
 
                 // Visual Changes due to type Update
-                holder.eventShareIv.visibility=GONE
-                holder.eventIv.layoutParams.height=100
-                holder.eventIv.layoutParams.width=100
-                holder.eventMessage.textSize=10F
-                holder.eventCard.setCardBackgroundColor(ContextCompat.getColor(holder.eventCard.context,R.color.card_color_unclickable))
-                holder.eventCard.elevation=0F
+                holder.eventShareIv.visibility = GONE
+                holder.eventIv.layoutParams.height = 100
+                holder.eventIv.layoutParams.width = 100
+                holder.eventMessage.textSize = 10F
+                holder.eventCard.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        holder.eventCard.context,
+                        R.color.update_card_color
+                    )
+                )
+                holder.eventCard.elevation = 0F
             }
         }
         // Share Click Listener
@@ -106,48 +118,40 @@ class NewsfeedRecyclerViewAdapter(
     override fun getItemCount(): Int = events.size
 
 
-
     // Automatically displays data changes
+    @SuppressLint("NotifyDataSetChanged")
     fun setValues(events: List<Event>) {
         // sorts events by Date create
         this.events = events.sortedByDescending { it.created }
+        //TODO: this is a bad hack 
         this.notifyDataSetChanged()
     }
 
     private fun getTimePassed(dateTime: Date): String {
-
         val dateTimeNow = LocalDateTime.now()
         val dateTimeConv = LocalDateTime.ofInstant(dateTime.toInstant(), ZoneId.systemDefault())
         val diff = Duration.between(dateTimeConv, dateTimeNow).seconds
 
-
-
         return when {
-             diff in 60..3599 -> (diff / 60).toString() + " min"
-             diff in 3600..86399 -> (diff / 3600).toString() + " h"
-             diff in 86400..604799 -> (diff / 86400).toString() + " d"
-             diff in 604800..2629799 -> (diff / 604800).toString() + " w"
-             diff in 2629800.. 31535999-> (diff / 2629800).toString() + " m"
-             diff >= 31536000 -> (diff / 31536000).toString() + " y"
-
-             else -> "$diff s"
-         }
+            diff in 60..3599 -> (diff / 60).toString() + " min"
+            diff in 3600..86399 -> (diff / 3600).toString() + " h"
+            diff in 86400..604799 -> (diff / 86400).toString() + " d"
+            diff in 604800..2629799 -> (diff / 604800).toString() + " w"
+            diff in 2629800..31535999 -> (diff / 2629800).toString() + " m"
+            diff >= 31536000 -> (diff / 31536000).toString() + " y"
+            else -> "$diff s"
+        }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val eventShareIv: ImageView = view.findViewById(R.id.share_iv)
         var eventMessage: TextView = view.findViewById(R.id.event_message)
         var eventType: TextView = view.findViewById(R.id.event_type)
-        var eventIv :ImageView = view.findViewById(R.id.event_iv)
-        var eventTime : TextView = view.findViewById(R.id.event_time)
+        var eventIv: ImageView = view.findViewById(R.id.event_iv)
+        var eventTime: TextView = view.findViewById(R.id.event_time)
         var eventCard: CardView = view.findViewById(R.id.event_card)
 
-        val paramsMessage = eventMessage.layoutParams as ConstraintLayout.LayoutParams
-        val paramsType = eventType.layoutParams as ConstraintLayout.LayoutParams
-
-
         init {
-
             itemView.setOnClickListener {
                 if (it.isClickable) {
                     var position: Int = bindingAdapterPosition
@@ -157,25 +161,43 @@ class NewsfeedRecyclerViewAdapter(
 
                     when (event.eventTypes) {
                         EventTypes.MESSAGE -> {
-
                             // Uses Safe Args with type safety
-                            val action = NewsfeedFragmentDirections.actionNewsToNewsfeedMessage(event)
+                            val action = NewsfeedFragmentDirections
+                                .actionNewsToNewsfeedMessage(event)
+
                             navController.navigate(action)
                         }
                         EventTypes.COUPON -> {
 
+
+//                            val model = NewsfeedListViewModel()
+//                            model.getCoupons(itemView.context, event.refId).observe(, { coupon ->
+//                                it.findNavController()
+//                                    .navigate(NewsfeedFragmentDirections
+//                                        .actionNewsToCouponDetailFragment(coupon)
+//                                    )
+//                            })
+
+
                             val gson = Gson()
                             val url = "http://10.0.2.2:8080/coupon/"
                             val request = JsonObjectRequest(
-                                Request.Method.GET, url+event.refId, null,
+                                Request.Method.GET, url + event.refId, null,
                                 { response ->
-                                    val coupon = gson.fromJson(response.toString(), Coupon::class.java)
-                                    val action = NewsfeedFragmentDirections.actionNewsToCouponDetailFragment(coupon)
+                                    val coupon =
+                                        gson.fromJson(response.toString(), Coupon::class.java)
+                                    val action =
+                                        NewsfeedFragmentDirections.actionNewsToCouponDetailFragment(
+                                            coupon
+                                        )
                                     it.findNavController().navigate(action)
 
                                 },
                                 { error ->
-                                    Log.e("Response", error.message ?: "Keine Fehlermeldung vorhanden")
+                                    Log.e(
+                                        "Response",
+                                        error.message ?: "Keine Fehlermeldung vorhanden"
+                                    )
                                 }
                             )
                             RequestSingleton.getInstance(context).addToRequestQueue(request)
@@ -186,12 +208,8 @@ class NewsfeedRecyclerViewAdapter(
                         }
                         EventTypes.UPDATE -> TODO()
                     }
-
                 }
             }
         }
-
-
     }
-
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.Constants
 
 class HomeFragment : Fragment() {
 
@@ -16,7 +17,7 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = "Kauf Lokal"
+        (activity as AppCompatActivity).supportActionBar?.title = Constants.TITLE_HOME
         return view
     }
 }

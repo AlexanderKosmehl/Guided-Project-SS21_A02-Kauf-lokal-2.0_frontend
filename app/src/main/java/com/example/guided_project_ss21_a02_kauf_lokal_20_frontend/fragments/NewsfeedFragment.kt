@@ -23,21 +23,20 @@ import com.google.gson.Gson
  */
 class NewsfeedFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_newsfeed_list, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.newsfeedList)
-        // Set LayoutManager and Adapter
 
         (activity as AppCompatActivity).supportActionBar?.title = "Nachrichten für dich"
 
         with(recyclerView) {
             layoutManager = LinearLayoutManager(context)
-            adapter = NewsfeedRecyclerViewAdapter(listOf())
+            adapter = NewsfeedRecyclerViewAdapter(listOf<Event>())
         }
+
         addEventsToAdapter(recyclerView)
 
         return view
@@ -49,18 +48,15 @@ class NewsfeedFragment : Fragment() {
         val events = mutableListOf<Event>()
         val gson = Gson()
 
-        //TODO: changed Port for temporary testing
         val url = "http://10.0.2.2:8080/event"
 
         val request = JsonArrayRequest(
             Request.Method.GET, url, null,
             { response ->
-                // JSONArray does not support iterable which means this has to be a regular for loop
                 for (i in 0 until response.length()) {
                     val event = gson.fromJson(response.getJSONObject(i).toString(), Event::class.java)
                     events.add(event)
                 }
-
                 adapter.setValues(events)
             },
             { error ->
