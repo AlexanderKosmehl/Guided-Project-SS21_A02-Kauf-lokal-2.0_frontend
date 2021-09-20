@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.Constants
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.TitleTexts
 
 class ProgressFragment : Fragment() {
 
@@ -16,8 +16,7 @@ class ProgressFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_progress, container, false)
-        (activity as AppCompatActivity).supportActionBar?.title = Constants.TITLE_PROGRESS
+        (activity as AppCompatActivity).supportActionBar?.title = TitleTexts.PROGRESS
         return view
     }
-
 }

@@ -9,7 +9,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.Constants
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.URIS
 import com.google.gson.Gson
 
 class CouponListViewModel(application: Application) : AndroidViewModel(application) {
@@ -28,7 +28,7 @@ class CouponListViewModel(application: Application) : AndroidViewModel(applicati
         val coupons = mutableListOf<Coupon>()
         Volley.newRequestQueue(getApplication()).add(
             JsonArrayRequest(
-                Request.Method.GET, Constants.URL_COUPONS, null,
+                Request.Method.GET, URIS.COUPONS, null,
                 { response ->
                     for (i in 0 until response.length()) {
                         coupons.add(

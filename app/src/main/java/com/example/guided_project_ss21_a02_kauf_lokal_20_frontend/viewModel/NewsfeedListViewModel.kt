@@ -12,7 +12,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Event
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.RequestSingleton
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.Constants
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.URIS
 import com.google.gson.Gson
 import java.util.*
 
@@ -38,12 +38,15 @@ class NewsfeedListViewModel(application: Application) : AndroidViewModel(applica
 
     fun getEvents(): LiveData<List<Event>> = eventsLiveData
 
-    fun getCoupons(refId: UUID): LiveData<Coupon> = couponsLiveData
+    fun getCoupons(eventID: UUID): LiveData<Coupon> {
+        this.eventID = eventID
+        return couponsLiveData
+    }
 
     private fun loadEvents() {
         val events = mutableListOf<Event>()
         RequestSingleton.getInstance(getApplication()).addToRequestQueue(JsonArrayRequest(
-            Request.Method.GET, Constants.URL_EVENTS, null,
+            Request.Method.GET, URIS.EVENTS, null,
             { response ->
                 for (i in 0 until response.length()) {
                     events.add(
@@ -64,14 +67,13 @@ class NewsfeedListViewModel(application: Application) : AndroidViewModel(applica
 
     private fun loadCoupon() {
         RequestSingleton.getInstance(getApplication()).addToRequestQueue(JsonObjectRequest(
-            Request.Method.GET, Constants.URL_COUPONS + eventID, null,
+            Request.Method.GET, URIS.COUPONS + "/" + eventID, null,
             { response ->
-                val coupon = Gson().fromJson(response.toString(), Coupon::class.java)
+                couponsLiveData.value = Gson().fromJson(response.toString(), Coupon::class.java)
             },
             { error ->
                 Log.e("Response", error.message ?: "Keine Fehlermeldung vorhanden")
             }
         ))
     }
-
 }

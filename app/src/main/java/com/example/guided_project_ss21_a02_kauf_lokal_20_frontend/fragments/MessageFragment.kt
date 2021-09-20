@@ -15,12 +15,10 @@ import com.bumptech.glide.Glide
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Message
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.Constants
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.TitleTexts
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.viewModel.MessageViewModel
 
-class MessageFragment(// TODO: Rename and change types of parameters
-    //val event: Event
-) : Fragment() {
+class MessageFragment : Fragment() {
 
     private val args by navArgs<MessageFragmentArgs>()
 
@@ -31,7 +29,7 @@ class MessageFragment(// TODO: Rename and change types of parameters
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_newsfeed_message, container, false)
 
-        (activity as AppCompatActivity).supportActionBar?.title = Constants.TITLE_MESSAGE
+        (activity as AppCompatActivity).supportActionBar?.title = TitleTexts.MESSAGE
 
         addMessageVM(view)
         return view

@@ -22,7 +22,7 @@ import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Poll
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.User
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.VotingOption
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.RequestSingleton
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.Constants
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.URIS
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import org.json.JSONObject
@@ -51,7 +51,7 @@ class PollRecyclerViewAdapter(private var poll: Poll) :
 
         // create dummyUser
         RequestSingleton.getInstance(view.context).addToRequestQueue(JsonObjectRequest(
-            Request.Method.GET, Constants.URL_DUMMY, null,
+            Request.Method.GET, URIS.DUMMY, null,
             { response ->
                 dummyUser = Gson().fromJson(response.toString(), User::class.java)
                 //Toast.makeText(context, "User is ${dummyUser?.firstName}",Toast.LENGTH_SHORT).show()
@@ -102,7 +102,7 @@ class PollRecyclerViewAdapter(private var poll: Poll) :
     fun postOption(optionId: UUID, pollId: UUID, context: Context) {
         RequestSingleton.getInstance(context).addToRequestQueue(JsonObjectRequest(
             Request.Method.POST,
-            Constants.URL_POLL + "$pollId/vote/$optionId",
+             "${URIS.POLL}/$pollId/vote/$optionId",
             JSONObject(Gson().toJson(dummyUser)),
             { response ->
                 Toast.makeText(context, "Erfolgreich abgestimmt.", Toast.LENGTH_SHORT).show()
@@ -114,9 +114,10 @@ class PollRecyclerViewAdapter(private var poll: Poll) :
         ))
     }
 
-    //-------
     override fun getItemCount(): Int = poll.votingOptions.size
+
     private fun getPercentage(part: Int, total: Int): Int = (part.toDouble() / total * 100).toInt()
+
     private fun checkOption(holder: ViewHolder, option: VotingOption) {
         // check whether one item was already clicked
         if (isClicked) {
@@ -141,15 +142,3 @@ class PollRecyclerViewAdapter(private var poll: Poll) :
         }
     }
 }
-
-
-/*
-    // Automatically displays data changes
-    @SuppressLint("NotifyDataSetChanged")
-    fun setValues(poll: Poll) {
-        // sorts events by Date create
-        //this.events = events.sortedByDescending { it.created }
-        this.poll = poll
-        this.notifyDataSetChanged()
-    }
- */

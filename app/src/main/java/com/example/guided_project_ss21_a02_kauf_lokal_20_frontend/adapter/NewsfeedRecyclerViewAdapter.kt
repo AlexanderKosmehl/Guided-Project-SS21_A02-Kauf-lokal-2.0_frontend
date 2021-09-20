@@ -2,7 +2,6 @@ package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -10,24 +9,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.NewsfeedFragmentDirections
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Event
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.EventTypes
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.service.RequestSingleton
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.viewModel.NewsfeedListViewModel
-import com.google.gson.Gson
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -44,7 +34,7 @@ class NewsfeedRecyclerViewAdapter(
     private var events: List<Event>
 ) : RecyclerView.Adapter<NewsfeedRecyclerViewAdapter.ViewHolder>() {
 
-    lateinit var owner : LifecycleOwner
+    lateinit var coupon : Coupon
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -117,7 +107,6 @@ class NewsfeedRecyclerViewAdapter(
 
     override fun getItemCount(): Int = events.size
 
-
     // Automatically displays data changes
     @SuppressLint("NotifyDataSetChanged")
     fun setValues(events: List<Event>) {
@@ -154,58 +143,27 @@ class NewsfeedRecyclerViewAdapter(
         init {
             itemView.setOnClickListener {
                 if (it.isClickable) {
-                    var position: Int = bindingAdapterPosition
-                    val event = events[position]
-                    val context = itemView.context
+                    val event = events[bindingAdapterPosition]
                     val navController: NavController = view.findNavController()
 
                     when (event.eventTypes) {
-                        EventTypes.MESSAGE -> {
-                            // Uses Safe Args with type safety
-                            val action = NewsfeedFragmentDirections
+                        // Uses Safe Args with type safety
+                        EventTypes.MESSAGE -> navController.navigate(
+                            NewsfeedFragmentDirections
                                 .actionNewsToNewsfeedMessage(event)
+                        )
+                        EventTypes.COUPON ->{
 
-                            navController.navigate(action)
-                        }
-                        EventTypes.COUPON -> {
-
-
-//                            val model = NewsfeedListViewModel()
-//                            model.getCoupons(itemView.context, event.refId).observe(, { coupon ->
-//                                it.findNavController()
-//                                    .navigate(NewsfeedFragmentDirections
-//                                        .actionNewsToCouponDetailFragment(coupon)
-//                                    )
-//                            })
-
-
-                            val gson = Gson()
-                            val url = "http://10.0.2.2:8080/coupon/"
-                            val request = JsonObjectRequest(
-                                Request.Method.GET, url + event.refId, null,
-                                { response ->
-                                    val coupon =
-                                        gson.fromJson(response.toString(), Coupon::class.java)
-                                    val action =
-                                        NewsfeedFragmentDirections.actionNewsToCouponDetailFragment(
-                                            coupon
-                                        )
-                                    it.findNavController().navigate(action)
-
-                                },
-                                { error ->
-                                    Log.e(
-                                        "Response",
-                                        error.message ?: "Keine Fehlermeldung vorhanden"
-                                    )
-                                }
+                            navController.navigate(
+                                NewsfeedFragmentDirections
+                                    .actionNewsToCouponDetailFragment(coupon)
                             )
-                            RequestSingleton.getInstance(context).addToRequestQueue(request)
                         }
-                        EventTypes.POLL -> {
-                            val action = NewsfeedFragmentDirections.actionNewsToPoll(event)
-                            navController.navigate(action)
-                        }
+                        EventTypes.POLL ->
+                            navController.navigate(
+                                NewsfeedFragmentDirections
+                                    .actionNewsToPoll(event)
+                            )
                         EventTypes.UPDATE -> TODO()
                     }
                 }

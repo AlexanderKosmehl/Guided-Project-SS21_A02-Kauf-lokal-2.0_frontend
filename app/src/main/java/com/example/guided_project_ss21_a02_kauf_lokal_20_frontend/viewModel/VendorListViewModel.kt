@@ -10,7 +10,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
-import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.Constants
+import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities.URIS
 import com.google.gson.Gson
 
 class VendorListViewModel(application: Application) : AndroidViewModel(application) {
@@ -29,7 +29,7 @@ class VendorListViewModel(application: Application) : AndroidViewModel(applicati
         val vendors = mutableListOf<Vendor>()
         Volley.newRequestQueue(getApplication()).add(
             JsonArrayRequest(
-                Request.Method.GET, Constants.URL_VENDORS, null,
+                Request.Method.GET, URIS.VENDORS, null,
                 { response ->
                     for (i in 0 until response.length()) {
                         vendors.add(
