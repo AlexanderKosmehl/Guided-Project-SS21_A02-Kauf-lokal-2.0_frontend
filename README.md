@@ -72,9 +72,19 @@ git clone https://github.com/Kauf-lokal-2-0/Guided-Project-SS21_A02-Kauf-lokal-2
 
 ### Voraussetzungen
 
+* Für das Starten der Applikation wird [Maven](https://maven.apache.org/) benötigt.
+* Ein fertig eingerichtetes [Android Studio](https://developer.android.com/studio/) mit Android Emulator muss vorliegen.
+
 ### Installation
+
+1. Das Projekt in der Entwicklungsumgebung [Android Studio](https://developer.android.com/studio/) öffnen.
+2. Das Projekt builden.
 
 ## Starten der Applikation
 
+1. Nach der Installation des Projektes, kann die Applikation über Android Studio gestartet werden. (Alternativ können die Daten aus dem Buildprozess auch manuell an den Emulator geschickt werden. Für detaillierte Informationen offizielle Dokumentation einsehen.)
+2. Damit die Applikation Daten anzeigen kann, muss das [Backend](https://github.com/Kauf-lokal-2-0/Guided-Project-SS21_A02-Kauf-lokal-2.0_backend/tree/main) laufen!
+
 ## Dokumentation
 
+Für eine ausführliche Dokumentation der Applikation, siehe: [Wiki](https://github.com/Kauf-lokal-2-0/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend/wiki)
