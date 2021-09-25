@@ -5,12 +5,6 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#über-das-projekt">Über das Projekt</a>
-      <ul>
-        <li><a href="#verwendete-technologien">Verwendete Technologien</a></li>
-      </ul>
-    </li>
-    <li>
       <a href="#erste-schritte">Erste Schritte</a>
       <ul>
         <li><a href="#download-des-source-codes">Download des Source-Codes</a></li>
@@ -35,13 +29,6 @@
     <img src="images/url.png" alt="Logo" width="240" height="240"><br>
     <a href="https://github.com/Kauf-lokal-2-0/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend">Repository auf Github</a>
   </a> -->
-
-<!-- ABOUT THE PROJECT -->
-## Über das Projekt
-
-### Verwendete Technologien
-
-Folgende Technologien wurden verwendet:
 
 <!-- GETTING STARTED -->
 
