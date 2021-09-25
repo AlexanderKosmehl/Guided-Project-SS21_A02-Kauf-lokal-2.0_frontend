@@ -72,7 +72,7 @@ git clone https://github.com/Kauf-lokal-2-0/Guided-Project-SS21_A02-Kauf-lokal-2
 
 ### Voraussetzungen
 
-* Für das Starten der Applikation wird [Maven](https://maven.apache.org/) benötigt.
+* Für das Starten der Applikation wird [Gradle](https://docs.gradle.org/current/userguide/userguide.html) benötigt.
 * Ein fertig eingerichtetes [Android Studio](https://developer.android.com/studio/) mit Android Emulator muss vorliegen.
 
 ### Installation
