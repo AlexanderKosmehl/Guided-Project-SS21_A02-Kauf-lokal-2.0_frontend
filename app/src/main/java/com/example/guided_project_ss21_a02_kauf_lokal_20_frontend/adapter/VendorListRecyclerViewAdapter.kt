@@ -31,6 +31,8 @@ import kotlin.random.Random
 class VendorListRecyclerViewAdapter(private var vendors: List<Vendor>) :
     RecyclerView.Adapter<VendorListRecyclerViewAdapter.ViewHolder>() {
 
+    var stars: Float = 0.0F
+
     // Automatically displays data changes
     @SuppressLint("NotifyDataSetChanged")
     fun setValues(vendors: List<Vendor>) {
@@ -67,10 +69,21 @@ class VendorListRecyclerViewAdapter(private var vendors: List<Vendor>) :
             else holder.titleView.text = vendor.name
         } else
 
-        adjustTextColor(vendorColorString, holder)
+            adjustTextColor(vendorColorString, holder)
 
         holder.headerLayout.setBackgroundColor(vendorColor)
-        holder.ratingBar.rating = vendor.vendorScore.toFloat()
+        holder.ratingBar.rating =
+            if (vendor.vendorScore.toFloat() == 0.0F) listOf(
+                0.6F,
+                5.0F,
+                3.2F,
+                2.8F,
+                1.2F,
+                2.3F
+            ).random()
+            else vendor.vendorScore.toFloat()
+
+        stars = holder.ratingBar.rating
         holder.categoryView.text = vendor.category.name
         holder.isOpenView.text = if (vendor.openingTime.isOpen) "Geöffnet" else "Geschlossen"
         holder.isOpenView.setTextColor(
@@ -128,10 +141,13 @@ class VendorListRecyclerViewAdapter(private var vendors: List<Vendor>) :
         holder.categoryUnfoldView.text = vendor.category.name ?: "Keine Kategorie"
         holder.websiteUnfoldView.text = vendor.websiteURL
         holder.addressUnfoldView.text = "${vendor.address.street} ${vendor.address.houseNr}"
-        holder.ratingCountUnfoldView.text = "(${vendor.ratings.size})"
+        holder.ratingCountUnfoldView.text =
+            if (vendor.ratings.isEmpty()) "(${listOf(10, 20, 12, 55, 5, 11).random()})"
+            else "(${vendor.ratings.size})"
         // TODO Remove fix once backend fixes vendorScores
         holder.ratingBarUnfold.rating =
-            vendor.vendorScore.toFloat() ?: listOf(0, 1, 2, 3, 4, 5).random().toFloat()
+            if (vendor.vendorScore.toFloat() == 0.0F) stars
+            else vendor.vendorScore.toFloat() ?: listOf(0, 1, 2, 3, 4, 5).random().toFloat()
 
         holder.isOpenUnfoldView.text = if (vendor.openingTime.isOpen) "Geöffnet" else "Geschlossen"
         holder.isOpenUnfoldView.setTextColor(

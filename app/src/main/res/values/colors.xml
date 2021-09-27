@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
     <!-- pre -->
     <color name="purple_200">#BB86FC</color>
@@ -12,7 +13,7 @@
     <color name="star_fill">#AF185B</color>
 
     <!-- custom -->
-    <color name="background_color">#D8D8D8</color>
+    <color name="new_background_color">#F8F8F8</color>
     <color name="card_color">#FFFFFF</color>
     <color name="card_color_unclickable">@color/material_on_primary_disabled</color>
     <color name="almost_closed_color">#e2a363</color>
