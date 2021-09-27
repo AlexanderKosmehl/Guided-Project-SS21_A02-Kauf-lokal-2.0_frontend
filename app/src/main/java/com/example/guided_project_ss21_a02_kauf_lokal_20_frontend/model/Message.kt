@@ -1,9 +1,7 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 import java.text.SimpleDateFormat
-
 import java.util.*
 
 @kotlinx.parcelize.Parcelize
@@ -14,21 +12,8 @@ data class Message(
     var imageURL: String,
     var title: String,
     var vendorId: String,
-): Parcelable {
+) : Parcelable {
+    fun formatDate(): String = SimpleDateFormat("dd.MM.yyyy").format(this.created)
+    fun formatTime(): String = SimpleDateFormat("HH:mm").format(this.created)
 
-    fun formatDate(): String {
-        var formattedDate: String
-        val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy")
-        formattedDate = simpleDateFormat.format(this.created)
-
-        return formattedDate
-    }
-
-    fun formatTime(): String {
-        var formattedTime: String
-        val simpleDateFormat = SimpleDateFormat("HH:mm")
-        formattedTime = simpleDateFormat.format(this.created)
-
-        return formatTime()
-    }
 }

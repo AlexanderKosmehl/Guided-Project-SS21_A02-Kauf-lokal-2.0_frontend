@@ -10,5 +10,5 @@ data class Poll(
     var title: String,
     var vendorId: String,
     var totalAmountVoters: Int,
-    var votingOptions: List<VotingOption>,
+    var votingOptions: List<VotingOption>
 ): Parcelable

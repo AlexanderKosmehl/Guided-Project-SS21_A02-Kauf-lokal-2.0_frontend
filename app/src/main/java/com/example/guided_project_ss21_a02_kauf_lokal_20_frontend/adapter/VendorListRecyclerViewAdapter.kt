@@ -16,7 +16,6 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.R
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Vendor
@@ -29,26 +28,13 @@ import kotlin.random.Random
 
 // TODO fix the warning later
 @SuppressLint("SetTextI18n")
-class VendorListRecyclerViewAdapter(
-    private var vendors: List<Vendor>
+class VendorListRecyclerViewAdapter(private var vendors: List<Vendor>) :
+    RecyclerView.Adapter<VendorListRecyclerViewAdapter.ViewHolder>() {
 
-) : RecyclerView.Adapter<VendorListRecyclerViewAdapter.ViewHolder>() {
-
-    private val colors = listOf(
-        R.color.risse_green,
-        R.color.open_color,
-        R.color.tchibo_blue,
-        R.color.teal_700,
-        R.color.teal_200,
-        R.color.purple_200,
-        R.color.purple_500,
-        R.color.purple_700,
-        R.color.star_fill,
-        R.color.close_color,
-        R.color.saturn_orange
-    )
+    var stars: Float = 0.0F
 
     // Automatically displays data changes
+    @SuppressLint("NotifyDataSetChanged")
     fun setValues(vendors: List<Vendor>) {
         this.vendors = vendors
         this.notifyDataSetChanged()
@@ -60,6 +46,14 @@ class VendorListRecyclerViewAdapter(
         return ViewHolder(view)
     }
 
+    /* TODO: - (59) remove name-fix when names in BE is fixed
+             - (72) vendorScore is currently an integer
+                    Remove fix once backend fixes vendorScores
+             - (74) Remove fix once backend fixes null fields
+             - (81) Calculate value once backend adds support
+             - (84) Implement user management
+     */
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val distanceText = (Random.nextInt(20) * 50).toString() + " m"
 
@@ -68,45 +62,41 @@ class VendorListRecyclerViewAdapter(
 
         val vendorColor = Color.parseColor(vendorColorString)
 
-        // TODO handle profilePicture URL(?) once backend implements it
-        if (vendor.logo != null) {
-            // Handle picture
-        } else {
+        if (vendor.logo.isEmpty()) {
             holder.logoView.visibility = View.GONE
-            if (vendor.name != "Forum Gummersbach") // TODO remove fix when names in BE is fixed
+            if (vendor.name != "Forum Gummersbach")
                 holder.titleView.text = vendor.name.replace("Gummersbach", "", false)
-            else {
-                holder.titleView.text = vendor.name
-            }
-        }
+            else holder.titleView.text = vendor.name
+        } else
 
-        adjustTextColor(vendorColorString, holder)
+            adjustTextColor(vendorColorString, holder)
 
         holder.headerLayout.setBackgroundColor(vendorColor)
+        holder.ratingBar.rating =
+            if (vendor.vendorScore.toFloat() == 0.0F) listOf(
+                0.6F,
+                5.0F,
+                3.2F,
+                2.8F,
+                1.2F,
+                2.3F
+            ).random()
+            else vendor.vendorScore.toFloat()
 
-        // TODO vendorScore is currently an integer
-        // TODO Remove fix once backend fixes vendorScores
-        holder.ratingBar.rating = vendor.vendorScore.toFloat()
-
-        // TODO Remove fix once backend fixes null fields
+        stars = holder.ratingBar.rating
         holder.categoryView.text = vendor.category.name
-        holder.isOpenView.text = if (vendor.openingTime.isOpen == true) "Geöffnet" else "Geschlossen"
+        holder.isOpenView.text = if (vendor.openingTime.isOpen) "Geöffnet" else "Geschlossen"
         holder.isOpenView.setTextColor(
             holder.isOpenView.context.resources.getColor(
                 if (vendor.openingTime.isOpen) R.color.open_color else R.color.close_color,
                 null
             )
         )
-
-        // TODO Calculate value once backend adds support
         holder.distanceView.text = distanceText
-
-        // TODO Implement user management
         holder.isFavoView.setImageResource(
             if (listOf(true, false).random()) R.drawable.ic_baseline_favorite_24
             else R.drawable.ic_baseline_favorite_border_24
         )
-
         // Display vendor details on tap
         holder.cardView.setOnClickListener {
             if (holder.unfoldedView.visibility == View.VISIBLE) {
@@ -148,17 +138,21 @@ class VendorListRecyclerViewAdapter(
         distance: String,
     ) {
         // TODO Remove fix once backend fixes null fields
-        holder.categoryUnfoldView.text = vendor.category?.name ?: "Keine Kategorie"
+        holder.categoryUnfoldView.text = vendor.category.name ?: "Keine Kategorie"
         holder.websiteUnfoldView.text = vendor.websiteURL
         holder.addressUnfoldView.text = "${vendor.address.street} ${vendor.address.houseNr}"
-        holder.ratingCountUnfoldView.text = "(${vendor.ratings.size})"
+        holder.ratingCountUnfoldView.text =
+            if (vendor.ratings.isEmpty()) "(${listOf(10, 20, 12, 55, 5, 11).random()})"
+            else "(${vendor.ratings.size})"
         // TODO Remove fix once backend fixes vendorScores
-        holder.ratingBarUnfold.rating = vendor.vendorScore?.toFloat() ?: listOf(0,1,2,3,4,5).random().toFloat()
+        holder.ratingBarUnfold.rating =
+            if (vendor.vendorScore.toFloat() == 0.0F) stars
+            else vendor.vendorScore.toFloat() ?: listOf(0, 1, 2, 3, 4, 5).random().toFloat()
 
-        holder.isOpenUnfoldView.text = if (vendor.openingTime?.isOpen == true) "Geöffnet" else "Geschlossen"
+        holder.isOpenUnfoldView.text = if (vendor.openingTime.isOpen) "Geöffnet" else "Geschlossen"
         holder.isOpenUnfoldView.setTextColor(
             holder.isOpenUnfoldView.context.resources.getColor(
-                if (vendor.openingTime?.isOpen == true)
+                if (vendor.openingTime.isOpen)
                     R.color.open_color else R.color.close_color, null
             )
         )
@@ -170,7 +164,8 @@ class VendorListRecyclerViewAdapter(
         holder.distanceUnfoldView.text = distance
 
         holder.routeButton.setOnClickListener {
-            val gmmIntentUri = Uri.parse("geo:0,0?q=${vendor.name} ${vendor.address.zipCode} ${vendor.address.place} ${vendor.address.street} ${vendor.address.houseNr}")
+            val gmmIntentUri =
+                Uri.parse("geo:0,0?q=${vendor.name} ${vendor.address.zipCode} ${vendor.address.place} ${vendor.address.street} ${vendor.address.houseNr}")
             val mapIntent: Intent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
             mapIntent.setPackage("com.google.android.apps.maps")
             holder.routeButton.context.startActivity(mapIntent)

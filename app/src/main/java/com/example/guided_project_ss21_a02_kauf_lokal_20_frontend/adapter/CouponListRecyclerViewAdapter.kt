@@ -1,11 +1,14 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.adapter
 
+import android.app.Application
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
@@ -16,10 +19,10 @@ import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.Coup
 import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.model.Coupon
 import java.time.LocalDate
 import java.util.*
+import kotlin.coroutines.coroutineContext
 
 class CouponListRecyclerViewAdapter(
     private var coupons: List<Coupon>
-
 ) : RecyclerView.Adapter<CouponListRecyclerViewAdapter.ViewHolder>() {
 
     fun setValues(coupons: List<Coupon>) {
@@ -55,7 +58,7 @@ class CouponListRecyclerViewAdapter(
         calendar.time = expiryDate
         val expiryString = "${calendar.get(Calendar.DAY_OF_MONTH)} ${monthStrings[calendar.get(Calendar.MONTH)]}"
 
-        holder.couponDate.text = "$createdString - $expiryString" ?: "Ohne Ablaufdatum"
+        // holder.couponDate.text = "$createdString - $expiryString" ?: "Ohne Ablaufdatum"
 
         // Click Listener
         holder.couponCardView.setOnClickListener {
@@ -72,7 +75,6 @@ class CouponListRecyclerViewAdapter(
         val couponLogo: ImageView = view.findViewById(R.id.couponLogoView)
         val couponFavorite: ImageView = view.findViewById(R.id.couponIsFavo)
         val couponText: TextView = view.findViewById(R.id.couponText)
-        val couponDate: TextView = view.findViewById(R.id.couponDate)
     }
 
 
