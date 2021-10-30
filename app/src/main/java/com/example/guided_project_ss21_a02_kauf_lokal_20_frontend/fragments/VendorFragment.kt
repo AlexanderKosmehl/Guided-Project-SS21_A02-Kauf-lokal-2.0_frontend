@@ -18,32 +18,17 @@ import com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.viewModel.Vend
 /**
  * A fragment representing a list of Items.
  */
-class VendorListFragment : Fragment() {
+class VendorFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_vendor_list, container, false)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.vendorListRecyclerView)
+        val view = inflater.inflate(R.layout.fragment_vendor, container, false)
+        //val recyclerView = view.findViewById<RecyclerView>(R.id.vendorListRecyclerView)
 
-        (activity as AppCompatActivity).supportActionBar?.title = TitleTexts.VENDOR_LIST
-
-        // Set LayoutManager and Adapter
-        with(recyclerView) {
-            layoutManager = LinearLayoutManager(context)
-            adapter = VendorListRecyclerViewAdapter(listOf<Vendor>())
-        }
-
-        addVendorsToAdapterVM(recyclerView)
         return view
     }
 
-    private fun addVendorsToAdapterVM(recyclerView: RecyclerView) {
-        val model: VendorListViewModel by viewModels()
-        model.getVendors()
-            .observe(this, {
-                (recyclerView.adapter as VendorListRecyclerViewAdapter).setValues(it)
-            })
-    }
+
 }
