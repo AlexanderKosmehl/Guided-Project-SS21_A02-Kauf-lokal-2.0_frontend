@@ -72,7 +72,5 @@
     <string name="option">Option</string>
     <string name="filter_date">Nach Datum</string>
     <string name="home">Home</string>
-    <string name="tab_list">Liste</string>
-    <string name="tab_map">Karte</string>
 
 </resources>

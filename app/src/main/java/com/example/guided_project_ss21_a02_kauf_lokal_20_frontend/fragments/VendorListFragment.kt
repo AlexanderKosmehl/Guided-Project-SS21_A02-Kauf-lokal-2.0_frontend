@@ -23,27 +23,26 @@ class VendorListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_vendor_list, container, false)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.vendorListRecyclerView)
+    ): View {
+        val view = inflater.inflate(R.layout.fragment_vendor_list, container, false) as RecyclerView
 
         (activity as AppCompatActivity).supportActionBar?.title = TitleTexts.VENDOR_LIST
 
         // Set LayoutManager and Adapter
-        with(recyclerView) {
+        with(view) {
             layoutManager = LinearLayoutManager(context)
             adapter = VendorListRecyclerViewAdapter(listOf<Vendor>())
         }
 
-        addVendorsToAdapterVM(recyclerView)
+        addVendorsToAdapterVM(view)
         return view
     }
 
-    private fun addVendorsToAdapterVM(recyclerView: RecyclerView) {
+    private fun addVendorsToAdapterVM(view: RecyclerView) {
         val model: VendorListViewModel by viewModels()
         model.getVendors()
             .observe(this, {
-                (recyclerView.adapter as VendorListRecyclerViewAdapter).setValues(it)
+                (view.adapter as VendorListRecyclerViewAdapter).setValues(it)
             })
     }
 }
