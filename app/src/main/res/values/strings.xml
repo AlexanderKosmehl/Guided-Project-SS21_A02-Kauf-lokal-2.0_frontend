@@ -18,6 +18,10 @@
     <string name="nav_coupons">Coupons</string>
     <string name="nav_progress">Fortschritt</string>
 
+    <!-- tab layout -->
+    <string name="tab_list">Liste</string>
+    <string name="tab_map">Map</string>
+
     <!-- descriptions -->
     <string name="no_category">Keine Kategorie</string>
     <string name="no_address">Keine Adresse</string>

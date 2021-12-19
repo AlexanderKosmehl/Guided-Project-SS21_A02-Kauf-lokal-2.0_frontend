@@ -66,9 +66,17 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/vendor"
+        android:id="@+id/vendorList"
         android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.VendorListFragment"
         android:label="Vendor List"
         tools:layout="@layout/fragment_vendor_list"/>
+    <fragment
+        android:id="@+id/vendorTab"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.VendorTabFragment"
+        android:label="VendorTab" />
+    <fragment
+        android:id="@+id/vendorMap"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.fragments.vendorMap"
+        android:label="vendorMap" />
 
 </navigation>

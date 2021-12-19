@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_baseline_article_24"
         android:title="@string/nav_news" />
     <item
-        android:id="@+id/vendor"
+        android:id="@+id/vendorTab"
         android:enabled="true"
         android:icon="@drawable/ic_location_button"
         android:title="@string/nav_vendor" />

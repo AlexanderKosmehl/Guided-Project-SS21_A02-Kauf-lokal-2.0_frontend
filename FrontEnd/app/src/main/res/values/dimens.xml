@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="text_margin">16dp</dimen>
-    <dimen name="event_type_text_size">10sp</dimen>
-    <dimen name="event_time_text_size">10sp</dimen>
-</resources>

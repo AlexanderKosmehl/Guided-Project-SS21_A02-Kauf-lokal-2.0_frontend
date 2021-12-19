@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupActionBar() {
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.home, R.id.news, R.id.vendor, R.id.coupon)
+            setOf(R.id.home, R.id.news, R.id.vendorTab, R.id.coupon)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
     }

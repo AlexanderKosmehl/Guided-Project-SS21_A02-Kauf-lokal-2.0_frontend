@@ -1,6 +1,7 @@
 package com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.utilities
 
 object TitleTexts {
+    const val VENDOR_TAB = "Händler in deiner Nähe"
     const val COUPON_LIST = "Coupons für dich"
     const val NEWSFEED = "Nachrichten für dich"
     const val VENDOR_LIST = "Händler in deiner Nähe"
