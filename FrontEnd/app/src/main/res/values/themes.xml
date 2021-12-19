@@ -1,0 +1,42 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="lightly" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/primaryComplementary</item>
+        <item name="colorSecondaryVariant">@color/primaryComplementaryLight</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+        <item name="new_background_color">@color/new_background_color</item>
+        <item name="text_color">@color/black</item>
+        <item name="invert_text_color">@color/white</item>
+        <item name="top_bar_color">@color/primaryColor</item>
+        <item name="bottom_icon">@color/primaryComplementary</item>
+        <item name="bottom_icon_disabled">@color/black</item>
+        <item name="item_text_color">@color/item</item>
+        <item name="icon_news_color">@color/item</item>
+        <item name="switchy">@color/primaryComplementary</item>
+    </style>
+
+    <style name="Switch" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorControlActivated">@color/primaryComplementaryLight</item>
+        <item name="colorSwitchThumbNormal">@color/gray_300</item>
+        <item name="android:colorForeground">@color/gray_600</item>
+    </style>
+
+    <style name="RatingBarTheme" parent="Theme.MaterialComponents.Light">
+        <item name="colorControlNormal">@color/gray_600</item>
+        <item name="colorControlActivated">@color/star_fill</item>
+    </style>
+
+    <style name="CardTheme" parent="Theme.MaterialComponents.Light">
+        <item name="android:clickable">@color/white</item>
+        <item name="un_clickable">@color/card_color_unclickable</item>
+    </style>
+</resources>
+
+    <!--<item name="colorSecondary">@color/secondaryColor</item> -->
+    <!--<item name="colorSecondaryVariant">@color/secondaryDarkColor</item>-->

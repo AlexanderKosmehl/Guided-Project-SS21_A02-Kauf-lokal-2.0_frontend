@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend.iml" filepath="$PROJECT_DIR$/.idea/modules/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Guided-Project-SS21_A02-Kauf-lokal-2.0_frontend.app.unitTest.iml" />
+    </modules>
+  </component>
+</project>

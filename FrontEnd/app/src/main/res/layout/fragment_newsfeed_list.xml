@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="?attr/new_background_color">
+
+    <HorizontalScrollView
+        android:id="@+id/filter_scrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/filter_chipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:singleLine="true">
+
+            <!-- Chips can be declared here, or added dynamically. -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/filter_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#909090"
+                android:checkable="true"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/filter_date"
+                android:textColor="@color/white"
+                app:checkedIconVisible="true"
+                app:closeIconVisible="false" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/newsfeedList"
+        android:name="com.example.guided_project_ss21_a02_kauf_lokal_20_frontend.newsfeed"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filter_scrollView"
+        tools:context=".fragments.NewsfeedFragment"
+        tools:listitem="@layout/fragment_newsfeed_list_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

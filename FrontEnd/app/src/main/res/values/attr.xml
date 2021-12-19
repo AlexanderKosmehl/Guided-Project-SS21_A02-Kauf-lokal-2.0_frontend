@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="dark_theme">
+        <attr name="new_background_color" format="color"/>
+        <attr name="text_color" format="color"/>
+        <attr name="invert_text_color" format="color"/>
+        <attr name="top_bar_color" format="color"/>
+        <attr name="bottom_icon" format="color"/>
+        <attr name="bottom_icon_disabled" format="color"/>
+        <attr name="item_text_color" format="color"/>
+        <attr name="icon_news_color" format="color"/>
+        <attr name="switchy" format="color"/>
+        <attr name="un_clickable" format="color"/>
+        <attr name="card" format="color"/>
+    </declare-styleable>
+</resources>

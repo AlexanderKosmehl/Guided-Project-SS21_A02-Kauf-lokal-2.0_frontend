@@ -1,0 +1,80 @@
+<resources>
+    <!-- names -->
+    <string name="app_name">Kauf Lokal</string>
+    <string name="category">Kategorie</string>
+    <string name="distance">Distanz</string>
+    <string name="is_opened">Geöffnet</string>
+    <string name="website">Internetseite:</string>
+    <string name="address">Adresse:</string>
+    <string name="coupon">Coupon</string>
+    <string name="Route">Route</string>
+    <string name="vendor_overview">Händlerübersicht</string>
+
+    <!-- nav stuff -->
+    <string name="nav_more">Mehr</string>
+    <string name="nav_search">Suche</string>
+    <string name="nav_news">Neuigkeiten</string>
+    <string name="nav_vendor">Händler</string>
+    <string name="nav_coupons">Coupons</string>
+    <string name="nav_progress">Fortschritt</string>
+
+    <!-- tab layout -->
+    <string name="tab_list">Liste</string>
+    <string name="tab_map">Map</string>
+
+    <!-- descriptions -->
+    <string name="no_category">Keine Kategorie</string>
+    <string name="no_address">Keine Adresse</string>
+    <string name="no_website">Keine Website</string>
+    <string name="no_rating_count">(0)</string>
+    <string name="picture_description">Bild des Ladens</string>
+    <string name="icon_description">Icon</string>
+    <string name="logo_description">Logo des Ladens</string>
+    <string name="nav_more_description">Mehr Optionen</string>
+    <string name="nav_search_description">In der App Suchen</string>
+
+    <!-- everything else -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lightMode">Lightmode</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!-- Some weirdly specific stuff -->
+    <string name="event_type">Eventtype</string>
+    <string name="rem_min">x min</string>
+    <string name="notification">Nachricht</string>
+    <string name="placeholder_progress">Hier wird auch bald dein Fortschritt stehen! Nur Geduld!</string>
+    <string name="discount_coupon_list_item">5 % Rabatt</string>
+    <string name="date_coupon_list_item">01 März - 30 Juni</string>
+    <string name="welcome">Willkommen Kevin !</string>
+    <string name="level">Level 70</string>
+    <string name="exp_till_level">450 EXP bis Level 71</string>
+    <string name="exp">100 EXP</string>
+    <string name="exp_2">50 EXP</string>
+    <string name="shop_10">Einkauf für 10€</string>
+    <string name="shop_30">Einkauf für 30€</string>
+    <string name="expiration_date">31.07.2021</string>
+    <string name="coupon_date_2">31.07.2021</string>
+
+    <!-- Some generic stuff -->
+    <string name="title">title</string>
+    <string name="of">von</string>
+    <string name="name">Vorname Nachname</string>
+    <string name="date">Datum</string>
+    <string name="option">Option</string>
+    <string name="filter_date">Nach Datum</string>
+    <string name="home">Home</string>
+
+</resources>
